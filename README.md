@@ -1,10 +1,52 @@
 # PLEASE READ EVERYTHING, IT'S PRETTY IMPORTANT
 
+## Before starting
+
+Make sure you have Git installed. You can check by opening a terminal (any is fine) and running:
+
+~~~bash
+git --version
+~~~
+
+If you see:
+
+~~~text
+'git' is not recognized as an internal or external command...
+~~~
+
+that means you don't have Git installed.
+
+> **NOTE:** If you downloaded Git but your VS Code was already open, you may need to restart VS Code before the terminal recognises `git`.
+
 `main` is **protected** (nothing against you guys, it's just to avoid accidental overwrites), so you won't be able to push directly to it. Instead, every change should go through a **Pull Request (PR)**.
 
 Whenever you start working on a **new feature or fix/tweak**, follow these steps.
 
-## General Steps (for a mental model)
+> **NOTE:** You can follow this workflow using VS Code's Source Control interface if you prefer. The commands below are just the terminal equivalents.
+
+## Step 0: Clone the repo
+
+If you don't already have the project on your computer, clone it first.
+
+1. Copy the repository URL from GitHub:
+   - Click **Code**
+   - Copy the HTTPS URL
+2. Open a terminal in the folder where you want the project.
+3. Run:
+
+~~~git
+git clone repository-url
+~~~
+
+Then you can enter the project folder by running:
+
+~~~git
+cd repository-name
+~~~
+
+After this, you can follow the normal workflow below.
+
+## General Workflow (after cloning)
 
 ~~~mermaid
 flowchart TD
@@ -31,9 +73,9 @@ git pull origin main
 
 ## Step 2: Create a branch
 
-Create a new branch for whatever you're working on. Replace `branch-name` with something descriptive (e.g. `tweak-css`, `add-about-me-page`, etc). Or you can type whatever, it's fine with me.
+Create a new branch for whatever you're working on. Replace `branch-name` with something descriptive (e.g. `tweak-css`, `add-about-me-page`, etc). Don't worry about it too much though, as long as I roughly get what the branch is for from the name it's good enough already.
 
-Any later mention of `branch-name` should be replaced with the actual name of your branch.
+Any later mention of `branch-name` should be replaced with the actual name of your branch (writing this just in case).
 
 ~~~git
 git switch -c branch-name
@@ -48,7 +90,7 @@ git add .
 git commit -m "Describe your changes, blah blah blah"
 ~~~
 
-You can commit as often as you like while you're working, as many times as you want.
+You can commit as often as you like while you're working, as many times as you want. Do note that you can use `git status` at any time to see what files have changed.
 
 ## Step 4: Upload branch
 
@@ -58,7 +100,7 @@ When you're happy with your changes, run the following to push your branch (you 
 git push -u origin branch-name
 ~~~
 
-Git will print a GitHub link (or GitHub will show a banner in the repository). Open it to create a PR.
+After pushing, GitHub will usually show a banner suggesting you create a PR. If not, open the repository on GitHub and create one manually.
 
 ## Step 5: Open a PR
 
