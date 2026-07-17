@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+/* everything below is placeholder, change on demand */
+
+@theme {
+    --font-sans: "DM Sans", sans-serif;
+
+    --color-primary: #ff8200;
+    --color-background: #0d0e0e;
+    --color-surface: #1e1e2d;
+    --color-accent: #27272a;
+
+    --radius-card: 12px;
+    --radius-pill: 9999px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+html {
+    scroll-padding-top: 100px;
+}
+
+:focus-visible {
+    outline: 2px solid #ff8200;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 5px;
+}
