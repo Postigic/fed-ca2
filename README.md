@@ -1,4 +1,4 @@
-# FED-CA2
+# FED CA2
 
 ## Getting Started
 
