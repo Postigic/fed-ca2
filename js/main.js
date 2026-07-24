@@ -1,3 +1,1 @@
-function hello() {
-  console.log("Hello");
-}
+// all quiet
