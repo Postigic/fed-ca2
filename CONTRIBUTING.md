@@ -4,15 +4,15 @@
 
 Make sure you have Git installed. You can check by opening a terminal (any is fine) and running:
 
-~~~bash
+```bash
 git --version
-~~~
+```
 
 If you see:
 
-~~~text
+```text
 'git' is not recognized as an internal or external command...
-~~~
+```
 
 that means you don't have Git installed.
 
@@ -34,21 +34,21 @@ If you don't already have the project on your computer, clone it first.
 2. Open a terminal in the folder where you want the project.
 3. Run:
 
-~~~git
+```git
 git clone repository-url
-~~~
+```
 
 Then you can enter the project folder by running:
 
-~~~git
+```git
 cd repository-name
-~~~
+```
 
 After this, you can follow the normal workflow below.
 
 ## General Workflow (after cloning)
 
-~~~mermaid
+```mermaid
 flowchart TD
     A[main] --> B[Pull latest]
     B --> C[Create branch]
@@ -58,7 +58,7 @@ flowchart TD
     F --> G[Open PR]
     G --> H[Review]
     H --> I[Merge]
-~~~
+```
 
 More detailed steps provided below.
 
@@ -66,10 +66,10 @@ More detailed steps provided below.
 
 First, make sure your local `main` branch is up to date so you're starting from the latest version of the project.
 
-~~~git
+```git
 git switch main
 git pull origin main
-~~~
+```
 
 ## Step 2: Create a branch
 
@@ -77,18 +77,18 @@ Create a new branch for whatever you're working on. Replace `branch-name` with s
 
 Any later mention of `branch-name` should be replaced with the actual name of your branch (writing this just in case).
 
-~~~git
+```git
 git switch -c branch-name
-~~~
+```
 
 ## Step 3: Save changes
 
 When you've made some changes, stage all your changes (that's `git add .`) and commit them.
 
-~~~git
+```git
 git add .
 git commit -m "Describe your changes, blah blah blah"
-~~~
+```
 
 You can commit as often as you like while you're working, as many times as you want. Do note that you can use `git status` at any time to see what files have changed.
 
@@ -96,9 +96,9 @@ You can commit as often as you like while you're working, as many times as you w
 
 When you're happy with your changes, run the following to push your branch (you really only have to do this once, but it doesn't matter if you accidentally do it again):
 
-~~~git
+```git
 git push -u origin branch-name
-~~~
+```
 
 After pushing, GitHub will usually show a banner suggesting you create a PR. If not, open the repository on GitHub and create one manually.
 
@@ -107,8 +107,8 @@ After pushing, GitHub will usually show a banner suggesting you create a PR. If 
 1. Go to the GitHub repository.
 2. Click **Compare & pull request** (or **Pull requests → New pull request**).
 3. Ensure that:
-    - Base: `main`
-    - Compare: `branch-name`
+   - Base: `main`
+   - Compare: `branch-name`
 4. Click **Create pull request**.
 
 I'll review your changes and merge them if everything looks good.
@@ -119,11 +119,11 @@ After your PR is merged, GitHub may show a **Delete branch** button. It's safe t
 
 Make the changes on the same branch, then run:
 
-~~~git
+```git
 git add .
 git commit -m "Describe your changes, blah blah blah"
 git push
-~~~
+```
 
 Your PR will update automatically. Do not create another PR.
 

@@ -1,391 +1,360 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-        />
-        <link href="./dist/output.css" rel="stylesheet" />
-        <title>Space Something Something</title>
-    </head>
-    <body class="bg-background font-sans text-white">
-        <main class="mx-auto flex max-w-6xl flex-col gap-16 p-8">
-            <header class="space-y-4">
-                <h1 class="text-5xl font-bold">Tailwind CSS Refresher</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <title>Space Something Something</title>
+  </head>
+  <body class="bg-background font-sans text-white">
+    <main class="mx-auto flex max-w-6xl flex-col gap-16 p-8">
+      <header class="space-y-4">
+        <h1 class="text-5xl font-bold">Tailwind CSS Refresher</h1>
 
-                <p class="max-w-prose text-zinc-300">
-                    Tailwind is a utility-first CSS framework. Every class
-                    usually represents one CSS declaration. Instead of writing
-                    CSS rules, you compose lots of small utility classes.
-                </p>
-            </header>
+        <p class="max-w-prose text-zinc-300">
+          Tailwind is a utility-first CSS framework. Every class usually
+          represents one CSS declaration. Instead of writing CSS rules, you
+          compose lots of small utility classes.
+        </p>
+      </header>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Basic Syntax</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Basic Syntax</h2>
 
-                <p>Tailwind utilities generally follow this pattern:</p>
+        <p>Tailwind utilities generally follow this pattern:</p>
 
-                <div class="overflow-x-auto">
-                    <table
-                        class="w-full overflow-hidden rounded-xl bg-surface text-left"
-                    >
-                        <thead class="bg-accent">
-                            <tr>
-                                <th class="px-4 py-3">Pattern</th>
-                                <th class="px-4 py-3">Meaning</th>
-                                <th class="px-4 py-3">Example</th>
-                            </tr>
-                        </thead>
+        <div class="overflow-x-auto">
+          <table class="bg-surface w-full overflow-hidden rounded-xl text-left">
+            <thead class="bg-accent">
+              <tr>
+                <th class="px-4 py-3">Pattern</th>
+                <th class="px-4 py-3">Meaning</th>
+                <th class="px-4 py-3">Example</th>
+              </tr>
+            </thead>
 
-                        <tbody>
-                            <tr class="border-t border-zinc-700">
-                                <td class="px-4 py-3">
-                                    <code>property-value</code>
-                                </td>
-                                <td class="px-4 py-3">A utility class</td>
-                                <td class="px-4 py-3">
-                                    <code>p-4</code>, <code>text-xl</code>,
-                                    <code>bg-primary</code>
-                                </td>
-                            </tr>
+            <tbody>
+              <tr class="border-t border-zinc-700">
+                <td class="px-4 py-3">
+                  <code>property-value</code>
+                </td>
+                <td class="px-4 py-3">A utility class</td>
+                <td class="px-4 py-3">
+                  <code>p-4</code>, <code>text-xl</code>,
+                  <code>bg-primary</code>
+                </td>
+              </tr>
 
-                            <tr class="border-t border-zinc-700">
-                                <td class="px-4 py-3">
-                                    <code>prefix:utility</code>
-                                </td>
-                                <td class="px-4 py-3">
-                                    Apply only in a specific state or breakpoint
-                                </td>
-                                <td class="px-4 py-3">
-                                    <code>hover:bg-primary</code>,
-                                    <code>md:flex</code>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+              <tr class="border-t border-zinc-700">
+                <td class="px-4 py-3">
+                  <code>prefix:utility</code>
+                </td>
+                <td class="px-4 py-3">
+                  Apply only in a specific state or breakpoint
+                </td>
+                <td class="px-4 py-3">
+                  <code>hover:bg-primary</code>,
+                  <code>md:flex</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-                <div class="rounded-xl bg-surface p-6">
-                    <ul class="space-y-2">
-                        <li><code>p-4</code> → padding</li>
-                        <li><code>px-6</code> → horizontal padding</li>
-                        <li><code>py-2</code> → vertical padding</li>
-                        <li><code>m-8</code> → margin</li>
-                        <li><code>mt-4</code> → margin-top</li>
-                        <li><code>w-full</code> → width: 100%</li>
-                        <li><code>h-screen</code> → height: 100vh</li>
-                        <li><code>bg-primary</code> → background colour</li>
-                        <li><code>text-white</code> → text colour</li>
-                        <li><code>rounded-xl</code> → border radius</li>
-                    </ul>
-                </div>
-            </section>
+        <div class="bg-surface rounded-xl p-6">
+          <ul class="space-y-2">
+            <li><code>p-4</code> → padding</li>
+            <li><code>px-6</code> → horizontal padding</li>
+            <li><code>py-2</code> → vertical padding</li>
+            <li><code>m-8</code> → margin</li>
+            <li><code>mt-4</code> → margin-top</li>
+            <li><code>w-full</code> → width: 100%</li>
+            <li><code>h-screen</code> → height: 100vh</li>
+            <li><code>bg-primary</code> → background colour</li>
+            <li><code>text-white</code> → text colour</li>
+            <li><code>rounded-xl</code> → border radius</li>
+          </ul>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Typography</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Typography</h2>
 
-                <p>
-                    Most typography classes begin with <code>text-</code> or
-                    <code>font-</code>.
-                </p>
+        <p>
+          Most typography classes begin with <code>text-</code> or
+          <code>font-</code>.
+        </p>
 
-                <div class="space-y-3 rounded-xl bg-surface p-6">
-                    <h1 class="text-5xl font-bold">text-5xl font-bold</h1>
+        <div class="bg-surface space-y-3 rounded-xl p-6">
+          <h1 class="text-5xl font-bold">text-5xl font-bold</h1>
 
-                    <h2 class="text-3xl font-semibold">
-                        text-3xl font-semibold
-                    </h2>
+          <h2 class="text-3xl font-semibold">text-3xl font-semibold</h2>
 
-                    <p class="text-lg">text-lg</p>
+          <p class="text-lg">text-lg</p>
 
-                    <p class="text-zinc-400">text-zinc-400</p>
+          <p class="text-zinc-400">text-zinc-400</p>
 
-                    <p class="leading-relaxed">
-                        leading-relaxed controls line height.
-                    </p>
-                </div>
-            </section>
+          <p class="leading-relaxed">leading-relaxed controls line height.</p>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Flexbox</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Flexbox</h2>
 
-                <p>Flexbox utilities map almost directly to CSS.</p>
+        <p>Flexbox utilities map almost directly to CSS.</p>
 
-                <div
-                    class="flex items-center justify-between rounded-xl bg-surface p-6"
-                >
-                    <span>items-center</span>
+        <div
+          class="bg-surface flex items-center justify-between rounded-xl p-6"
+        >
+          <span>items-center</span>
 
-                    <button class="rounded-lg bg-primary px-5 py-2">
-                        justify-between
-                    </button>
-                </div>
-            </section>
+          <button class="bg-primary rounded-lg px-5 py-2">
+            justify-between
+          </button>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Grid</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Grid</h2>
 
-                <p>Responsive layouts are usually built with Grid.</p>
+        <p>Responsive layouts are usually built with Grid.</p>
 
-                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="rounded-xl bg-surface p-6">Card</div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-surface rounded-xl p-6">Card</div>
 
-                    <div class="rounded-xl bg-surface p-6">Card</div>
+          <div class="bg-surface rounded-xl p-6">Card</div>
 
-                    <div class="rounded-xl bg-surface p-6">Card</div>
-                </div>
-            </section>
+          <div class="bg-surface rounded-xl p-6">Card</div>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Responsive Prefixes</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Responsive Prefixes</h2>
 
-                <p>Prefixes apply utilities once a breakpoint is reached.</p>
+        <p>Prefixes apply utilities once a breakpoint is reached.</p>
 
-                <div class="rounded-xl bg-surface p-6">
-                    <ul class="space-y-2">
-                        <li><code>sm:</code></li>
-                        <li><code>md:</code></li>
-                        <li><code>lg:</code></li>
-                        <li><code>xl:</code></li>
-                        <li><code>2xl:</code></li>
-                    </ul>
+        <div class="bg-surface rounded-xl p-6">
+          <ul class="space-y-2">
+            <li><code>sm:</code></li>
+            <li><code>md:</code></li>
+            <li><code>lg:</code></li>
+            <li><code>xl:</code></li>
+            <li><code>2xl:</code></li>
+          </ul>
 
-                    <h3 class="mt-6 text-xl md:text-3xl lg:text-5xl">
-                        Resize the window.
-                    </h3>
-                </div>
-            </section>
+          <h3 class="mt-6 text-xl md:text-3xl lg:text-5xl">
+            Resize the window.
+          </h3>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">State Prefixes</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">State Prefixes</h2>
 
-                <p>Prefixes can also target different states.</p>
+        <p>Prefixes can also target different states.</p>
 
-                <div class="flex flex-wrap gap-4">
-                    <button
-                        class="rounded-lg bg-primary px-6 py-3 transition hover:scale-105 hover:opacity-90 active:scale-95"
-                    >
-                        hover:
-                    </button>
+        <div class="flex flex-wrap gap-4">
+          <button
+            class="bg-primary rounded-lg px-6 py-3 transition hover:scale-105 hover:opacity-90 active:scale-95"
+          >
+            hover:
+          </button>
 
-                    <input
-                        class="rounded-lg bg-surface px-4 py-3 focus:outline focus:outline-primary"
-                        placeholder="focus:"
-                    />
-                </div>
-            </section>
+          <input
+            class="bg-surface focus:outline-primary rounded-lg px-4 py-3 focus:outline"
+            placeholder="focus:"
+          />
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Common Prefixes</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Common Prefixes</h2>
 
-                <div class="rounded-xl bg-surface p-6">
-                    <div class="overflow-x-auto">
-                        <table
-                            class="w-full overflow-hidden rounded-xl bg-surface text-left"
-                        >
-                            <thead class="bg-accent">
-                                <tr>
-                                    <th class="px-4 py-3">Prefix</th>
-                                    <th class="px-4 py-3">Purpose</th>
-                                    <th class="px-4 py-3">Example</th>
-                                </tr>
-                            </thead>
+        <div class="bg-surface rounded-xl p-6">
+          <div class="overflow-x-auto">
+            <table
+              class="bg-surface w-full overflow-hidden rounded-xl text-left"
+            >
+              <thead class="bg-accent">
+                <tr>
+                  <th class="px-4 py-3">Prefix</th>
+                  <th class="px-4 py-3">Purpose</th>
+                  <th class="px-4 py-3">Example</th>
+                </tr>
+              </thead>
 
-                            <tbody>
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>hover:</code>
-                                    </td>
-                                    <td class="px-4 py-3">Hover state</td>
-                                    <td class="px-4 py-3">
-                                        <code>hover:bg-primary</code>
-                                    </td>
-                                </tr>
+              <tbody>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>hover:</code>
+                  </td>
+                  <td class="px-4 py-3">Hover state</td>
+                  <td class="px-4 py-3">
+                    <code>hover:bg-primary</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>focus:</code>
-                                    </td>
-                                    <td class="px-4 py-3">Focused element</td>
-                                    <td class="px-4 py-3">
-                                        <code>focus:ring</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>focus:</code>
+                  </td>
+                  <td class="px-4 py-3">Focused element</td>
+                  <td class="px-4 py-3">
+                    <code>focus:ring</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>active:</code>
-                                    </td>
-                                    <td class="px-4 py-3">Active (pressed)</td>
-                                    <td class="px-4 py-3">
-                                        <code>active:scale-95</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>active:</code>
+                  </td>
+                  <td class="px-4 py-3">Active (pressed)</td>
+                  <td class="px-4 py-3">
+                    <code>active:scale-95</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>disabled:</code>
-                                    </td>
-                                    <td class="px-4 py-3">Disabled element</td>
-                                    <td class="px-4 py-3">
-                                        <code>disabled:opacity-50</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>disabled:</code>
+                  </td>
+                  <td class="px-4 py-3">Disabled element</td>
+                  <td class="px-4 py-3">
+                    <code>disabled:opacity-50</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>sm:</code> → <code>2xl:</code>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        Responsive breakpoints
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>lg:grid-cols-3</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>sm:</code> → <code>2xl:</code>
+                  </td>
+                  <td class="px-4 py-3">Responsive breakpoints</td>
+                  <td class="px-4 py-3">
+                    <code>lg:grid-cols-3</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>dark:</code>
-                                    </td>
-                                    <td class="px-4 py-3">Dark mode</td>
-                                    <td class="px-4 py-3">
-                                        <code>dark:bg-black</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>dark:</code>
+                  </td>
+                  <td class="px-4 py-3">Dark mode</td>
+                  <td class="px-4 py-3">
+                    <code>dark:bg-black</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>first:</code>, <code>last:</code>,
-                                        <code>odd:</code>, <code>even:</code>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        Structural pseudo-classes
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>odd:bg-surface</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>first:</code>, <code>last:</code>, <code>odd:</code>,
+                    <code>even:</code>
+                  </td>
+                  <td class="px-4 py-3">Structural pseudo-classes</td>
+                  <td class="px-4 py-3">
+                    <code>odd:bg-surface</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3">
-                                        <code>group-hover:</code>,
-                                        <code>peer-invalid:</code>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        Parent/sibling state
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>group-hover:block</code>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3">
+                    <code>group-hover:</code>,
+                    <code>peer-invalid:</code>
+                  </td>
+                  <td class="px-4 py-3">Parent/sibling state</td>
+                  <td class="px-4 py-3">
+                    <code>group-hover:block</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-            <section class="space-y-6">
-                <h2 class="text-3xl font-semibold">Common Utilities</h2>
+      <section class="space-y-6">
+        <h2 class="text-3xl font-semibold">Common Utilities</h2>
 
-                <div class="rounded-xl bg-surface p-6">
-                    <div class="overflow-x-auto">
-                        <table
-                            class="w-full overflow-hidden rounded-xl bg-surface text-left"
-                        >
-                            <thead class="bg-accent">
-                                <tr>
-                                    <th class="px-4 py-3">Category</th>
-                                    <th class="px-4 py-3">Common Utilities</th>
-                                </tr>
-                            </thead>
+        <div class="bg-surface rounded-xl p-6">
+          <div class="overflow-x-auto">
+            <table
+              class="bg-surface w-full overflow-hidden rounded-xl text-left"
+            >
+              <thead class="bg-accent">
+                <tr>
+                  <th class="px-4 py-3">Category</th>
+                  <th class="px-4 py-3">Common Utilities</th>
+                </tr>
+              </thead>
 
-                            <tbody>
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Layout
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>flex</code>, <code>grid</code>,
-                                        <code>block</code>, <code>hidden</code>
-                                    </td>
-                                </tr>
+              <tbody>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Layout</td>
+                  <td class="px-4 py-3">
+                    <code>flex</code>, <code>grid</code>, <code>block</code>,
+                    <code>hidden</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Spacing
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>p-*</code>, <code>px-*</code>,
-                                        <code>py-*</code>, <code>m-*</code>,
-                                        <code>gap-*</code>,
-                                        <code>space-y-*</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Spacing</td>
+                  <td class="px-4 py-3">
+                    <code>p-*</code>, <code>px-*</code>, <code>py-*</code>,
+                    <code>m-*</code>, <code>gap-*</code>,
+                    <code>space-y-*</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Sizing
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>w-full</code>,
-                                        <code>h-full</code>,
-                                        <code>max-w-*</code>,
-                                        <code>min-h-screen</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Sizing</td>
+                  <td class="px-4 py-3">
+                    <code>w-full</code>, <code>h-full</code>,
+                    <code>max-w-*</code>,
+                    <code>min-h-screen</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Typography
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>text-*</code>,
-                                        <code>font-*</code>,
-                                        <code>leading-*</code>,
-                                        <code>tracking-*</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Typography</td>
+                  <td class="px-4 py-3">
+                    <code>text-*</code>, <code>font-*</code>,
+                    <code>leading-*</code>,
+                    <code>tracking-*</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Colours
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>bg-*</code>, <code>text-*</code>,
-                                        <code>border-*</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Colours</td>
+                  <td class="px-4 py-3">
+                    <code>bg-*</code>, <code>text-*</code>,
+                    <code>border-*</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Borders
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>rounded</code>,
-                                        <code>rounded-lg</code>,
-                                        <code>rounded-xl</code>
-                                    </td>
-                                </tr>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Borders</td>
+                  <td class="px-4 py-3">
+                    <code>rounded</code>, <code>rounded-lg</code>,
+                    <code>rounded-xl</code>
+                  </td>
+                </tr>
 
-                                <tr class="border-t border-zinc-700">
-                                    <td class="px-4 py-3 font-semibold">
-                                        Effects
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <code>shadow</code>,
-                                        <code>transition</code>,
-                                        <code>duration-200</code>,
-                                        <code>opacity-50</code>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </body>
+                <tr class="border-t border-zinc-700">
+                  <td class="px-4 py-3 font-semibold">Effects</td>
+                  <td class="px-4 py-3">
+                    <code>shadow</code>, <code>transition</code>,
+                    <code>duration-200</code>,
+                    <code>opacity-50</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
