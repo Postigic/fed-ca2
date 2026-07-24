@@ -7,17 +7,11 @@ export default defineConfig([
     ignores: ["node_modules/**", "dist/**"],
   },
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    files: ["**/*.js"],
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
       globals: globals.browser,
-    },
-  },
-  {
-    files: ["**/*.js"],
-    languageOptions: {
-      sourceType: "script",
     },
   },
 ]);

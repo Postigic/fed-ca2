@@ -3,36 +3,28 @@
 /* everything below is placeholder, change on demand */
 
 @theme {
+  --color-background: #0b1f3a;
+
+  --color-primary: var(--color-blue-600);
+  --color-secondary: var(--color-violet-600);
+  --color-accent: var(--color-amber-400);
+
+  --color-foreground: var(--color-slate-50);
+
   --font-sans: "DM Sans", sans-serif;
-
-  --color-primary: #ff8200;
-  --color-background: #0d0e0e;
-  --color-surface: #1e1e2d;
-  --color-accent: #27272a;
-
-  --radius-card: 12px;
-  --radius-pill: 9999px;
 }
 
-/* body {
-  overflow-x: hidden;
+.animate-target {
+  opacity: 0;
+  transform: translateY(50px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
-html {
-  scroll-padding-top: 100px;
+.animate-target.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
-
-:focus-visible {
-  outline: 2px solid #ff8200;
-  outline-offset: 3px;
-  border-radius: 8px;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 5px;
-} */
