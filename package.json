@@ -6,8 +6,7 @@
     "globals": "^17.7.0",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "tailwindcss": "^4.3.3",
-    "vnu-jar": "^26.7.22"
+    "tailwindcss": "^4.3.3"
   },
   "scripts": {
     "dev": "tailwindcss -i ./css/input.css -o ./dist/output.css --watch",
@@ -15,7 +14,6 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "validate:html": "vnu-jar index.html"
+    "lint:fix": "eslint . --fix"
   }
 }
