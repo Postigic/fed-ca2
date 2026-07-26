@@ -1,22 +1,530 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-    />
-    <link href="./dist/output.css" rel="stylesheet" />
-    <script type="module" src="./js/index.js"></script>
-    <title>Space Something Something</title>
-  </head>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <base href="/fed-ca2/" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/index.js"></script>
+        <title>Universe Explorer</title>
+    </head>
 
-  <body class="bg-background text-foreground font-sans">
-    <h1 class="animate-target text-9xl font-bold">Wenkai</h1>
-    <p id="description" class="animate-target">
-      Lorum ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
-      tempor something something
-    </p>
-  </body>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+        </button>
+
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
+
+        <div class="md:ml-48">
+            <main class="flex-1">
+                <!-- ======= HERO SECTION ======= -->
+
+                <section
+                    class="relative mb-24 flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center md:mb-32 md:p-12 xl:mb-40"
+                >
+                    <img
+                        src="./assets/images/hero.jpg"
+                        alt=""
+                        class="absolute inset-0 -z-20 h-full w-full object-cover"
+                    />
+                    <div class="bg-background/85 absolute inset-0 -z-10"></div>
+
+                    <span
+                        class="border-primary/30 pointer-events-none absolute hidden h-8 w-8 border-t border-l md:top-10 md:left-10 md:block"
+                    ></span>
+                    <span
+                        class="border-primary/30 pointer-events-none absolute hidden h-8 w-8 border-t border-r md:top-10 md:right-10 md:block"
+                    ></span>
+                    <span
+                        class="border-primary/30 pointer-events-none absolute hidden h-8 w-8 border-b border-l md:bottom-10 md:left-10 md:block"
+                    ></span>
+                    <span
+                        class="border-primary/30 pointer-events-none absolute hidden h-8 w-8 border-r border-b md:right-10 md:bottom-10 md:block"
+                    ></span>
+
+                    <p
+                        class="text-muted absolute hidden font-mono text-xs tracking-widest md:top-20 md:left-10 md:block"
+                    >
+                        EARTH–SUN · 1 AU · 149,597,870 KM
+                    </p>
+
+                    <p
+                        class="text-muted absolute hidden font-mono text-xs tracking-widest md:top-20 md:right-10 md:block"
+                    >
+                        M42 · RA 05h 35m 17s · DEC −05° 23′ 28″
+                    </p>
+
+                    <div
+                        class="hero-content mx-auto max-w-3xl min-[2200px]:max-w-4xl"
+                    >
+                        <p
+                            class="text-primary mb-5 font-mono text-xs tracking-[0.35em] uppercase xl:text-sm"
+                        >
+                            From Earth to the Cosmos
+                        </p>
+
+                        <h1
+                            class="font-display mb-5 text-5xl font-semibold tracking-tight min-[2200px]:text-9xl md:text-7xl xl:text-8xl"
+                        >
+                            Explore the
+                            <span
+                                class="from-primary to-secondary bg-linear-to-r bg-clip-text text-transparent"
+                                >Universe</span
+                            >
+                        </h1>
+
+                        <p
+                            class="text-muted text-base min-[2200px]:text-2xl md:text-lg xl:text-xl"
+                        >
+                            Discover the Solar System, learn about the worlds
+                            beyond Earth, explore humanity's greatest missions,
+                            and uncover the science behind space exploration.
+                        </p>
+                    </div>
+
+                    <div
+                        class="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
+                    >
+                        <span
+                            class="text-muted relative left-[0.15em] font-mono text-xs tracking-[0.3em] uppercase"
+                        >
+                            Scroll
+                        </span>
+
+                        <i
+                            class="bx bx-chevron-down text-muted animate-bounce text-2xl"
+                        ></i>
+                    </div>
+                </section>
+
+                <!-- ======= INTRO SECTION ======= -->
+
+                <section
+                    id="intro"
+                    class="animate-target mb-24 py-24 md:mb-32 md:py-28 xl:mb-40 xl:py-32"
+                >
+                    <div
+                        class="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 min-[1920px]:max-w-7xl min-[2200px]:max-w-368 min-[2200px]:gap-24 md:grid-cols-[1fr_1.4fr] md:items-start md:gap-16 xl:max-w-6xl"
+                    >
+                        <h2
+                            class="font-display animate-target text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                        >
+                            A universe waiting to be explored.
+                        </h2>
+
+                        <p
+                            class="text-muted animate-target text-base min-[2200px]:text-2xl md:pt-2 md:text-lg xl:text-xl"
+                        >
+                            From the planets closest to the Sun to distant
+                            galaxies billions of light-years away, discover the
+                            science, history, and technology that help us
+                            understand the universe around us. Learn about
+                            planets, stars, galaxies, missions, and the
+                            technology that allows humanity to explore beyond
+                            Earth.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ======= STATS SECTION ======= -->
+
+                <section
+                    id="stats"
+                    class="bg-surface border-border animate-target relative mb-24 overflow-hidden border-y py-20 md:mb-32 md:py-24 xl:mb-40 xl:py-28"
+                >
+                    <div
+                        class="divide-border relative mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-6 min-[1920px]:max-w-[100rem] md:grid-cols-4 md:gap-y-0 md:divide-x xl:max-w-7xl"
+                    >
+                        <div class="animate-target space-y-1 md:px-8">
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Planets
+                            </p>
+                            <p
+                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
+                            >
+                                8
+                            </p>
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest"
+                            >
+                                in the Solar System
+                            </p>
+                        </div>
+
+                        <div class="animate-target space-y-1 md:px-8">
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Moons
+                            </p>
+                            <p
+                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
+                            >
+                                200+
+                            </p>
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest"
+                            >
+                                known natural satellites
+                            </p>
+                        </div>
+
+                        <div class="animate-target space-y-1 md:px-8">
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Space Age
+                            </p>
+                            <p
+                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
+                            >
+                                60+
+                            </p>
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest"
+                            >
+                                years of human exploration
+                            </p>
+                        </div>
+
+                        <div class="animate-target space-y-1 md:px-8">
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Universe Age
+                            </p>
+                            <p
+                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
+                            >
+                                13.8B
+                            </p>
+                            <p
+                                class="text-muted font-mono text-xs tracking-widest"
+                            >
+                                years old
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= EXPLORE SECTION ======= -->
+
+                <section
+                    id="explore"
+                    class="animate-target mb-24 px-6 py-16 pb-24 md:mb-32 md:py-24 md:pb-32 xl:mb-40"
+                >
+                    <div
+                        class="mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl"
+                    >
+                        <h2
+                            class="font-display animate-target mb-10 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                        >
+                            Start Exploring
+                        </h2>
+
+                        <div
+                            class="animate-target grid grid-cols-1 gap-6 min-[1920px]:gap-10 md:grid-cols-3 xl:gap-8"
+                        >
+                            <article class="animate-target">
+                                <a
+                                    href="pages/solar-system.html"
+                                    class="group border-border shadow-elevated relative block aspect-video overflow-hidden rounded-md border transition-transform duration-300 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <img
+                                        src="./assets/images/saturn.jpg"
+                                        alt=""
+                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                    />
+                                    <div
+                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                    ></div>
+                                    <div
+                                        class="relative flex h-full flex-col justify-end p-6"
+                                    >
+                                        <h3
+                                            class="font-display text-xl font-semibold"
+                                        >
+                                            Solar System
+                                        </h3>
+                                        <p class="text-muted mt-1 text-sm">
+                                            Discover the structure of our Solar
+                                            System and the worlds that orbit our
+                                            Sun.
+                                        </p>
+                                        <span
+                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                            >Explore
+                                            <span
+                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
+                                            >
+                                                →
+                                            </span></span
+                                        >
+                                    </div>
+                                </a>
+                            </article>
+
+                            <article class="animate-target">
+                                <a
+                                    href="pages/missions.html"
+                                    class="group border-border shadow-elevated relative block aspect-video overflow-hidden rounded-md border transition-transform duration-300 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <img
+                                        src="./assets/images/apollo-11.jpg"
+                                        alt=""
+                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                    />
+                                    <div
+                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                    ></div>
+                                    <div
+                                        class="relative flex h-full flex-col justify-end p-6"
+                                    >
+                                        <h3
+                                            class="font-display text-xl font-semibold"
+                                        >
+                                            Space Missions
+                                        </h3>
+                                        <p class="text-muted mt-1 text-sm">
+                                            Explore historic missions that took
+                                            humans to the Moon and spacecraft to
+                                            the edges of our Solar System.
+                                        </p>
+                                        <span
+                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                            >Explore
+                                            <span
+                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
+                                            >
+                                                →
+                                            </span></span
+                                        >
+                                    </div>
+                                </a>
+                            </article>
+
+                            <article class="animate-target">
+                                <a
+                                    href="pages/technology.html"
+                                    class="group border-border shadow-elevated relative block aspect-video overflow-hidden rounded-md border transition-transform duration-300 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <img
+                                        src="./assets/images/hubble-space-telescope.jpg"
+                                        alt=""
+                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                    />
+                                    <div
+                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                    ></div>
+                                    <div
+                                        class="relative flex h-full flex-col justify-end p-6"
+                                    >
+                                        <h3
+                                            class="font-display text-xl font-semibold"
+                                        >
+                                            Space Technology
+                                        </h3>
+                                        <p class="text-muted mt-1 text-sm">
+                                            Discover the spacecraft, telescopes,
+                                            and technology that make exploration
+                                            possible.
+                                        </p>
+                                        <span
+                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                            >Explore
+                                            <span
+                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
+                                            >
+                                                →
+                                            </span></span
+                                        >
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= MORE TO EXPLORE SECTION ======= -->
+
+                <section
+                    id="more-explore"
+                    class="animate-target mb-24 px-6 md:mb-32 xl:mb-40"
+                >
+                    <div
+                        class="mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl"
+                    >
+                        <h2
+                            class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                        >
+                            More to Explore
+                        </h2>
+
+                        <div
+                            class="animate-target grid grid-cols-2 gap-4 sm:grid-cols-4"
+                        >
+                            <div class="animate-target">
+                                <a
+                                    href="pages/planets.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-planet text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Planets</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/moon.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-moon text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Moon</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/sun.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-sun text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium">Sun</span>
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/galaxies.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-globe text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Galaxies</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/astronauts.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-user text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Astronauts</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/constellations.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-star text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Constellations</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/quiz.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-help-circle text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >Quiz</span
+                                    >
+                                </a>
+                            </div>
+
+                            <div class="animate-target">
+                                <a
+                                    href="pages/about.html"
+                                    class="border-border bg-surface hover:border-primary/40 hover:text-primary transition-[color, transform] flex items-center gap-3 rounded-md border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                >
+                                    <i
+                                        class="bx bx-info-circle text-primary text-xl"
+                                    ></i>
+                                    <span class="text-sm font-medium"
+                                        >About</span
+                                    >
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= QUIZ CTA SECTION ======= -->
+
+                <section
+                    id="quiz-cta"
+                    class="animate-target border-border bg-surface mb-24 border-y px-6 py-16 text-center md:mb-32 md:py-20 xl:mb-40 xl:py-24"
+                >
+                    <p
+                        class="text-muted animate-target font-mono text-xs tracking-widest uppercase"
+                    >
+                        Think you know space?
+                    </p>
+                    <h2
+                        class="font-display animate-target mt-2 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                    >
+                        Test Your Space Knowledge
+                    </h2>
+                    <div class="animate-target">
+                        <a
+                            href="pages/quiz.html"
+                            class="border-primary text-primary hover:bg-primary hover:text-background transition-[color, transform] relative mt-6 inline-block rounded-md border px-6 py-3 font-mono text-sm duration-200 hover:-translate-y-1 active:translate-y-0"
+                            >Take the Quiz →</a
+                        >
+                    </div>
+                </section>
+            </main>
+
+            <!-- injected via JS -->
+            <footer id="footer"></footer>
+        </div>
+    </body>
 </html>

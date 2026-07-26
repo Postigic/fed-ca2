@@ -29,8 +29,8 @@ Whenever you start working on a **new feature or fix/tweak**, follow these steps
 If you don't already have the project on your computer, clone it first.
 
 1. Copy the repository URL from GitHub:
-   - Click **Code**
-   - Copy the HTTPS URL
+    - Click **Code**
+    - Copy the HTTPS URL
 2. Open a terminal in the folder where you want the project.
 3. Run:
 
@@ -107,8 +107,8 @@ After pushing, GitHub will usually show a banner suggesting you create a PR. If 
 1. Go to the GitHub repository.
 2. Click **Compare & pull request** (or **Pull requests → New pull request**).
 3. Ensure that:
-   - Base: `main`
-   - Compare: `branch-name`
+    - Base: `main`
+    - Compare: `branch-name`
 4. Click **Create pull request**.
 
 I'll review your changes and merge them if everything looks good.
