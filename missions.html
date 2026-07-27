@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/missions.js"></script>
+        <title>Mission Timeline</title>
+        <style>
+            .extra-info-wrap {
+                display: grid;
+                grid-template-rows: 0fr;
+                opacity: 0;
+                transition:
+                    grid-template-rows 300ms ease,
+                    opacity 250ms ease;
+            }
+
+            .extra-info-wrap.is-open {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+
+            .extra-info {
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+        </button>
+
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
+
+        <div class="md:ml-48">
+            <main class="flex-1">
+                <section
+                    id="timeline"
+                    class="animate-target mx-auto max-w-5xl px-6 py-16"
+                >
+                    <h1
+                        class="font-display animate-target mb-12 text-4xl font-semibold tracking-tight"
+                    >
+                        Milestones in Space Exploration
+                    </h1>
+
+                    <div class="animate-target relative">
+                        <!-- timeline -->
+                        <div
+                            class="bg-primary absolute top-0 bottom-0 left-4 w-1 -translate-x-1/2 rounded"
+                            aria-hidden="true"
+                        ></div>
+
+                        <ol class="list-none">
+                            <!--  ======= SPUTNIK 1 ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1957">1957</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-sputnik-1-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Sputnik 1
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            First artificial satellite.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-sputnik-1-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                4 October 1957
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Country:
+                                                            </dt>
+                                                            <dd>
+                                                                Soviet Union
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Rocket:
+                                                            </dt>
+                                                            <dd>
+                                                                Sputnik 8K71PS
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Orbital Period:
+                                                            </dt>
+                                                            <dd>96 minutes</dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Sputnik 1's simple radio
+                                                        beeps, audible to
+                                                        amateur radio operators
+                                                        worldwide, triggered the
+                                                        Space Race and prompted
+                                                        the United States to
+                                                        found NASA less than a
+                                                        year later.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                            <!-- ======= VOSTOK 1 ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1961">1961</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-vostok-1-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Vostok 1
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            First human spaceflight.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-vostok-1-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                12 April 1961
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Country:
+                                                            </dt>
+                                                            <dd>
+                                                                Soviet Union
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Cosmonaut:
+                                                            </dt>
+                                                            <dd>
+                                                                Yuri Gagarin
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Duration:
+                                                            </dt>
+                                                            <dd>108 minutes</dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Gagarin's single orbit
+                                                        of Earth proved humans
+                                                        could survive
+                                                        spaceflight and made him
+                                                        instantly famous
+                                                        worldwide. The flight's
+                                                        success intensified the
+                                                        Space Race, pushing the
+                                                        United States toward its
+                                                        own crewed program and,
+                                                        eventually, the Moon.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!--  ======= APOLLO 11 ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1969">1969</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-apollo-11-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Apollo 11
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            First crewed Moon landing.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-apollo-11-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                16 July 1969
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Landing:
+                                                            </dt>
+                                                            <dd>
+                                                                20 July 1969
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Crew:
+                                                            </dt>
+                                                            <dd>
+                                                                Neil Armstrong,
+                                                                Buzz Aldrin,
+                                                                Michael Collins
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Spacecraft:
+                                                            </dt>
+                                                            <dd>
+                                                                Columbia (CM),
+                                                                Eagle (LM)
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        An estimated 650 million
+                                                        people watched
+                                                        Armstrong's first steps
+                                                        live, one of the
+                                                        most-viewed broadcasts
+                                                        in history, fulfilling
+                                                        President Kennedy's 1961
+                                                        pledge to land a man on
+                                                        the Moon before the
+                                                        decade's end.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= VOYAGER 1 ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1977">1977</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-voyager-1-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Voyager 1
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            Grand Tour probe, now in
+                                            interstellar space.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-voyager-1-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                5 September 1977
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Country:
+                                                            </dt>
+                                                            <dd>
+                                                                United States
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Flybys:
+                                                            </dt>
+                                                            <dd>
+                                                                Jupiter, Saturn
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Status:
+                                                            </dt>
+                                                            <dd>
+                                                                Interstellar
+                                                                space since 2012
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Voyager 1 carries the
+                                                        Golden Record, a
+                                                        phonograph disc of
+                                                        sounds and images meant
+                                                        to represent life on
+                                                        Earth to any intelligent
+                                                        life that might find it.
+                                                        Nearly five decades
+                                                        after launch, it's still
+                                                        transmitting data from
+                                                        farther away than any
+                                                        other human-made object
+                                                        has ever traveled.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= HUBBLE SPACE TELESCOPE ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1990">1990</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-hubble-space-telescope-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Hubble Space Telescope
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            Orbiting observatory that reshaped
+                                            modern astronomy.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-hubble-space-telescope-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                24 April 1990
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Partners:
+                                                            </dt>
+                                                            <dd>NASA, ESA</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Orbit Altitude:
+                                                            </dt>
+                                                            <dd>~535 km</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Servicing
+                                                                Missions:
+                                                            </dt>
+                                                            <dd>5</dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        A flawed mirror nearly
+                                                        doomed the mission at
+                                                        launch, but a 1993
+                                                        spacewalk repair turned
+                                                        Hubble into one of the
+                                                        most productive
+                                                        scientific instruments
+                                                        ever built, capturing
+                                                        images like the Hubble
+                                                        Deep Field that reshaped
+                                                        how far, and how old,
+                                                        the observable universe
+                                                        was known to be.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!--  ======= ISS ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="1998">1998</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-international-space-station-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                International Space Station
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            Largest space laboratory,
+                                            continuously crewed since 2000.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-international-space-station-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                First Module:
+                                                            </dt>
+                                                            <dd>
+                                                                Zarya, 20
+                                                                November 1998
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Partners:
+                                                            </dt>
+                                                            <dd>
+                                                                NASA, Roscosmos,
+                                                                ESA, JAXA, CSA
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Continuous
+                                                                Occupation:
+                                                            </dt>
+                                                            <dd>
+                                                                Since 2 Nov 2000
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Orbital Speed:
+                                                            </dt>
+                                                            <dd>
+                                                                ~28,000 km/h
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Assembled from more than
+                                                        40 modules launched over
+                                                        more than a decade, the
+                                                        ISS orbits Earth roughly
+                                                        every 90 minutes and has
+                                                        hosted over 280 people
+                                                        from more than 20
+                                                        countries, making it one
+                                                        of the longest-running
+                                                        examples of
+                                                        international
+                                                        cooperation in history.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= FALCON 9 FIRST LANDING ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="2015">2015</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-falcon-9-first-landing-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Falcon 9 First Landing
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            First landing of an orbital-class
+                                            rocket booster.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-falcon-9-first-landing-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Landing Date:
+                                                            </dt>
+                                                            <dd>
+                                                                21 December 2015
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Company:
+                                                            </dt>
+                                                            <dd>SpaceX</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Landing Site:
+                                                            </dt>
+                                                            <dd>
+                                                                Landing Zone 1,
+                                                                Cape Canaveral
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Mission:
+                                                            </dt>
+                                                            <dd>Orbcomm-2</dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Every orbital rocket
+                                                        before this flight had
+                                                        been thrown away after a
+                                                        single use. Landing the
+                                                        booster upright and
+                                                        intact opened the door
+                                                        to routine reuse, which
+                                                        has cut the cost of
+                                                        reaching orbit more than
+                                                        any advance since the
+                                                        Space Shuttle.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= CREW DRAGON DEMO-2 ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="2020">2020</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-crew-dragon-demo-2-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Crew Dragon Demo-2
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            First crewed flight on a
+                                            commercially built spacecraft.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-crew-dragon-demo-2-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>30 May 2020</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Operator:
+                                                            </dt>
+                                                            <dd>
+                                                                SpaceX, for NASA
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Crew:
+                                                            </dt>
+                                                            <dd>
+                                                                Robert Behnken,
+                                                                Douglas Hurley
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Destination:
+                                                            </dt>
+                                                            <dd>
+                                                                International
+                                                                Space Station
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Demo-2 ended a nine-year
+                                                        gap in US crewed
+                                                        launches since the Space
+                                                        Shuttle's retirement,
+                                                        and was the first time
+                                                        NASA astronauts reached
+                                                        orbit aboard a
+                                                        spacecraft built and
+                                                        flown by a private
+                                                        company.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= JAMES WEBB SPACE TELESCOPE ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="2022-07">2022</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-james-webb-space-telescope-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                James Webb Space Telescope
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            Hubble's successor, built to see the
+                                            universe's first galaxies.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-james-webb-space-telescope-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch Date:
+                                                            </dt>
+                                                            <dd>
+                                                                25 December 2021
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                First Images:
+                                                            </dt>
+                                                            <dd>
+                                                                12 July 2022
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Partners:
+                                                            </dt>
+                                                            <dd>
+                                                                NASA, ESA, CSA
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Orbit:
+                                                            </dt>
+                                                            <dd>
+                                                                Sun–Earth L2,
+                                                                ~1.5 million km
+                                                                out
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Webb's infrared
+                                                        instruments see through
+                                                        cosmic dust to light
+                                                        from galaxies formed
+                                                        within a few hundred
+                                                        million years of the Big
+                                                        Bang, further back in
+                                                        time than Hubble could
+                                                        reach.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                            <!-- ======= ARTEMIS I ======= -->
+
+                            <li>
+                                <article
+                                    class="animate-target relative mb-10 flex items-center"
+                                >
+                                    <div
+                                        class="relative flex w-8 justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="border-background bg-primary z-10 h-5 w-5 rounded-full border-4"
+                                        ></div>
+                                    </div>
+
+                                    <p
+                                        class="text-muted ml-4 w-20 font-mono font-semibold"
+                                    >
+                                        <time datetime="2022-11">2022</time>
+                                    </p>
+
+                                    <div
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="flex w-full cursor-pointer items-center justify-between text-left"
+                                            aria-expanded="false"
+                                            aria-controls="mission-artemis-i-details"
+                                        >
+                                            <h2
+                                                class="font-display text-lg font-semibold"
+                                            >
+                                                Artemis I
+                                            </h2>
+                                            <span
+                                                class="text-primary text-2xl"
+                                                aria-hidden="true"
+                                                >+</span
+                                            >
+                                        </button>
+
+                                        <p class="text-muted mt-2">
+                                            Uncrewed test flight paving the way
+                                            back to the Moon.
+                                        </p>
+
+                                        <div
+                                            class="extra-info-wrap"
+                                            id="mission-artemis-i-details"
+                                        >
+                                            <div class="extra-info">
+                                                <div
+                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                >
+                                                    <dl class="space-y-1">
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Launch:
+                                                            </dt>
+                                                            <dd>
+                                                                16 November 2022
+                                                            </dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Spacecraft:
+                                                            </dt>
+                                                            <dd>Orion</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Mission
+                                                                Duration:
+                                                            </dt>
+                                                            <dd>25.5 days</dd>
+                                                        </div>
+                                                        <div class="flex gap-1">
+                                                            <dt
+                                                                class="font-semibold"
+                                                            >
+                                                                Max Distance:
+                                                            </dt>
+                                                            <dd>
+                                                                ~432,000 km from
+                                                                Earth
+                                                            </dd>
+                                                        </div>
+                                                    </dl>
+
+                                                    <p class="mt-3">
+                                                        Though it carried no
+                                                        crew, Artemis I proved
+                                                        out the Space Launch
+                                                        System rocket and
+                                                        Orion's heat shield
+                                                        ahead of Artemis II and
+                                                        III, the first attempts
+                                                        to return astronauts to
+                                                        the lunar surface since
+                                                        Apollo 17 in 1972.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+            </main>
+
+            <!-- injected via JS -->
+            <footer id="footer"></footer>
+        </div>
+    </body>
+</html>
