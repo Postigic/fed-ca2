@@ -14,17 +14,59 @@ observeElements({ elements: document.querySelector("#timeline") });
 observeElements({ elements: document.querySelector("#attributions") });
 
 const PHASES = [
-    { name: "New Moon", angle: 0, desc: "The Moon sits between Earth and the Sun, so its lit side faces away from us and it's essentially invisible in the sky.", tip: "You won't see it — but it's the best night of the month for stargazing since there's no moonlight to wash out faint stars." },
-    { name: "Waxing Crescent", angle: 45, desc: "A thin sliver of light appears on the right edge as the Moon starts moving out from between Earth and the Sun.", tip: "Look just after sunset, low in the western sky." },
-    { name: "First Quarter", angle: 90, desc: "Exactly half the visible face is lit. Despite the name, it's a quarter of the way through the full cycle, not a quarter lit.", tip: "Visible high in the sky in the afternoon and early evening — a great time to see craters along the terminator line." },
-    { name: "Waxing Gibbous", angle: 135, desc: "More than half the disk is lit, and it keeps growing as the Moon approaches the far side of its orbit from the Sun.", tip: "Rises in the afternoon and is visible for most of the night." },
-    { name: "Full Moon", angle: 180, desc: "Earth sits roughly between the Sun and Moon, so we see the entire lit face — the brightest phase of the month.", tip: "Rises around sunset and stays up all night, making it easy to spot without staying up late." },
-    { name: "Waning Gibbous", angle: 225, desc: "Illumination starts shrinking back from the right side after the full moon, though it's still mostly lit.", tip: "Rises later in the evening — check the eastern sky after dark." },
-    { name: "Last Quarter", angle: 270, desc: "The other half of the disk is now lit, mirroring the first quarter — it's three-quarters of the way through the cycle.", tip: "Best viewed after midnight and into the early morning sky." },
-    { name: "Waning Crescent", angle: 315, desc: "A thin crescent remains as the Moon heads back toward alignment with the Sun and the next new moon.", tip: "Look for it low in the east just before sunrise." },
+    {
+        name: "New Moon",
+        angle: 0,
+        desc: "The Moon sits between Earth and the Sun, so its lit side faces away from us and it's essentially invisible in the sky.",
+        tip: "You won't see it — but it's the best night of the month for stargazing since there's no moonlight to wash out faint stars.",
+    },
+    {
+        name: "Waxing Crescent",
+        angle: 45,
+        desc: "A thin sliver of light appears on the right edge as the Moon starts moving out from between Earth and the Sun.",
+        tip: "Look just after sunset, low in the western sky.",
+    },
+    {
+        name: "First Quarter",
+        angle: 90,
+        desc: "Exactly half the visible face is lit. Despite the name, it's a quarter of the way through the full cycle, not a quarter lit.",
+        tip: "Visible high in the sky in the afternoon and early evening — a great time to see craters along the terminator line.",
+    },
+    {
+        name: "Waxing Gibbous",
+        angle: 135,
+        desc: "More than half the disk is lit, and it keeps growing as the Moon approaches the far side of its orbit from the Sun.",
+        tip: "Rises in the afternoon and is visible for most of the night.",
+    },
+    {
+        name: "Full Moon",
+        angle: 180,
+        desc: "Earth sits roughly between the Sun and Moon, so we see the entire lit face — the brightest phase of the month.",
+        tip: "Rises around sunset and stays up all night, making it easy to spot without staying up late.",
+    },
+    {
+        name: "Waning Gibbous",
+        angle: 225,
+        desc: "Illumination starts shrinking back from the right side after the full moon, though it's still mostly lit.",
+        tip: "Rises later in the evening — check the eastern sky after dark.",
+    },
+    {
+        name: "Last Quarter",
+        angle: 270,
+        desc: "The other half of the disk is now lit, mirroring the first quarter — it's three-quarters of the way through the cycle.",
+        tip: "Best viewed after midnight and into the early morning sky.",
+    },
+    {
+        name: "Waning Crescent",
+        angle: 315,
+        desc: "A thin crescent remains as the Moon heads back toward alignment with the Sun and the next new moon.",
+        tip: "Look for it low in the east just before sunrise.",
+    },
 ];
 
-const svgR = 70, svgCX = 100, svgCY = 100;
+const svgR = 70,
+    svgCX = 100,
+    svgCY = 100;
 
 /**
  * Builds the SVG path for the illuminated portion of the Moon at a given
@@ -41,7 +83,7 @@ function moonLitPath(angleDeg, r = svgR, cx = svgCX, cy = svgCY) {
     const crescent = angleDeg < 90 || angleDeg > 270;
 
     const outerSweep = litOnRight ? 1 : 0;
-    const innerSweep = litOnRight ? (crescent ? 1 : 0) : (crescent ? 0 : 1);
+    const innerSweep = litOnRight ? (crescent ? 1 : 0) : crescent ? 0 : 1;
 
     const top = `${cx} ${cy - r}`;
     const bottom = `${cx} ${cy + r}`;
@@ -85,7 +127,8 @@ function renderPhase(index) {
 PHASES.forEach((p, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "phase-tick border-border hover:border-primary/40 flex flex-col items-center gap-1.5 rounded-sm border p-2 transition-colors";
+    btn.className =
+        "phase-tick border-border hover:border-primary/40 flex flex-col items-center gap-1.5 rounded-sm border p-2 transition-colors";
     btn.setAttribute("aria-pressed", "false");
     btn.title = p.name;
     btn.innerHTML = `
@@ -114,12 +157,36 @@ renderPhase(0);
     TIMELINE
 ========================================================= */
 const MILESTONES = [
-    { year: "1609", title: "Galileo sketches the Moon", body: "Galileo Galilei points a telescope at the Moon and records mountains and craters, showing it isn't the perfectly smooth sphere many believed." },
-    { year: "1959", title: "Luna 2 reaches the surface", body: "The Soviet Union's Luna 2 becomes the first human-made object to reach the Moon, impacting its surface and confirming it has no significant magnetic field." },
-    { year: "1969", title: "Apollo 11 — first footsteps", body: "Neil Armstrong and Buzz Aldrin become the first humans to walk on the Moon, while Michael Collins orbits above in the command module." },
-    { year: "1972", title: "Apollo 17 — last crewed landing", body: "Gene Cernan and Harrison Schmitt complete the sixth and, so far, final crewed Moon landing, spending three days on the surface." },
-    { year: "2009", title: "Water ice confirmed", body: "NASA's LCROSS mission deliberately impacts a shadowed crater near the south pole, confirming the presence of water ice — a key resource for future missions." },
-    { year: "2026", title: "Artemis return missions", body: "NASA's Artemis program works to return astronauts to lunar orbit and the surface, this time aiming to stay for the long term." },
+    {
+        year: "1609",
+        title: "Galileo sketches the Moon",
+        body: "Galileo Galilei points a telescope at the Moon and records mountains and craters, showing it isn't the perfectly smooth sphere many believed.",
+    },
+    {
+        year: "1959",
+        title: "Luna 2 reaches the surface",
+        body: "The Soviet Union's Luna 2 becomes the first human-made object to reach the Moon, impacting its surface and confirming it has no significant magnetic field.",
+    },
+    {
+        year: "1969",
+        title: "Apollo 11 — first footsteps",
+        body: "Neil Armstrong and Buzz Aldrin become the first humans to walk on the Moon, while Michael Collins orbits above in the command module.",
+    },
+    {
+        year: "1972",
+        title: "Apollo 17 — last crewed landing",
+        body: "Gene Cernan and Harrison Schmitt complete the sixth and, so far, final crewed Moon landing, spending three days on the surface.",
+    },
+    {
+        year: "2009",
+        title: "Water ice confirmed",
+        body: "NASA's LCROSS mission deliberately impacts a shadowed crater near the south pole, confirming the presence of water ice — a key resource for future missions.",
+    },
+    {
+        year: "2026",
+        title: "Artemis return missions",
+        body: "NASA's Artemis program works to return astronauts to lunar orbit and the surface, this time aiming to stay for the long term.",
+    },
 ];
 
 const nodesWrap = document.getElementById("timeline-nodes");
