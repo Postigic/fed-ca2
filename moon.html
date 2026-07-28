@@ -1,10 +1,395 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/moon.js"></script>
+        <title>Moon | Universe Explorer</title>
+        <style>
+            .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            .reveal.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .reveal { transition: none; opacity: 1; transform: none; }
+            }
+
+            /* ===== Custom range slider (phase scrubber) ===== */
+            #phase-slider {
+                -webkit-appearance: none;
+                appearance: none;
+                height: 4px;
+                border-radius: 999px;
+                background: linear-gradient(
+                    to right,
+                    var(--color-primary) 0%,
+                    var(--color-primary) var(--fill, 0%),
+                    var(--color-border) var(--fill, 0%),
+                    var(--color-border) 100%
+                );
+            }
+            #phase-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 999px;
+                background: var(--color-primary);
+                border: 3px solid var(--color-background);
+                box-shadow: 0 0 0 1px var(--color-primary);
+                cursor: pointer;
+                margin-top: -8px;
+            }
+            #phase-slider::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 999px;
+                background: var(--color-primary);
+                border: 3px solid var(--color-background);
+                box-shadow: 0 0 0 1px var(--color-primary);
+                cursor: pointer;
+            }
+            #phase-slider::-moz-range-track {
+                height: 4px;
+                border-radius: 999px;
+                background: var(--color-border);
+            }
+
+            /* Quick-select phase tick buttons */
+            .phase-tick[aria-pressed="true"] {
+                border-color: var(--color-primary);
+                background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+            }
+            .phase-tick svg circle.lit { fill: var(--color-foreground); }
+
+            /* Soft ambient glow behind the big moon visual */
+            .moon-glow {
+                background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 22%, transparent) 0%, transparent 70%);
+            }
+
+            /* Timeline node states */
+            .tl-node[aria-current="true"] .tl-dot {
+                background: var(--color-primary);
+                box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-primary) 20%, transparent);
+            }
+            .tl-node[aria-current="true"] .tl-label { color: var(--color-primary); }
+
+            /* Fade-swap for the timeline detail card */
+            #timeline-card.swapping { opacity: 0; transform: translateY(6px); }
+            #timeline-card { transition: opacity 0.25s ease, transform 0.25s ease; }
+        </style>
     </head>
 
-    <body></body>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+        </button>
+
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
+
+        <div class="md:ml-48">
+            <main class="flex-1">
+                <!-- ======= HERO SECTION ======= -->
+
+               <!-- ======= PAGE HEADER ======= -->
+                <section class="animate-target reveal mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl">
+                    <p class="text-primary mb-3 font-mono text-xs tracking-[0.3em] uppercase">
+                        Earth's only natural satellite
+                    </p>
+                    <h1 class="font-display text-4xl font-semibold tracking-tight md:text-6xl">
+                        The Moon
+                    </h1>
+                    <p class="text-muted mt-4 max-w-2xl text-base md:text-lg">
+                        Every 29.5 days the Moon cycles through 8 recognizable phases as it
+                        orbits Earth. Drag the slider below to preview each one, then
+                        explore facts, imagery, and the history of lunar exploration.
+                    </p>
+
+                    <!-- quick stats, same mono/label pattern as the home page hero -->
+                    <dl class="border-border mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4">
+                        <div>
+                            <dt class="text-muted font-mono text-xs tracking-widest uppercase">Diameter</dt>
+                            <dd class="font-mono text-lg text-foreground">3,474 km</dd>
+                        </div>
+                        <div>
+                            <dt class="text-muted font-mono text-xs tracking-widest uppercase">Avg. distance</dt>
+                            <dd class="font-mono text-lg text-foreground">384,400 km</dd>
+                        </div>
+                        <div>
+                            <dt class="text-muted font-mono text-xs tracking-widest uppercase">Orbital period</dt>
+                            <dd class="font-mono text-lg text-foreground">27.3 days</dd>
+                        </div>
+                        <div>
+                            <dt class="text-muted font-mono text-xs tracking-widest uppercase">Full cycle</dt>
+                            <dd class="font-mono text-lg text-foreground">29.5 days</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <!-- ======= PHASE EXPLORER ======= -->
+                <section id="phase-explorer" class="animate-target reveal mx-auto max-w-6xl px-6 py-10 xl:max-w-7xl">
+                    <div class="bg-surface border-border shadow-elevated rounded-sm border p-6 md:p-10">
+                        <div class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:items-center">
+
+                            <!-- Moon visual -->
+                            <div class="relative mx-auto flex aspect-square w-full max-w-[280px] items-center justify-center">
+                                <div class="moon-glow absolute inset-0 rounded-full"></div>
+                                <svg id="moon-svg" viewBox="0 0 200 200" class="relative h-full w-full" role="img" aria-labelledby="moon-svg-title">
+                                    <title id="moon-svg-title">Illustration of the current Moon phase</title>
+                                    <defs>
+                                        <clipPath id="moon-clip">
+                                            <path id="moon-lit-path" d="" />
+                                        </clipPath>
+                                    </defs>
+                                    <!-- dark disk (the "new moon" base) -->
+                                    <circle cx="100" cy="100" r="70" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1.5" />
+                                    <!-- illuminated portion, clipped to the phase path computed in JS -->
+                                    <g clip-path="url(#moon-clip)">
+                                        <circle cx="100" cy="100" r="70" fill="var(--color-foreground)" />
+                                        <!-- a few faint craters for texture -->
+                                        <circle cx="78" cy="72" r="7" fill="#000" opacity="0.06" />
+                                        <circle cx="118" cy="95" r="10" fill="#000" opacity="0.05" />
+                                        <circle cx="95" cy="130" r="5" fill="#000" opacity="0.07" />
+                                        <circle cx="130" cy="60" r="4" fill="#000" opacity="0.06" />
+                                    </g>
+                                    <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-border)" stroke-width="1.5" />
+                                </svg>
+                            </div>
+
+                            <!-- Info panel (updates as the slider moves) -->
+                            <div>
+                                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                                    <h2 id="phase-name" class="font-display text-2xl font-semibold md:text-3xl">New Moon</h2>
+                                    <span class="text-primary font-mono text-sm">
+                                        <span id="phase-illum">0</span>% illuminated
+                                    </span>
+                                </div>
+                                <p id="phase-desc" class="text-muted mt-3 text-sm md:text-base"></p>
+
+                                <div class="border-border bg-surface-2 mt-5 flex gap-3 rounded-sm border p-4">
+                                    <i class="bx bx-binoculars text-primary mt-0.5 text-lg"></i>
+                                    <p class="text-sm">
+                                        <span class="font-medium">Viewing tip:</span>
+                                        <span id="phase-tip" class="text-muted"></span>
+                                    </p>
+                                </div>
+
+                                <!-- live region so screen readers announce phase changes -->
+                                <p id="phase-live" class="sr-only" aria-live="polite"></p>
+                            </div>
+                        </div>
+
+                        <!-- Slider + quick-select ticks -->
+                        <div class="mt-10">
+                            <div class="flex items-center gap-3">
+                                <button id="phase-prev" type="button" aria-label="Previous phase"
+                                    class="border-border hover:border-primary/40 hover:text-primary flex h-8 w-8 items-center justify-center rounded-sm border transition-colors">
+                                    <i class="bx bx-chevron-left"></i>
+                                </button>
+
+                                <input
+                                    id="phase-slider"
+                                    type="range"
+                                    min="0"
+                                    max="7"
+                                    step="1"
+                                    value="0"
+                                    class="w-full"
+                                    aria-label="Moon phase (0 = New Moon, 7 = Waning Crescent)"
+                                />
+
+                                <button id="phase-next" type="button" aria-label="Next phase"
+                                    class="border-border hover:border-primary/40 hover:text-primary flex h-8 w-8 items-center justify-center rounded-sm border transition-colors">
+                                    <i class="bx bx-chevron-right"></i>
+                                </button>
+                            </div>
+                            <p class="text-muted mt-2 text-center font-mono text-xs tracking-widest uppercase">
+                                Drag, use the arrows, or tap a phase below
+                            </p>
+
+                            <!-- Quick-select tick buttons: each renders a small precomputed phase icon.
+                                This is the extra UX affordance beyond dragging alone — lets a student
+                                jump straight to a phase they recognize instead of hunting on the slider. -->
+                            <div id="phase-ticks" class="mt-6 grid grid-cols-4 gap-2 sm:grid-cols-8"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= FUN FACTS ======= -->
+                <section id="fun-facts" class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl">
+                    <h2 class="font-display mb-8 text-2xl font-semibold tracking-tight md:text-4xl">Fun Facts</h2>
+
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-time-five text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Always the same face</h3>
+                            <p class="text-muted mt-1 text-sm">The Moon is tidally locked to Earth, so the same side always faces us — the "far side" was never seen until spacecraft photographed it.</p>
+                        </div>
+
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-move text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Slowly drifting away</h3>
+                            <p class="text-muted mt-1 text-sm">The Moon moves about 3.8 cm farther from Earth every year — roughly the speed your fingernails grow.</p>
+                        </div>
+
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-sun text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Extreme temperatures</h3>
+                            <p class="text-muted mt-1 text-sm">With no atmosphere to trap heat, the surface swings from about 127°C in direct sunlight to −173°C in shadow.</p>
+                        </div>
+
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-footprint text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Footprints that last</h3>
+                            <p class="text-muted mt-1 text-sm">Without wind or water to erode them, astronaut footprints left in the lunar dust could remain visible for millions of years.</p>
+                        </div>
+
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-pulse text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Moonquakes</h3>
+                            <p class="text-muted mt-1 text-sm">Apollo seismometers recorded "moonquakes" caused by tidal stress — some tremors rang on for over 10 minutes.</p>
+                        </div>
+
+                        <div class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1">
+                            <i class="bx bx-expand text-primary text-2xl"></i>
+                            <h3 class="font-display mt-3 font-semibold">Supermoons</h3>
+                            <p class="text-muted mt-1 text-sm">When a full moon lines up with its closest approach to Earth (perigee), it can look up to 14% bigger and 30% brighter.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= GALLERY ======= -->
+                <section id="gallery" class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl">
+                    <h2 class="font-display mb-8 text-2xl font-semibold tracking-tight md:text-4xl">Gallery</h2>
+
+                    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+                        <!-- Gallery card pattern matches the home page's "Start Exploring" cards:
+                            image + gradient overlay + caption that lifts on hover. -->
+                        <a href="#" class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1">
+                            <img
+                                src="https://images.unsplash.com/photo-1741990417513-81d6d95b5bbb?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                alt="Sequence of lunar eclipse phases arranged against a black sky"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"></div>
+                            <div class="relative flex h-full flex-col justify-end p-4">
+                                <h3 class="font-display text-sm font-semibold">Phases in Sequence</h3>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1">
+                            <img
+                                src="https://images.unsplash.com/photo-1777276516321-e50733992e40?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                alt="Close-up of the Moon's cratered surface"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"></div>
+                            <div class="relative flex h-full flex-col justify-end p-4">
+                                <h3 class="font-display text-sm font-semibold">Cratered Surface</h3>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1">
+                            <img
+                                src="https://images.unsplash.com/photo-1777195680759-9c3c616a92e7?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                alt="Earth rising over the Moon's horizon, seen from lunar orbit"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"></div>
+                            <div class="relative flex h-full flex-col justify-end p-4">
+                                <h3 class="font-display text-sm font-semibold">Earthrise</h3>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1">
+                            <img
+                                src="https://images.unsplash.com/photo-1762862064886-72a3dcc25230?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                alt="Bright orange full moon rising over silhouetted trees"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"></div>
+                            <div class="relative flex h-full flex-col justify-end p-4">
+                                <h3 class="font-display text-sm font-semibold">Moonrise</h3>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- ======= TIMELINE ======= -->
+                <section id="timeline" class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl">
+                    <h2 class="font-display mb-2 text-2xl font-semibold tracking-tight md:text-4xl">Lunar Exploration Timeline</h2>
+                    <p class="text-muted mb-10 max-w-2xl text-sm md:text-base">Click a milestone to read about it.</p>
+
+                    <!-- horizontal node row -->
+                    <div class="relative">
+                        <div class="border-border absolute top-3 right-0 left-0 border-t"></div>
+                        <div id="timeline-nodes" class="relative flex justify-between overflow-x-auto pb-2">
+                            <!-- buttons injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- detail card: content swaps here when a node is clicked -->
+                    <div id="timeline-card" class="bg-surface border-border shadow-elevated mt-8 rounded-sm border p-6 md:p-8">
+                        <p id="tl-year" class="text-primary font-mono text-sm"></p>
+                        <h3 id="tl-title" class="font-display mt-1 text-xl font-semibold md:text-2xl"></h3>
+                        <p id="tl-body" class="text-muted mt-3 text-sm md:text-base"></p>
+                    </div>
+                </section>
+
+                <!-- ======= ATTRIBUTIONS ======= -->
+                <section id="attributions" class="animate-target reveal border-border mx-auto max-w-6xl border-t px-6 py-12 xl:max-w-7xl">
+                    <h2 class="font-display mb-4 text-sm font-semibold tracking-wide uppercase">Attributions</h2>
+                    <ul class="text-muted list-disc space-y-2 pl-5 text-sm">
+                        <li>Phases in Sequence photo by <a href="https://unsplash.com/@elijahbcrouch" class="underline hover:text-primary">Elijah Crouch</a> on <a href="https://unsplash.com" class="underline hover:text-primary">Unsplash</a></li>
+                        <li>Cratered Surface photo by <a href="https://unsplash.com/@nasa" class="underline hover:text-primary">NASA</a> on <a href="https://unsplash.com" class="underline hover:text-primary">Unsplash</a></li>
+                        <li>Earthrise photo by <a href="https://unsplash.com/@nasa" class="underline hover:text-primary">NASA</a> on <a href="https://unsplash.com" class="underline hover:text-primary">Unsplash</a></li>
+                        <li>Moonrise photo by <a href="https://unsplash.com/@maksim_taawy" class="underline hover:text-primary">Maksim Samuilionak</a> on <a href="https://unsplash.com" class="underline hover:text-primary">Unsplash</a></li>
+                        <li>Icons by <a href="https://boxicons.com" class="underline hover:text-primary">Boxicons</a></li>
+                    </ul>
+                </section>
+            </main>
+
+            <!-- ======= FOOTER (matches home page's simple footer bar) =======
+            <footer class="border-border border-t px-6 py-8 text-center">
+                <p class="text-muted text-sm">© 2026 Universe Explorer</p>
+            </footer> -->
+        
+
+            <!-- injected via JS -->
+            <footer id="footer"></footer>
+        </div>
+    </body>
 </html>
