@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,10 +7,14 @@
             href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
         <link href="./dist/output.css" rel="stylesheet" />
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
         <script type="module" src="./js/missions.js"></script>
-        <title>Mission Timeline</title>
+        <title>Space Missions | Universe Explorer</title>
         <style>
             .extra-info-wrap {
                 display: grid;
@@ -38,9 +42,18 @@
             class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
             aria-label="Open menu"
         >
-            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
-            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
-            <span class="bar bg-foreground block h-0.5 w-5 rounded-full"></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
         </button>
 
         <header>
@@ -50,15 +63,85 @@
 
         <div class="md:ml-48">
             <main class="flex-1">
+                <!-- ======= PAGE HEADER ======= -->
+                <section
+                    id="intro"
+                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
+                >
+                    <p
+                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
+                    >
+                        Humanity's journey beyond Earth
+                    </p>
+                    <h1
+                        class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
+                    >
+                        Space Missions
+                    </h1>
+                    <p
+                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
+                    >
+                        From the first satellite to the return to the Moon,
+                        these are the milestones that expanded what humans and
+                        their machines could reach. Click a milestone below to
+                        read more.
+                    </p>
+
+                    <dl
+                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
+                    >
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Milestones
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                10
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Time span
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                1957–2022
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                First milestone
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Sputnik 1
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Latest milestone
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Artemis I
+                            </dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <!-- ======= TIMELINE ======= -->
                 <section
                     id="timeline"
-                    class="animate-target mx-auto max-w-5xl px-6 py-16"
+                    aria-labelledby="timeline-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
                 >
-                    <h1
-                        class="font-display animate-target mb-12 text-4xl font-semibold tracking-tight"
-                    >
-                        Milestones in Space Exploration
-                    </h1>
+                    <h2 id="timeline-heading" class="sr-only">
+                        Mission Timeline
+                    </h2>
 
                     <div class="animate-target relative">
                         <!-- timeline -->
@@ -90,29 +173,43 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-sputnik-1-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/sputnik-1.jpg"
+                                                alt="Sputnik 1"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Sputnik 1
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-sputnik-1-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Sputnik 1
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            First artificial satellite.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    First artificial satellite.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -120,7 +217,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -201,29 +298,43 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-vostok-1-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/vostok-1.jpg"
+                                                alt="Vostok 1"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Vostok 1
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-vostok-1-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Vostok 1
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            First human spaceflight.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    First human spaceflight.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -231,7 +342,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -316,29 +427,43 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-apollo-11-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/apollo-11(1).jpg"
+                                                alt="Apollo 11"
+                                                class="absolute inset-0 h-full w-full object-cover object-top"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Apollo 11
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-apollo-11-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Apollo 11
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            First crewed Moon landing.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    First crewed Moon landing.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -346,7 +471,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -435,30 +560,44 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-voyager-1-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/voyager-1.jpg"
+                                                alt="Voyager 1"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Voyager 1
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-voyager-1-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Voyager 1
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            Grand Tour probe, now in
-                                            interstellar space.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    Grand Tour probe, now in
+                                                    interstellar space.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -466,7 +605,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -556,30 +695,44 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-hubble-space-telescope-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/hubble-space-telescope.jpg"
+                                                alt="Hubble Space Telescope"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Hubble Space Telescope
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-hubble-space-telescope-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Hubble Space Telescope
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            Orbiting observatory that reshaped
-                                            modern astronomy.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    Orbiting observatory that
+                                                    reshaped modern astronomy.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -587,7 +740,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -671,30 +824,46 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-international-space-station-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/international-space-station.jpg"
+                                                alt="International Space Station"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                International Space Station
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-international-space-station-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        International Space
+                                                        Station
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            Largest space laboratory,
-                                            continuously crewed since 2000.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    Largest space laboratory,
+                                                    continuously crewed since
+                                                    2000.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -702,7 +871,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -793,30 +962,45 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-falcon-9-first-landing-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/falcon-9-first-landing.jpg"
+                                                alt="Falcon 9 First Landing"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Falcon 9 First Landing
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-falcon-9-first-landing-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Falcon 9 First Landing
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            First landing of an orbital-class
-                                            rocket booster.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    First landing of an
+                                                    orbital-class rocket
+                                                    booster.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -824,7 +1008,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -908,30 +1092,45 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-crew-dragon-demo-2-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/crew-dragon-demo-2.jpg"
+                                                alt="Crew Dragon Demo-2"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Crew Dragon Demo-2
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-crew-dragon-demo-2-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Crew Dragon Demo-2
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            First crewed flight on a
-                                            commercially built spacecraft.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    First crewed flight on a
+                                                    commercially built
+                                                    spacecraft.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -939,7 +1138,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -1025,30 +1224,46 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-james-webb-space-telescope-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/james-webb-space-telescope.jpg"
+                                                alt="James Webb Space Telescope"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                James Webb Space Telescope
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-james-webb-space-telescope-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        James Webb Space
+                                                        Telescope
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            Hubble's successor, built to see the
-                                            universe's first galaxies.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    Hubble's successor, built to
+                                                    see the universe's first
+                                                    galaxies.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -1056,7 +1271,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">
@@ -1143,30 +1358,44 @@
                                     </p>
 
                                     <div
-                                        class="timeline-card border-border bg-surface hover:border-primary/40 ml-6 flex-1 cursor-pointer rounded-sm border p-6 transition"
+                                        class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
                                     >
-                                        <button
-                                            type="button"
-                                            class="flex w-full cursor-pointer items-center justify-between text-left"
-                                            aria-expanded="false"
-                                            aria-controls="mission-artemis-i-details"
-                                        >
-                                            <h2
-                                                class="font-display text-lg font-semibold"
+                                        <div class="relative aspect-video">
+                                            <img
+                                                src="./assets/images/missions/artemis-i.jpg"
+                                                alt="Artemis I"
+                                                class="absolute inset-0 h-full w-full object-cover"
+                                            />
+                                            <div
+                                                class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
+                                            ></div>
+                                            <div
+                                                class="relative flex h-full flex-col justify-end p-6"
                                             >
-                                                Artemis I
-                                            </h2>
-                                            <span
-                                                class="text-primary text-2xl"
-                                                aria-hidden="true"
-                                                >+</span
-                                            >
-                                        </button>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between text-left"
+                                                    aria-expanded="false"
+                                                    aria-controls="mission-artemis-i-details"
+                                                >
+                                                    <h2
+                                                        class="font-display text-lg font-semibold"
+                                                    >
+                                                        Artemis I
+                                                    </h2>
+                                                    <span
+                                                        class="text-primary text-2xl"
+                                                        aria-hidden="true"
+                                                        >+</span
+                                                    >
+                                                </button>
 
-                                        <p class="text-muted mt-2">
-                                            Uncrewed test flight paving the way
-                                            back to the Moon.
-                                        </p>
+                                                <p class="text-muted mt-2">
+                                                    Uncrewed test flight paving
+                                                    the way back to the Moon.
+                                                </p>
+                                            </div>
+                                        </div>
 
                                         <div
                                             class="extra-info-wrap"
@@ -1174,7 +1403,7 @@
                                         >
                                             <div class="extra-info">
                                                 <div
-                                                    class="border-border text-muted mt-4 border-t pt-4"
+                                                    class="border-border text-muted border-t p-6 pt-4"
                                                 >
                                                     <dl class="space-y-1">
                                                         <div class="flex gap-1">

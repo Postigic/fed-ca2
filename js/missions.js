@@ -15,6 +15,7 @@ cards.forEach((card) => {
     });
 });
 
+observeElements({ elements: document.querySelector("#intro") });
 observeElements({
     elements: document.querySelector("#timeline"),
     desktopThreshold: 0.1,

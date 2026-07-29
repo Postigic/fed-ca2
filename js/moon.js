@@ -11,7 +11,6 @@ observeElements({ elements: document.querySelector("#phase-explorer") });
 observeElements({ elements: document.querySelector("#fun-facts") });
 observeElements({ elements: document.querySelector("#gallery") });
 observeElements({ elements: document.querySelector("#timeline") });
-observeElements({ elements: document.querySelector("#attributions") });
 
 const PHASES = [
     {
@@ -122,8 +121,7 @@ function renderPhase(index) {
     });
 }
 
-// Build the 8 quick-select tick buttons, each with a small precomputed
-// phase icon so students can recognize + jump to a phase directly.
+// Build the 8 quick-select tick buttons, each with a small precomputed phase icon.
 PHASES.forEach((p, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -224,30 +222,3 @@ MILESTONES.forEach((m, i) => {
 });
 
 renderMilestone(0);
-
-// /* =========================================================
-//     MOBILE SIDEBAR TOGGLE
-// ========================================================= */
-// const sidebarBtn = document.getElementById("sidebar-btn");
-// const sidebar = document.getElementById("sidebar");
-// sidebarBtn.addEventListener("click", () => {
-//     const isOpen = sidebar.classList.toggle("translate-x-0");
-//     sidebar.classList.toggle("-translate-x-full", !isOpen);
-//     sidebarBtn.setAttribute("aria-expanded", String(isOpen));
-// });
-
-// /* =========================================================
-//     REVEAL-ON-SCROLL
-// ========================================================= */
-// const io = new IntersectionObserver(
-//     (entries) => {
-//         entries.forEach((entry) => {
-//             if (entry.isIntersecting) {
-//                 entry.target.classList.add("is-visible");
-//                 io.unobserve(entry.target);
-//             }
-//         });
-//     },
-//     { threshold: 0.15 }
-// );
-// document.querySelectorAll(".reveal").forEach((el) => io.observe(el));

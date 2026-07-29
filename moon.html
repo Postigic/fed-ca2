@@ -16,25 +16,6 @@
         <script type="module" src="./js/moon.js"></script>
         <title>Moon | Universe Explorer</title>
         <style>
-            .reveal {
-                opacity: 0;
-                transform: translateY(16px);
-                transition:
-                    opacity 0.6s ease,
-                    transform 0.6s ease;
-            }
-            .reveal.is-visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            @media (prefers-reduced-motion: reduce) {
-                .reveal {
-                    transition: none;
-                    opacity: 1;
-                    transform: none;
-                }
-            }
-
             /* ===== Custom range slider (phase scrubber) ===== */
             #phase-slider {
                 -webkit-appearance: none;
@@ -59,7 +40,6 @@
                 border: 3px solid var(--color-background);
                 box-shadow: 0 0 0 1px var(--color-primary);
                 cursor: pointer;
-                margin-top: -8px;
             }
             #phase-slider::-moz-range-thumb {
                 width: 20px;
@@ -148,34 +128,34 @@
 
         <div class="md:ml-48">
             <main class="flex-1">
-                <!-- ======= HERO SECTION ======= -->
-
                 <!-- ======= PAGE HEADER ======= -->
                 <section
-                    class="animate-target reveal mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
+                    id="intro"
+                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
                 >
                     <p
-                        class="text-primary mb-3 font-mono text-xs tracking-[0.3em] uppercase"
+                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
                     >
                         Earth's only natural satellite
                     </p>
                     <h1
-                        class="font-display text-4xl font-semibold tracking-tight md:text-6xl"
+                        class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
                     >
                         The Moon
                     </h1>
-                    <p class="text-muted mt-4 max-w-2xl text-base md:text-lg">
+                    <p
+                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
+                    >
                         Every 29.5 days the Moon cycles through 8 recognizable
                         phases as it orbits Earth. Drag the slider below to
                         preview each one, then explore facts, imagery, and the
                         history of lunar exploration.
                     </p>
 
-                    <!-- quick stats, same mono/label pattern as the home page hero -->
                     <dl
-                        class="border-border mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
+                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
                     >
-                        <div>
+                        <div class="animate-target">
                             <dt
                                 class="text-muted font-mono text-xs tracking-widest uppercase"
                             >
@@ -185,7 +165,7 @@
                                 3,474 km
                             </dd>
                         </div>
-                        <div>
+                        <div class="animate-target">
                             <dt
                                 class="text-muted font-mono text-xs tracking-widest uppercase"
                             >
@@ -195,7 +175,7 @@
                                 384,400 km
                             </dd>
                         </div>
-                        <div>
+                        <div class="animate-target">
                             <dt
                                 class="text-muted font-mono text-xs tracking-widest uppercase"
                             >
@@ -205,7 +185,7 @@
                                 27.3 days
                             </dd>
                         </div>
-                        <div>
+                        <div class="animate-target">
                             <dt
                                 class="text-muted font-mono text-xs tracking-widest uppercase"
                             >
@@ -221,20 +201,19 @@
                 <!-- ======= PHASE EXPLORER ======= -->
                 <section
                     id="phase-explorer"
-                    class="animate-target reveal mx-auto max-w-6xl px-6 py-10 xl:max-w-7xl"
+                    class="animate-target mx-auto max-w-6xl px-6 py-10 xl:max-w-7xl"
                 >
                     <div
                         class="bg-surface border-border shadow-elevated rounded-sm border p-6 md:p-10"
                     >
                         <div
-                            class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:items-center"
+                            class="animate-target grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:items-center"
                         >
-                            <!-- Moon visual -->
                             <div
-                                class="relative mx-auto flex aspect-square w-full max-w-[280px] items-center justify-center"
+                                class="animate-target relative mx-auto flex aspect-square w-full max-w-70 items-center justify-center"
                             >
                                 <div
-                                    class="moon-glow absolute inset-0 rounded-full"
+                                    class="moon-glow animate-target absolute inset-0 rounded-full"
                                 ></div>
                                 <svg
                                     id="moon-svg"
@@ -251,7 +230,6 @@
                                             <path id="moon-lit-path" d="" />
                                         </clipPath>
                                     </defs>
-                                    <!-- dark disk (the "new moon" base) -->
                                     <circle
                                         cx="100"
                                         cy="100"
@@ -260,7 +238,6 @@
                                         stroke="var(--color-border)"
                                         stroke-width="1.5"
                                     />
-                                    <!-- illuminated portion, clipped to the phase path computed in JS -->
                                     <g clip-path="url(#moon-clip)">
                                         <circle
                                             cx="100"
@@ -268,7 +245,6 @@
                                             r="70"
                                             fill="var(--color-foreground)"
                                         />
-                                        <!-- a few faint craters for texture -->
                                         <circle
                                             cx="78"
                                             cy="72"
@@ -309,19 +285,18 @@
                                 </svg>
                             </div>
 
-                            <!-- Info panel (updates as the slider moves) -->
                             <div>
                                 <div
-                                    class="flex flex-wrap items-baseline justify-between gap-2"
+                                    class="animate-target flex flex-wrap items-baseline justify-between gap-2"
                                 >
                                     <h2
                                         id="phase-name"
-                                        class="font-display text-2xl font-semibold md:text-3xl"
+                                        class="font-display animate-target text-2xl font-semibold md:text-3xl"
                                     >
                                         New Moon
                                     </h2>
                                     <span
-                                        class="text-primary font-mono text-sm"
+                                        class="text-primary animate-target font-mono text-sm"
                                     >
                                         <span id="phase-illum">0</span>%
                                         illuminated
@@ -329,14 +304,14 @@
                                 </div>
                                 <p
                                     id="phase-desc"
-                                    class="text-muted mt-3 text-sm md:text-base"
+                                    class="text-muted animate-target mt-3 text-sm md:text-base"
                                 ></p>
 
                                 <div
-                                    class="border-border bg-surface-2 mt-5 flex gap-3 rounded-sm border p-4"
+                                    class="border-border bg-surface-2 animate-target mt-5 flex gap-3 rounded-sm border p-4"
                                 >
                                     <i
-                                        class="bx bx-binoculars text-primary mt-0.5 text-lg"
+                                        class="bx bxs-binoculars text-primary mt-0.5 text-lg"
                                     ></i>
                                     <p class="text-sm">
                                         <span class="font-medium"
@@ -358,8 +333,7 @@
                             </div>
                         </div>
 
-                        <!-- Slider + quick-select ticks -->
-                        <div class="mt-10">
+                        <div class="animate-target mt-10">
                             <div class="flex items-center gap-3">
                                 <button
                                     id="phase-prev"
@@ -396,9 +370,7 @@
                                 Drag, use the arrows, or tap a phase below
                             </p>
 
-                            <!-- Quick-select tick buttons: each renders a small precomputed phase icon.
-                                This is the extra UX affordance beyond dragging alone — lets a student
-                                jump straight to a phase they recognize instead of hunting on the slider. -->
+                            <!-- Quick-select tick buttons: each renders a small precomputed phase icon -->
                             <div
                                 id="phase-ticks"
                                 class="mt-6 grid grid-cols-4 gap-2 sm:grid-cols-8"
@@ -410,19 +382,21 @@
                 <!-- ======= FUN FACTS ======= -->
                 <section
                     id="fun-facts"
-                    class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    aria-labelledby="fun-facts-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
                 >
                     <h2
+                        id="fun-facts-heading"
                         class="font-display mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
                     >
                         Fun Facts
                     </h2>
 
                     <div
-                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                        class="animate-target grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
                     >
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i
                                 class="bx bx-time-five text-primary text-2xl"
@@ -438,7 +412,7 @@
                         </div>
 
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i class="bx bx-move text-primary text-2xl"></i>
                             <h3 class="font-display mt-3 font-semibold">
@@ -452,7 +426,7 @@
                         </div>
 
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i class="bx bx-sun text-primary text-2xl"></i>
                             <h3 class="font-display mt-3 font-semibold">
@@ -466,7 +440,7 @@
                         </div>
 
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i
                                 class="bx bx-footprint text-primary text-2xl"
@@ -482,7 +456,7 @@
                         </div>
 
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i class="bx bx-pulse text-primary text-2xl"></i>
                             <h3 class="font-display mt-3 font-semibold">
@@ -496,7 +470,7 @@
                         </div>
 
                         <div
-                            class="border-border bg-surface hover:border-primary/40 rounded-sm border p-6 transition-all duration-300 hover:-translate-y-1"
+                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
                         >
                             <i class="bx bx-expand text-primary text-2xl"></i>
                             <h3 class="font-display mt-3 font-semibold">
@@ -514,134 +488,134 @@
                 <!-- ======= GALLERY ======= -->
                 <section
                     id="gallery"
-                    class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    aria-labelledby="gallery-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
                 >
                     <h2
-                        class="font-display mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
+                        id="gallery-heading"
+                        class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
                     >
                         Gallery
                     </h2>
 
-                    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-                        <!-- Gallery card pattern matches the home page's "Start Exploring" cards:
-                            image + gradient overlay + caption that lifts on hover. -->
-                        <a
-                            href="#"
-                            class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1"
+                    <div
+                        class="animate-target grid grid-cols-2 gap-4 md:grid-cols-4"
+                    >
+                        <figure
+                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1741990417513-81d6d95b5bbb?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                src="./assets/images/celestial/phases-in-sequence.jpg"
                                 alt="Sequence of lunar eclipse phases arranged against a black sky"
-                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                class="absolute inset-0 h-full w-full object-cover"
                             />
                             <div
-                                class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"
+                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
                             ></div>
-                            <div
+                            <figcaption
                                 class="relative flex h-full flex-col justify-end p-4"
                             >
                                 <h3 class="font-display text-sm font-semibold">
                                     Phases in Sequence
                                 </h3>
-                            </div>
-                        </a>
+                            </figcaption>
+                        </figure>
 
-                        <a
-                            href="#"
-                            class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1"
+                        <figure
+                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1777276516321-e50733992e40?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                src="./assets/images/celestial/cratered-surface.jpg"
                                 alt="Close-up of the Moon's cratered surface"
-                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                class="absolute inset-0 h-full w-full object-cover"
                             />
                             <div
-                                class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"
+                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
                             ></div>
-                            <div
+                            <figcaption
                                 class="relative flex h-full flex-col justify-end p-4"
                             >
                                 <h3 class="font-display text-sm font-semibold">
                                     Cratered Surface
                                 </h3>
-                            </div>
-                        </a>
+                            </figcaption>
+                        </figure>
 
-                        <a
-                            href="#"
-                            class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1"
+                        <figure
+                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1777195680759-9c3c616a92e7?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                src="./assets/images/celestial/earthrise.jpg"
                                 alt="Earth rising over the Moon's horizon, seen from lunar orbit"
-                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                class="absolute inset-0 h-full w-full object-cover"
                             />
                             <div
-                                class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"
+                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
                             ></div>
-                            <div
+                            <figcaption
                                 class="relative flex h-full flex-col justify-end p-4"
                             >
                                 <h3 class="font-display text-sm font-semibold">
                                     Earthrise
                                 </h3>
-                            </div>
-                        </a>
+                            </figcaption>
+                        </figure>
 
-                        <a
-                            href="#"
-                            class="group border-border shadow-elevated relative block aspect-square overflow-hidden rounded-sm border transition-transform duration-300 hover:-translate-y-1"
+                        <figure
+                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1762862064886-72a3dcc25230?fm=jpg&q=60&w=800&auto=format&fit=crop"
+                                src="./assets/images/celestial/moonrise.jpg"
                                 alt="Bright orange full moon rising over silhouetted trees"
-                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                class="absolute inset-0 h-full w-full object-cover"
                             />
                             <div
-                                class="from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent"
+                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
                             ></div>
-                            <div
+                            <figcaption
                                 class="relative flex h-full flex-col justify-end p-4"
                             >
                                 <h3 class="font-display text-sm font-semibold">
                                     Moonrise
                                 </h3>
-                            </div>
-                        </a>
+                            </figcaption>
+                        </figure>
                     </div>
                 </section>
 
                 <!-- ======= TIMELINE ======= -->
                 <section
                     id="timeline"
-                    class="animate-target reveal mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    aria-labelledby="timeline-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
                 >
                     <h2
-                        class="font-display mb-2 text-2xl font-semibold tracking-tight md:text-4xl"
+                        id="timeline-heading"
+                        class="font-display animate-target mb-2 text-2xl font-semibold tracking-tight md:text-4xl"
                     >
                         Lunar Exploration Timeline
                     </h2>
-                    <p class="text-muted mb-10 max-w-2xl text-sm md:text-base">
+                    <p
+                        class="text-muted animate-target mb-10 max-w-2xl text-sm md:text-base"
+                    >
                         Click a milestone to read about it.
                     </p>
 
-                    <!-- horizontal node row -->
-                    <div class="relative">
+                    <div class="animate-target relative">
                         <div
-                            class="border-border absolute top-3 right-0 left-0 border-t"
+                            class="border-border absolute top-1.5 right-0 left-0 border-t"
                         ></div>
                         <div
                             id="timeline-nodes"
-                            class="relative flex justify-between overflow-x-auto pb-2"
+                            class="relative flex justify-between pb-2"
                         >
                             <!-- buttons injected by JS -->
                         </div>
                     </div>
 
-                    <!-- detail card: content swaps here when a node is clicked -->
                     <div
                         id="timeline-card"
-                        class="bg-surface border-border shadow-elevated mt-8 rounded-sm border p-6 md:p-8"
+                        class="bg-surface border-border shadow-elevated animate-target mt-8 rounded-sm border p-6 md:p-8"
                     >
                         <p
                             id="tl-year"
@@ -657,90 +631,7 @@
                         ></p>
                     </div>
                 </section>
-
-                <!-- ======= ATTRIBUTIONS ======= -->
-                <section
-                    id="attributions"
-                    class="animate-target reveal border-border mx-auto max-w-6xl border-t px-6 py-12 xl:max-w-7xl"
-                >
-                    <h2
-                        class="font-display mb-4 text-sm font-semibold tracking-wide uppercase"
-                    >
-                        Attributions
-                    </h2>
-                    <ul class="text-muted list-disc space-y-2 pl-5 text-sm">
-                        <li>
-                            Phases in Sequence photo by
-                            <a
-                                href="https://unsplash.com/@elijahbcrouch"
-                                class="hover:text-primary underline"
-                                >Elijah Crouch</a
-                            >
-                            on
-                            <a
-                                href="https://unsplash.com"
-                                class="hover:text-primary underline"
-                                >Unsplash</a
-                            >
-                        </li>
-                        <li>
-                            Cratered Surface photo by
-                            <a
-                                href="https://unsplash.com/@nasa"
-                                class="hover:text-primary underline"
-                                >NASA</a
-                            >
-                            on
-                            <a
-                                href="https://unsplash.com"
-                                class="hover:text-primary underline"
-                                >Unsplash</a
-                            >
-                        </li>
-                        <li>
-                            Earthrise photo by
-                            <a
-                                href="https://unsplash.com/@nasa"
-                                class="hover:text-primary underline"
-                                >NASA</a
-                            >
-                            on
-                            <a
-                                href="https://unsplash.com"
-                                class="hover:text-primary underline"
-                                >Unsplash</a
-                            >
-                        </li>
-                        <li>
-                            Moonrise photo by
-                            <a
-                                href="https://unsplash.com/@maksim_taawy"
-                                class="hover:text-primary underline"
-                                >Maksim Samuilionak</a
-                            >
-                            on
-                            <a
-                                href="https://unsplash.com"
-                                class="hover:text-primary underline"
-                                >Unsplash</a
-                            >
-                        </li>
-                        <li>
-                            Icons by
-                            <a
-                                href="https://boxicons.com"
-                                class="hover:text-primary underline"
-                                >Boxicons</a
-                            >
-                        </li>
-                    </ul>
-                </section>
             </main>
-
-            <!-- ======= FOOTER (matches home page's simple footer bar) =======
-            <footer class="border-border border-t px-6 py-8 text-center">
-                <p class="text-muted text-sm">© 2026 Universe Explorer</p>
-            </footer> -->
 
             <!-- injected via JS -->
             <footer id="footer"></footer>
