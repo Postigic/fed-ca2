@@ -210,8 +210,6 @@ const MISSIONS = [
 
 const timelineWrap = document.getElementById("missions-timeline");
 
-// Every node/marker shares this single class string, so there's no way
-// for one milestone's dot to drift out of sync with the others.
 const DOT_CLASS = "border-border bg-background h-3 w-3 rounded-full border-2";
 
 function factRow({ label, value }) {
