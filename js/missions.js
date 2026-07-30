@@ -1,12 +1,3 @@
-/* =========================================================
-    MISSION TIMELINE DATA
-    Single source of truth for every milestone card. Adding,
-    reordering, or editing a mission only means touching this
-    array — the markup below is generated from it, so every
-    node/card is guaranteed to share the same structure and
-    styling (mirrors the approach in moon.js).
-========================================================= */
-
 import { observeElements } from "./common.js";
 
 const MISSIONS = [
