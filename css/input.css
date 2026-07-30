@@ -28,6 +28,12 @@
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+@layer base {
+    button {
+        @apply cursor-pointer;
+    }
+}
+
 @layer components {
     .nav-link,
     .footer-link {

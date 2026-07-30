@@ -82,7 +82,7 @@ function moonLitPath(angleDeg, r = svgR, cx = svgCX, cy = svgCY) {
     const crescent = angleDeg < 90 || angleDeg > 270;
 
     const outerSweep = litOnRight ? 1 : 0;
-    const innerSweep = litOnRight ? (crescent ? 1 : 0) : crescent ? 0 : 1;
+    const innerSweep = litOnRight ? (crescent ? 0 : 1) : crescent ? 1 : 0;
 
     const top = `${cx} ${cy - r}`;
     const bottom = `${cx} ${cy + r}`;
