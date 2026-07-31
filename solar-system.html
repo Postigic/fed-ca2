@@ -237,7 +237,7 @@
                 white-space: nowrap;
                 opacity: 0;
                 pointer-events: none;
-                z-index: 60;
+                z-index: 999;
                 transition:
                     opacity 0.15s ease,
                     transform 0.15s ease,
@@ -464,6 +464,7 @@
                             class="panel border-border bg-surface relative overflow-x-hidden overflow-y-auto rounded-sm border"
                             id="panel"
                             aria-hidden="true"
+                            inert
                         >
                             <div class="p-6">
                                 <button

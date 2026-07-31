@@ -17,7 +17,7 @@ const PLANETS = [
         ecc: 0.206,
         incl: 7.0,
         bg: "radial-gradient(circle at 35% 30%, #b9b3ab, #6b6660 60%, #3c3833 100%)",
-        image: "assets/planets/mercury.jpg",
+        image: "assets/images/celestial/mercury.jpg",
         tagline: "The swift, sun-scorched world",
         desc: "The smallest planet and closest to the Sun, Mercury has almost no atmosphere to trap heat, so it swings between blistering days and frozen nights.",
         stats: {
@@ -40,7 +40,7 @@ const PLANETS = [
         ecc: 0.007,
         incl: 3.4,
         bg: "radial-gradient(circle at 35% 30%, #f0dca8, #c9a05a 65%, #8a6a34 100%)",
-        image: "assets/planets/venus.jpg",
+        image: "assets/images/celestial/venus.jpg",
         tagline: "Earth's twin, wrapped in a toxic haze",
         desc: "Venus is similar in size to Earth but its thick carbon dioxide atmosphere traps heat so effectively it's the hottest planet in the solar system.",
         stats: {
@@ -63,7 +63,7 @@ const PLANETS = [
         ecc: 0.017,
         incl: 0,
         bg: "radial-gradient(circle at 30% 65%, rgba(70,140,80,.9) 0 9%, transparent 10%), radial-gradient(circle at 62% 32%, rgba(70,140,80,.85) 0 11%, transparent 12%), radial-gradient(circle at 35% 30%, #7ec1e8, #285f92 55%, #12314f 100%)",
-        image: "assets/planets/earth.jpg",
+        image: "assets/images/celestial/earth.jpg",
         tagline: "Our home, the only known living world",
         desc: "Liquid water, a protective atmosphere, and a stable climate make Earth the only place we know of where life has taken hold.",
         stats: {
@@ -86,7 +86,7 @@ const PLANETS = [
         ecc: 0.093,
         incl: 1.85,
         bg: "radial-gradient(circle at 35% 30%, #d98a5f, #a1502c 55%, #5c2814 100%)",
-        image: "assets/planets/mars.jpg",
+        image: "assets/images/celestial/mars.jpg",
         tagline: "The rust-red desert world",
         desc: "Iron oxide dust gives Mars its color. It hosts the largest volcano and canyon in the solar system, and once had rivers and lakes of liquid water.",
         stats: {
@@ -110,7 +110,7 @@ const PLANETS = [
         incl: 1.3,
         bg: "repeating-linear-gradient(4deg, #e0bd8a 0 7%, #c9915a 7% 13%, #dba873 13% 19%), radial-gradient(circle at 30% 28%, rgba(255,255,255,.4), transparent 45%), radial-gradient(circle at 68% 74%, rgba(0,0,0,.4), transparent 60%)",
         blend: "screen, multiply, normal",
-        image: "assets/planets/jupiter.jpg",
+        image: "assets/images/celestial/jupiter.jpg",
         tagline: "The gas giant that rules the outer system",
         desc: "Jupiter is the largest planet by far, a churning ball of hydrogen and helium with a storm — the Great Red Spot — wider than Earth.",
         stats: {
@@ -134,7 +134,7 @@ const PLANETS = [
         incl: 2.5,
         bg: "repeating-linear-gradient(4deg, #ecdcae 0 8%, #d9c08a 8% 15%), radial-gradient(circle at 30% 28%, rgba(255,255,255,.35), transparent 45%), radial-gradient(circle at 68% 74%, rgba(0,0,0,.35), transparent 60%)",
         blend: "screen, multiply, normal",
-        image: "assets/planets/saturn.jpg",
+        image: "assets/images/celestial/saturn(1).jpg",
         tagline: "Crowned by a dazzling ring system",
         desc: "Saturn's rings are made of countless chunks of ice and rock. Despite its size, Saturn is so low-density it would float in a big enough bathtub.",
         stats: {
@@ -157,7 +157,7 @@ const PLANETS = [
         ecc: 0.046,
         incl: 0.77,
         bg: "radial-gradient(circle at 35% 30%, #b8e8e8, #6bb8b8 55%, #3a7d7d 100%)",
-        image: "assets/planets/uranus.jpg",
+        image: "assets/images/celestial/uranus.jpg",
         tagline: "The ice giant tipped on its side",
         desc: "Uranus rotates almost on its side, likely from an ancient collision, giving it the most extreme seasons of any planet.",
         stats: {
@@ -180,7 +180,7 @@ const PLANETS = [
         ecc: 0.01,
         incl: 1.77,
         bg: "radial-gradient(circle at 35% 30%, #6f8ef0, #2f45c0 55%, #17206b 100%)",
-        image: "assets/planets/neptune.jpg",
+        image: "assets/images/celestial/neptune.jpg",
         tagline: "The windiest world in the solar system",
         desc: "Neptune is the farthest known planet from the Sun, a deep blue ice giant with supersonic winds faster than any measured on another planet.",
         stats: {
@@ -206,7 +206,7 @@ const DWARFS = [
         ecc: 0.076,
         incl: 10.6,
         bg: "radial-gradient(circle at 35% 30%, #a8a196, #6e6862 60%, #423e39 100%)",
-        image: "assets/planets/ceres.jpg",
+        image: "assets/images/celestial/ceres.jpg",
         tagline: "Queen of the asteroid belt",
         desc: "Ceres is the largest object in the asteroid belt and the only dwarf planet in the inner solar system, with a cratered, ice-rich surface.",
         stats: {
@@ -229,7 +229,7 @@ const DWARFS = [
         ecc: 0.249,
         incl: 17.2,
         bg: "radial-gradient(circle at 35% 30%, #e6d9c8, #ab8f74 55%, #5f4c3c 100%)",
-        image: "assets/planets/pluto.jpg",
+        image: "assets/images/celestial/pluto.jpg",
         tagline: "The most famous dwarf planet",
         desc: "Pluto spent decades classified as the ninth planet before the 2006 definition of 'planet' moved it to dwarf-planet status. Its orbit is tilted and eccentric enough that it's occasionally closer to the Sun than Neptune.",
         stats: {
@@ -252,7 +252,7 @@ const DWARFS = [
         ecc: 0.195,
         incl: 28.2,
         bg: "radial-gradient(circle at 35% 30%, #e2e8ea, #a9b6ba 55%, #647275 100%)",
-        image: "assets/planets/haumea.jpg",
+        image: "assets/images/celestial/haumea.jpg",
         tagline: "The dwarf planet shaped like an egg",
         desc: "Haumea spins so fast — once every four hours — that it has been stretched into an elongated, egg-like shape, unlike any planet in the solar system.",
         stats: {
@@ -275,7 +275,7 @@ const DWARFS = [
         ecc: 0.159,
         incl: 29.0,
         bg: "radial-gradient(circle at 35% 30%, #d9b89a, #a67c56 55%, #5e4530 100%)",
-        image: "assets/planets/makemake.jpg",
+        image: "assets/images/celestial/makemake.jpg",
         tagline: "A frozen world beyond Pluto",
         desc: "Makemake is one of the largest known Kuiper Belt objects, covered in frozen methane and ethane that give it a reddish-brown surface.",
         stats: {
@@ -298,7 +298,7 @@ const DWARFS = [
         ecc: 0.436,
         incl: 44.0,
         bg: "radial-gradient(circle at 35% 30%, #eef1f4, #b7bfc9 55%, #6c7683 100%)",
-        image: "assets/planets/eris.jpg",
+        image: "assets/images/celestial/eris.jpg",
         tagline: "A distant, icy rival to Pluto",
         desc: "Eris is nearly as large as Pluto but far more distant, on an orbit tilted an extreme 44° from the plane the planets roughly share. Its discovery in 2005 triggered the debate that redefined what counts as a planet.",
         stats: {
@@ -318,7 +318,7 @@ const REGIONS = [
         id: "asteroid-belt",
         name: "Asteroid Belt",
         type: "region",
-        image: "assets/regions/asteroid-belt.jpg",
+        image: "assets/images/celestial/asteroid-belt.jpg",
         bg: "radial-gradient(circle at 35% 30%, #a89882, #6b5d4a 60%, #40362a 100%)",
         tagline: "A scattered ring of rocky leftovers",
         desc: "Between Mars and Jupiter, millions of rocky bodies orbit the Sun — debris from the early solar system that never coalesced into a planet, kept stirred up by Jupiter's gravity.",
@@ -333,7 +333,7 @@ const REGIONS = [
         id: "kuiper-belt",
         name: "Kuiper Belt",
         type: "region",
-        image: "assets/regions/kuiper-belt.jpg",
+        image: "assets/images/celestial/kuiper-belt.jpg",
         bg: "radial-gradient(circle at 35% 30%, #b7c6cc, #74868c 60%, #46545a 100%)",
         tagline: "A frozen ring of icy worlds beyond Neptune",
         desc: "Far past Neptune, the Kuiper Belt holds hundreds of thousands of icy bodies, including Pluto and several other dwarf planets, along with the source material for many short-period comets.",
@@ -348,7 +348,7 @@ const REGIONS = [
         id: "oort-cloud",
         name: "Oort Cloud",
         type: "region",
-        image: "assets/regions/oort-cloud.jpg",
+        image: "assets/images/celestial/oort-cloud.jpg",
         bg: "radial-gradient(circle at 40% 35%, rgba(233,237,246,.5), rgba(233,237,246,.06) 70%)",
         tagline: "The solar system's distant, spherical shell of comets",
         desc: "The Oort Cloud is a vast, roughly spherical shell of icy debris thought to surround the solar system far beyond the planets — the presumed source of most long-period comets. It has never been directly observed.",
@@ -639,7 +639,7 @@ const oortHit = makeRegionHit("oort-cloud", oortLabel, (on) =>
 );
 
 // All pan/zoom state funnels into a single CSS transform applied to #stage
-// (applyTransform, below) -- translate for pan, scale for zoom. Nothing else
+// (applyTransform, below): translate for pan, scale for zoom. Nothing else
 // on the stage needs to know pan/zoom is happening; it's all just one
 // transform on the parent layer.
 let zoom = 1,
@@ -995,18 +995,25 @@ function tick(t) {
     requestAnimationFrame(tick);
 }
 
+let lastFocusedElement = null; // for accessibility focus resolution
+
 // Handles clicking any planet, dwarf, or region: updates all the "is-active"/
 // "is-hot" highlight states (only one of these toggles is ever true per
 // call, since `id` matches at most one thing), then builds and injects the
 // detail panel's HTML from that body's data, and opens the panel via
 // .is-open on the grid.
 function openBody(id) {
+    if (!activeId) {
+        lastFocusedElement = document.activeElement;
+    }
     activeId = id;
+
     els.forEach((e) => {
         const on = e.data.id === id;
         e.btnEl.classList.toggle("is-active", on);
         e.orbitEl.classList.toggle("is-hot", on);
     });
+
     setBeltHot(asteroidBelt, id === "asteroid-belt");
     setBeltHot(kuiperBelt, id === "kuiper-belt");
     oort.classList.toggle("is-hot", id === "oort-cloud");
@@ -1056,24 +1063,35 @@ function openBody(id) {
         "</dl>";
 
     grid.classList.add("is-open");
+    panel.removeAttribute("inert");
     panel.setAttribute("aria-hidden", "false");
+
+    setTimeout(() => panelClose.focus(), 0);
 }
 
 // Mirror image of openBody: clears every highlight toggle and closes the panel.
 function closePanel() {
+    lastFocusedElement?.focus();
+    lastFocusedElement = null;
+
     activeId = null;
+
     els.forEach((e) => {
         e.btnEl.classList.remove("is-active");
         e.orbitEl.classList.remove("is-hot");
     });
+
     setBeltHot(asteroidBelt, false);
     setBeltHot(kuiperBelt, false);
+
     oort.classList.remove("is-hot");
     asteroidLabel.classList.remove("is-hot");
     kuiperLabel.classList.remove("is-hot");
     oortLabel.classList.remove("is-hot");
     grid.classList.remove("is-open");
+
     panel.setAttribute("aria-hidden", "true");
+    panel.setAttribute("inert", "");
 }
 
 panelClose.addEventListener("click", closePanel);
