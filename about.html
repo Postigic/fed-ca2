@@ -1,10 +1,327 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>About</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/about.js"></script>
     </head>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+        </button>
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
+        <!-- MAIN CONTENT FOR ABOUT.HTML -->
+        <div class="w-full p-12 sm:pl-10 md:pl-50">
+            <h1 class="text-2xl font-extrabold">Meet the Team</h1>
+            <br />
+            <div
+                class="align-centre flex w-full flex-row flex-wrap items-center items-stretch border-indigo-500 font-bold"
+            >
+                <div
+                    class="text-s m-2 flex flex-1 flex-col items-center justify-center rounded-xl border-2 border-[#8b93a6] bg-[#1a1c25] p-10"
+                >
+                    <img
+                        class="align-centre w-28 rounded-full"
+                        src="https://placeholdit.com/400?font_size=50"
+                    />
+                    <p>Dev Number 1</p>
+                </div>
+                <div
+                    class="text-s m-2 flex flex-1 flex-col items-center justify-center rounded-xl border-2 border-[#8b93a6] bg-[#1a1c25] p-10"
+                >
+                    <img
+                        class="align-centre w-28 rounded-full"
+                        src="https://placeholdit.com/400?font_size=50"
+                    />
+                    <p>Dev Number 2</p>
+                </div>
+                <div
+                    class="text-s m-2 flex flex-1 flex-col items-center justify-center rounded-xl border-2 border-[#8b93a6] bg-[#1a1c25] p-10"
+                >
+                    <img
+                        class="align-centre w-28 rounded-full"
+                        src="https://placeholdit.com/400?font_size=50"
+                    />
+                    <p>Dev Number 3</p>
+                </div>
+                <div
+                    class="text-s m-2 flex flex-1 flex-col items-center justify-center rounded-xl border-2 border-[#8b93a6] bg-[#1a1c25] p-10"
+                >
+                    <img
+                        class="align-centre w-28 rounded-full"
+                        src="https://placeholdit.com/400?font_size=50"
+                    />
+                    <p>Dev Number 4</p>
+                </div>
+            </div>
+            <br />
+            <br />
+            <h1 class="text-2xl font-extrabold">Frequently Asked Questions</h1>
+            <br />
+            <div
+                class="flex flex-col gap-4 overflow-hidden rounded-xl border-2 border-[#8b93a6] bg-[#13141b]"
+            >
+                <div class="w-full border-[border-gray-500]">
+                    <div>
+                        <button
+                            onclick="toggleAccordion(1)"
+                            class="flex w-full flex-1 items-center justify-between px-4 py-3.5"
+                        >
+                            <span>Who made this site?</span>
+                            <span
+                                id="ai-1"
+                                class="text-slate-800 transition-transform duration-300"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 16 16"
+                                    fill="#ffffff"
+                                    class="h-4 w-4"
+                                >
+                                    <path
+                                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <div
+                            id="ac-1"
+                            class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                        >
+                            <p class="px-4 py-3 text-sm text-[#8b8ea1]">
+                                This website was created by a team of four web
+                                development students as part of a school
+                                project.
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            onclick="toggleAccordion(2)"
+                            class="flex w-full flex-1 items-center justify-between px-4 py-3.5"
+                        >
+                            <span>Is this site kid-friendly?</span>
+                            <span
+                                id="ai-2"
+                                class="text-slate-800 transition-transform duration-300"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 16 16"
+                                    fill="#ffffff"
+                                    class="h-4 w-4"
+                                >
+                                    <path
+                                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <div
+                            id="ac-2"
+                            class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                        >
+                            <p class="px-4 py-3 text-sm text-[#8b8ea1]">
+                                Yes! Our website is designed to be
+                                family-friendly and suitable for users of all
+                                ages.
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            onclick="toggleAccordion(3)"
+                            class="flex w-full flex-1 items-center justify-between px-4 py-3.5"
+                        >
+                            <span
+                                >Can I use the information on this website for
+                                school projects?</span
+                            >
+                            <span
+                                id="ai-3"
+                                class="text-slate-800 transition-transform duration-300"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 16 16"
+                                    fill="#ffffff"
+                                    class="h-4 w-4"
+                                >
+                                    <path
+                                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <div
+                            id="ac-3"
+                            class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                        >
+                            <p class="px-4 py-3 text-sm text-[#8b8ea1]">
+                                Absolutely! You're welcome to use the
+                                information for learning and school assignments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <h1 class="text-2xl font-extrabold">Send Feedback/Contact Us</h1>
+            <br />
+            <form>
+                <div
+                    class="flex w-full flex-col rounded-xl border-2 border-[#8b93a6] bg-[#13141b]"
+                >
+                    <div
+                        class="flex w-full flex-col items-stretch justify-between gap-4 p-8"
+                    >
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            class="rounded-xl border-2 border-[#8b93a6] px-8 py-3"
+                        />
+                        <textarea
+                            id="message"
+                            type="text"
+                            name="message"
+                            rows="8"
+                            placeholder="Enter your message."
+                            class="text-align-top rounded-xl border-2 border-[#8b93a6] px-8 py-4 text-left"
+                        ></textarea>
+                    </div>
+                    <p
+                        id="alertEmpty"
+                        class="text-bold mb-8 hidden rounded-sm border-2 border-[#e68a8a] bg-[#db4f4f] py-4 text-center text-[#3d0000]"
+                    >
+                        Error: Email or Message field empty, unable to send
+                        message.
+                    </p>
+                    <p
+                        id="alertEmail"
+                        class="text-bold mb-8 hidden rounded-sm border-2 border-[#e68a8a] bg-[#db4f4f] py-4 text-center text-[#3d0000]"
+                    >
+                        Error: You entered an invalid email.
+                    </p>
+                    <p
+                        id="successSent"
+                        class="text-bold mb-8 hidden rounded-sm border-2 border-[#87c992] bg-[#5bba6b] py-4 text-center text-[#003d0a]"
+                    >
+                        Success: Your message has been sent. Thank you for your
+                        feedback!
+                    </p>
+                    <button
+                        type="button"
+                        onclick="submitForm()"
+                        class="text-bold rounded-xl border-2 border-[#8b93a6] bg-[#4f6577] px-8 py-3"
+                    >
+                        Submit Form
+                    </button>
+                </div>
+            </form>
+            <br />
+            <br />
+            <footer id="footer"></footer>
+        </div>
+        <script>
+            function submitForm() {
+                //define DOM variables
+                const alertEmpty = document.getElementById("alertEmpty");
+                const alertEmail = document.getElementById("alertEmail");
+                const successSent = document.getElementById("successSent");
+                const messageField = document.getElementById("message");
+                const emailField = document.getElementById("email");
+                //hide all popups
+                alertEmpty.classList.add("hidden");
+                alertEmail.classList.add("hidden");
+                successSent.classList.add("hidden");
+                //logic
+                if (!messageField.value || !emailField.value) {
+                    alertEmpty.classList.remove("hidden");
+                    alertEmpty.classList.add("block");
+                } else if (messageField.value && emailField.value) {
+                    if (
+                        emailField.value.includes(".") &&
+                        emailField.value.includes("@")
+                    ) {
+                        successSent.classList.remove("hidden");
+                        successSent.classList.add("block");
+                        //data to JSON
+                        let e = emailField.value;
+                        let m = messageField.value;
+                        toBackend = JSON.stringify({
+                            email: e,
+                            message: m,
+                        });
+                        //testing
+                        console.log(toBackend);
+                    } else {
+                        alertEmail.classList.remove("hidden");
+                        alertEmail.classList.add("block");
+                    }
+                }
+            }
 
-    <body></body>
+            function toggleAccordion(index) {
+                const content = document.getElementById(`ac-${index}`);
+                const icon = document.getElementById(`ai-${index}`);
+                const minusSVG = `
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#ffffff" class="w-4 h-4">
+						<path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+					</svg>`;
+
+                const plusSVG = `
+				    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#ffffff" class="w-4 h-4">
+					    <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+					</svg>`;
+
+                if (
+                    content.style.maxHeight &&
+                    content.style.maxHeight !== "0px"
+                ) {
+                    content.style.maxHeight = "0";
+                    icon.innerHTML = plusSVG;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.innerHTML = minusSVG;
+                }
+            }
+            window.addEventListener("DOMContentLoaded", () => {
+                setTimeout(() => {
+                    //EMPTY FOR NOW
+                }, 0);
+            });
+        </script>
+    </body>
 </html>
