@@ -957,8 +957,6 @@ function tick(t) {
 
 let lastFocusedElement = null; // for accessibility focus resolution
 
-// Handles clicking a planet, dwarf, or region: updates highlight states,
-// builds the detail panel HTML, and opens it.
 function openBody(id) {
     if (!activeId) {
         lastFocusedElement = document.activeElement;
@@ -1026,7 +1024,6 @@ function openBody(id) {
     setTimeout(() => panelClose.focus(), 0);
 }
 
-// Mirror image of openBody: clears every highlight toggle and closes the panel.
 function closePanel() {
     lastFocusedElement?.focus();
     lastFocusedElement = null;
@@ -1066,9 +1063,11 @@ window.addEventListener("resize", () => {
 });
 
 grid.addEventListener("transitionend", (e) => {
-    if (e.propertyName === "grid-template-columns") {
-        layoutStage();
-    }
+    if (e.target !== grid) return;
+    if (e.propertyName !== "grid-template-columns") return;
+    if (grid.classList.contains("is-open")) return;
+
+    layoutStage();
 });
 
 layoutStage();
