@@ -244,40 +244,40 @@
         @apply font-display text-sm font-semibold;
     }
 
-    /* ===== Feature cards: large aspect-video image link cards
+    /* ===== Explore cards: large aspect-video image link cards
        ("Start Exploring" on the homepage) =====
        `group` itself can't be @apply'd — it emits no CSS of its own,
        it's just a marker for group-hover/group-active variants — so
-       add it as a literal class alongside `feature-card` in the HTML. */
-    .feature-card {
+       add it as a literal class alongside `explore-card` in the HTML. */
+    .explore-card {
         @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,_box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0;
     }
 
-    .feature-card-img {
+    .explore-card-img {
         @apply absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02];
     }
 
-    .feature-card-overlay {
+    .explore-card-overlay {
         @apply from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent;
     }
 
-    .feature-card-body {
+    .explore-card-body {
         @apply relative flex h-full flex-col justify-end p-6;
     }
 
-    .feature-card-title {
+    .explore-card-title {
         @apply font-display text-xl font-semibold;
     }
 
-    .feature-card-desc {
+    .explore-card-desc {
         @apply text-muted mt-1 text-sm;
     }
 
-    .feature-card-link {
+    .explore-card-link {
         @apply text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200;
     }
 
-    .feature-card-arrow {
+    .explore-card-arrow {
         @apply inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0;
     }
 
