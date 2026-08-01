@@ -18,6 +18,30 @@
         transparent
     );
 
+    --color-error: #c17b74;
+    --color-error-surface: color-mix(
+        in srgb,
+        var(--color-error) 12%,
+        var(--color-background)
+    );
+    --color-error-border: color-mix(
+        in srgb,
+        var(--color-error) 40%,
+        transparent
+    );
+
+    --color-success: #7fa88a;
+    --color-success-surface: color-mix(
+        in srgb,
+        var(--color-success) 12%,
+        var(--color-background)
+    );
+    --color-success-border: color-mix(
+        in srgb,
+        var(--color-success) 40%,
+        transparent
+    );
+
     --shadow-elevated: 0 8px 30px -8px
         color-mix(in srgb, var(--color-primary) 20%, black);
     --shadow-elevated-hover: 0 14px 40px -10px
