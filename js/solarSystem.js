@@ -1059,9 +1059,16 @@ document.addEventListener("keydown", (e) => {
 // Debounced (100ms) so a window being actively resized doesn't trigger a
 // full layoutStage() recompute on every intermediate pixel.
 let resizeT;
+
 window.addEventListener("resize", () => {
     clearTimeout(resizeT);
     resizeT = setTimeout(layoutStage, 100);
+});
+
+grid.addEventListener("transitionend", (e) => {
+    if (e.propertyName === "grid-template-columns") {
+        layoutStage();
+    }
 });
 
 layoutStage();

@@ -54,7 +54,7 @@
                 }
             }
 
-            /* ---------- ORBITS ---------- */
+            /* ===== ORBITS ===== */
             .orbit {
                 position: absolute;
                 border: 1px solid var(--color-border);
@@ -115,7 +115,7 @@
                 ties between different planets are broken without exceeding this range */
             }
 
-            /* ---------- PLANETS ---------- */
+            /* ===== PLANETS ===== */
             .planet {
                 -webkit-tap-highlight-color: transparent;
             }
@@ -206,7 +206,7 @@
                 color: var(--color-foreground);
             }
 
-            /* ---------- BELTS / REGIONS ---------- */
+            /* ===== BELTS / REGIONS ===== */
             .belt-dot {
                 position: absolute;
                 border-radius: 50%;
@@ -252,7 +252,7 @@
                 border-color: var(--color-primary);
             }
 
-            /* ---------- DETAIL PANEL ---------- */
+            /* ===== DETAIL PANEL ===== */
             .panel {
                 opacity: 0;
                 pointer-events: none;
@@ -266,6 +266,11 @@
                 opacity: 1;
                 pointer-events: auto;
                 transform: translateX(0);
+            }
+
+            .orrery-grid:not(.is-open) .panel {
+                max-height: 0;
+                overflow: hidden;
             }
 
             @media (max-width: 860px) {
@@ -286,6 +291,7 @@
                     z-index: 80;
                     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
                 }
+
                 .orrery-grid.is-open .panel {
                     transform: translateY(0);
                 }
@@ -403,7 +409,7 @@
                     <div class="orrery-grid" id="orrery-grid">
                         <div class="min-w-0">
                             <div
-                                class="stage-viewport border-border bg-surface animate-target relative w-full cursor-grab touch-none overflow-hidden rounded-sm border"
+                                class="stage-viewport border-border bg-surface animate-target shadow-elevated relative w-full cursor-grab touch-none overflow-hidden rounded-sm border"
                                 id="stage-viewport"
                             >
                                 <div
@@ -423,21 +429,21 @@
                                     class="absolute right-3 bottom-3 z-90 flex flex-col gap-1.5"
                                 >
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
                                         id="zoom-in"
                                         aria-label="Zoom in"
                                     >
                                         <i class="bx bx-plus"></i>
                                     </button>
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
                                         id="zoom-out"
                                         aria-label="Zoom out"
                                     >
                                         <i class="bx bx-minus"></i>
                                     </button>
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
                                         id="zoom-reset"
                                         aria-label="Reset position"
                                     >
@@ -446,29 +452,28 @@
                                 </div>
                             </div>
                             <p
-                                class="text-muted animate-target mt-3 font-mono text-xs leading-relaxed"
+                                class="text-muted animate-target mt-4 font-mono text-xs leading-relaxed"
                             >
                                 Orbits use each body's real eccentricity and
-                                inclination. The Sun lies at each ellipse's
-                                focus, not its center. The asteroid belt, Kuiper
-                                belt, and dashed Oort Cloud boundary are
-                                interactive. Distances and sizes are compressed
-                                to fit on screen. For the gas and ice giants,
-                                the mean temperature refers to the average
-                                cloud-top temperature (near the 1-bar pressure
-                                level), as these planets have no solid surface.
+                                inclination, with the Sun at one focus of each
+                                ellipse. Distances and sizes are compressed to
+                                fit on screen. The asteroid belt, Kuiper belt,
+                                and dashed Oort Cloud boundary are interactive.
+                                Gas and ice giant temperatures refer to their
+                                average cloud tops (near the 1-bar pressure
+                                level).
                             </p>
                         </div>
 
                         <aside
-                            class="panel border-border bg-surface relative overflow-x-hidden overflow-y-auto rounded-sm border"
+                            class="panel border-border bg-surface shadow-elevated relative overflow-x-hidden overflow-y-auto rounded-sm border"
                             id="panel"
                             aria-hidden="true"
                             inert
                         >
                             <div class="p-6">
                                 <button
-                                    class="border-border bg-surface-2 text-muted hover:text-foreground hover:border-primary absolute top-4 right-4 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-lg"
+                                    class="border-border bg-surface-2 text-muted hover:text-foreground hover:border-primary absolute top-4 right-4 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-lg transition-colors duration-200"
                                     id="panel-close"
                                     aria-label="Close profile"
                                 >
