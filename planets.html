@@ -105,6 +105,10 @@
                 pointer-events: none;
                 position: absolute;
                 inset: 0;
+                /* i genuinely have never felt more pain 
+                in my life trying to debug this for it to 
+                turn out to be a missing overflow: hidden; */
+                overflow: hidden;
             }
 
             #view-stage {
@@ -187,7 +191,7 @@
                 <section
                     id="planets"
                     aria-label="Planet gallery and comparison table"
-                    class="animate-target mb-24 px-6 py-10 pb-24 md:mb-32 md:pb-32 xl:mb-40"
+                    class="animate-target section-gap-end px-6 py-10"
                 >
                     <div id="view-stage" class="wide-container relative">
                         <!-- ======= GALLERY VIEW ======= -->

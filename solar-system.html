@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Planets | Universe Explorer</title>
         <link
             href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
             rel="stylesheet"
@@ -14,108 +13,297 @@
         />
         <link href="./dist/output.css" rel="stylesheet" />
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-        <script type="module" src="./js/planets.js"></script>
+        <script type="module" src="./js/solarSystem.js"></script>
+        <title>Solar System | Universe Explorer</title>
         <style>
-            @keyframes fadeUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .panel-collapse {
+            /* ===== Interactive orrery (solar-system.html) ===== */
+            .orrery-grid {
                 display: grid;
-                grid-template-rows: 0fr;
-                opacity: 0;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+                align-items: stretch;
                 transition:
-                    grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                    opacity 0.25s ease;
+                    grid-template-columns 0.6s cubic-bezier(0.16, 0.8, 0.24, 1),
+                    gap 0.6s cubic-bezier(0.16, 0.8, 0.24, 1);
             }
 
-            .panel-collapse.is-open {
-                grid-template-rows: 1fr;
+            .orrery-grid.is-open {
+                grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+                gap: 1.75rem;
+            }
+
+            .stage-viewport.is-panning {
+                cursor: grabbing;
+            }
+
+            .star {
+                position: absolute;
+                border-radius: 50%;
+                background: #fff;
+                pointer-events: none;
+                animation: star-twinkle var(--dur, 4s) ease-in-out infinite;
+                animation-delay: var(--delay, 0s);
+            }
+
+            @keyframes star-twinkle {
+                0%,
+                100% {
+                    opacity: var(--min-opacity, 0.2);
+                }
+                50% {
+                    opacity: var(--max-opacity, 0.9);
+                }
+            }
+
+            /* ===== ORBITS ===== */
+            .orbit {
+                position: absolute;
+                border: 1px solid var(--color-border);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.55;
+                transition:
+                    opacity 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+            .orbit.is-dwarf {
+                border-style: dashed;
+                opacity: 0.4;
+            }
+
+            .orbit.is-hot {
+                border-color: var(--color-primary);
+                opacity: 1;
+                box-shadow: 0 0 14px
+                    color-mix(in srgb, var(--color-primary) 30%, transparent);
+            }
+
+            /* Fade every other orbit while one is hovered/focused */
+            .stage.is-hovering .orbit:not(.is-hot) {
+                opacity: 0.14;
+            }
+
+            .oort {
+                position: absolute;
+                border: 1px dashed
+                    color-mix(in srgb, var(--color-foreground) 14%, transparent);
+                border-radius: 50%;
+                pointer-events: none;
+                transition:
+                    border-color 0.2s ease,
+                    opacity 0.2s ease;
+            }
+            .oort.is-hot {
+                border-color: var(--color-primary);
                 opacity: 1;
             }
 
-            .panel-collapse > div {
+            .sun {
+                background: radial-gradient(
+                    circle at 38% 32%,
+                    #ffe9b8,
+                    #f2a65a 55%,
+                    #c9701f 100%
+                );
+                box-shadow:
+                    0 0 30px 6px rgba(242, 166, 90, 0.45),
+                    0 0 70px 20px rgba(242, 166, 90, 0.15);
+                z-index: 300;
+                /* mid-point of planets' 210–390 depth range (solarSystem.js positionAll) 
+                so near-side planets pass in front and far-side pass behind.
+                don't raise above ~390. See the depthRank comment in positionAll() for how 
+                ties between different planets are broken without exceeding this range */
+            }
+
+            /* ===== PLANETS ===== */
+            .planet {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .planet::before {
+                /* larger invisible hit area, doesn't affect visual size */
+                content: "";
+                position: absolute;
+                inset: -9px;
+                border-radius: 50%;
+            }
+
+            .planet-dot {
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                background-image: var(--bg);
+                background-blend-mode: var(--blend, normal);
+                box-shadow:
+                    0 0 0 1px rgba(0, 0, 0, 0.25) inset,
+                    0 2px 10px rgba(0, 0, 0, 0.5);
+                transition:
+                    box-shadow 0.2s ease,
+                    transform 0.2s ease;
+            }
+
+            .planet.is-dwarf .planet-dot {
+                opacity: 0.8;
+            }
+
+            .planet[data-planet="saturn"] .planet-dot::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 230%;
+                height: 95%;
+                transform: translate(-50%, -50%) rotate(-16deg);
+                border-radius: 50%;
+                border: 5px solid rgba(232, 213, 168, 0.5);
+                pointer-events: none;
+            }
+
+            .planet:hover .planet-dot,
+            .planet:focus-visible .planet-dot {
+                box-shadow:
+                    0 0 0 3px
+                        color-mix(
+                            in srgb,
+                            var(--color-primary) 15%,
+                            transparent
+                        ),
+                    0 0 14px 2px rgba(242, 166, 90, 0.5);
+                transform: scale(1.3);
+            }
+
+            .planet.is-active .planet-dot {
+                box-shadow:
+                    0 0 0 3px var(--color-primary),
+                    0 0 18px 4px rgba(242, 166, 90, 0.6);
+                transform: scale(1.35);
+            }
+
+            .planet:focus-visible {
+                outline: none;
+            }
+
+            .planet-label {
+                position: absolute;
+                top: calc(100% + 6px);
+                left: 50%;
+                transform: translateX(-50%) translateY(-2px);
+                color: var(--color-muted);
+                white-space: nowrap;
+                opacity: 0;
+                transition:
+                    opacity 0.15s ease,
+                    transform 0.15s ease,
+                    color 0.15s ease;
+                pointer-events: none;
+            }
+
+            .planet:hover .planet-label,
+            .planet:focus-visible .planet-label,
+            .planet.is-active .planet-label {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+                color: var(--color-foreground);
+            }
+
+            /* ===== BELTS / REGIONS ===== */
+            .belt-dot {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                transition: opacity 0.2s ease;
+            }
+
+            .belt-dot.asteroid {
+                background: #8a7a68;
+            }
+
+            .belt-dot.kuiper {
+                background: #7f97a6;
+            }
+
+            .region-label {
+                position: absolute;
+                transform: translate(-50%, -50%) translateY(4px);
+                color: var(--color-muted);
+                background: color-mix(
+                    in srgb,
+                    var(--color-surface) 85%,
+                    transparent
+                );
+                border: 1px solid var(--color-border);
+                border-radius: 999px;
+                padding: 0.2rem 0.6rem;
+                white-space: nowrap;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 999;
+                transition:
+                    opacity 0.15s ease,
+                    transform 0.15s ease,
+                    border-color 0.15s ease,
+                    color 0.15s ease;
+            }
+
+            .region-label.is-hot {
+                opacity: 1;
+                transform: translate(-50%, -50%) translateY(0);
+                color: var(--color-foreground);
+                border-color: var(--color-primary);
+            }
+
+            /* ===== DETAIL PANEL ===== */
+            .panel {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateX(12px);
+                transition:
+                    opacity 0.4s ease 0.15s,
+                    transform 0.4s ease 0.15s;
+            }
+
+            .orrery-grid.is-open .panel {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateX(0);
+            }
+
+            .orrery-grid:not(.is-open) .panel {
+                max-height: 0;
                 overflow: hidden;
             }
 
-            .panel-collapse.is-settled > div {
-                overflow: visible;
-            }
+            @media (max-width: 860px) {
+                .orrery-grid,
+                .orrery-grid.is-open {
+                    grid-template-columns: 1fr;
+                    gap: 0;
+                }
 
-            .panel-collapse.is-open .panel-inner-content > * {
-                animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-            }
+                .panel {
+                    position: fixed;
+                    left: 0.75rem;
+                    right: 0.75rem;
+                    bottom: 0.75rem;
+                    max-height: 72vh;
+                    border-radius: 0.25rem; /* rounded-sm equiv */
+                    transform: translateY(16px);
+                    z-index: 80;
+                    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+                }
 
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(2) {
-                animation-delay: 0.06s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(3) {
-                animation-delay: 0.12s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(4) {
-                animation-delay: 0.18s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(5) {
-                animation-delay: 0.24s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(6) {
-                animation-delay: 0.3s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(7) {
-                animation-delay: 0.36s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(8) {
-                animation-delay: 0.42s;
-            }
-
-            .panel-collapse.is-open .panel-inner-content > *:nth-child(9) {
-                animation-delay: 0.48s;
-            }
-
-            .chevron-toggle {
-                transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            }
-
-            .planet-card[aria-expanded="true"] .chevron-toggle {
-                transform: rotate(180deg);
-            }
-
-            .view-panel {
-                transition:
-                    opacity 0.28s ease,
-                    transform 0.28s ease;
-            }
-
-            .view-panel.view-hidden {
-                opacity: 0;
-                transform: translateY(10px);
-                pointer-events: none;
-                position: absolute;
-                inset: 0;
-            }
-
-            #view-stage {
-                transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+                .orrery-grid.is-open .panel {
+                    transform: translateY(0);
+                }
             }
         </style>
     </head>
 
     <body class="bg-background text-foreground font-sans">
         <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
-            <!-- injected via JS -->
+            <span class="bar sidebar-toggle-bar" aria-hidden="true"></span>
+            <span class="bar sidebar-toggle-bar" aria-hidden="true"></span>
+            <span class="bar sidebar-toggle-bar" aria-hidden="true"></span>
         </button>
 
         <header>
@@ -125,174 +313,127 @@
 
         <div class="page-shell">
             <main class="flex-1">
-                <section
-                    id="intro"
-                    aria-labelledby="planets-heading"
-                    class="page-header animate-target"
-                >
-                    <p class="eyebrow animate-target">Eight Worlds, One Sun</p>
-
-                    <div class="flex flex-wrap items-end justify-between gap-6">
-                        <h1
-                            id="planets-heading"
-                            class="page-title animate-target"
-                        >
-                            The Planets
-                        </h1>
-
-                        <div class="animate-target">
-                            <button
-                                id="view-toggle"
-                                type="button"
-                                class="btn-outline relative inline-flex items-center gap-2"
-                            >
-                                <i
-                                    id="view-toggle-icon"
-                                    class="bx bx-table text-base"
-                                    aria-hidden="true"
-                                ></i>
-                                <span id="view-toggle-label">Table View</span>
-                            </button>
-                        </div>
-                    </div>
-
+                <!-- ======= PAGE HEADER ======= -->
+                <section id="intro" class="page-header animate-target">
+                    <p class="eyebrow animate-target">
+                        Our home planetary system
+                    </p>
+                    <h1 class="page-title animate-target">The Solar System</h1>
                     <p class="page-lede animate-target">
-                        From scorched Mercury to windswept Neptune, the eight
-                        planets of our solar system span rocky worlds and gas
-                        giants alike. Tap any card below to see how they
-                        compare, or switch to a table for the full picture.
+                        Orbiting a single star, the Solar System is our home in
+                        the cosmos. From the rocky inner planets to the icy
+                        reaches beyond Neptune, explore the worlds, moons, and
+                        small bodies that make up our celestial neighborhood.
                     </p>
 
                     <dl class="stats-grid animate-target">
                         <div class="animate-target">
-                            <dt class="stat-label">Largest</dt>
+                            <dt class="stat-label">Age</dt>
+                            <dd class="stat-value">4.57B years</dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt class="stat-label">Planets</dt>
+                            <dd class="stat-value">8</dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt class="stat-label">Largest planet</dt>
                             <dd class="stat-value">Jupiter</dd>
                         </div>
                         <div class="animate-target">
-                            <dt class="stat-label">Smallest</dt>
-                            <dd class="stat-value">Mercury</dd>
-                        </div>
-                        <div class="animate-target">
-                            <dt class="stat-label">Hottest</dt>
-                            <dd class="stat-value">Venus</dd>
-                        </div>
-                        <div class="animate-target">
-                            <dt class="stat-label">Windiest</dt>
-                            <dd class="stat-value">Neptune</dd>
+                            <dt class="stat-label">Dwarf planets</dt>
+                            <dd class="stat-value">5 recognised</dd>
                         </div>
                     </dl>
                 </section>
 
-                <!-- ======= PLANETS SECTION ======= -->
+                <!-- ======= INTERACTIVE ORRERY ======= -->
                 <section
-                    id="planets"
-                    aria-label="Planet gallery and comparison table"
-                    class="animate-target mb-24 px-6 py-10 pb-24 md:mb-32 md:pb-32 xl:mb-40"
+                    id="orrery"
+                    class="orrery-section animate-target wide-container section-gap-end px-6"
                 >
-                    <div id="view-stage" class="wide-container relative">
-                        <!-- ======= GALLERY VIEW ======= -->
-                        <div
-                            id="gallery-view"
-                            class="view-panel"
-                            aria-labelledby="gallery-heading"
-                        >
-                            <h2 id="gallery-heading" class="sr-only">
-                                Planet gallery
-                            </h2>
+                    <p
+                        class="text-muted mb-4 text-center font-mono text-xs tracking-widest uppercase"
+                    >
+                        Click a world for details · scroll/pinch to zoom · drag
+                        to pan
+                    </p>
 
+                    <div class="orrery-grid" id="orrery-grid">
+                        <div class="min-w-0">
                             <div
-                                id="gallery"
-                                class="animate-target grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"
-                            ></div>
-
-                            <div
-                                id="panel-collapse"
-                                class="panel-collapse mt-6"
+                                class="stage-viewport surface-panel animate-target relative w-full cursor-grab touch-none overflow-hidden"
+                                id="stage-viewport"
                             >
-                                <div>
-                                    <div id="panel"></div>
+                                <div
+                                    class="stage absolute top-0 left-0 origin-top-left"
+                                    id="stage"
+                                >
+                                    <div
+                                        class="starfield pointer-events-none absolute inset-0 opacity-60"
+                                        id="starfield"
+                                    ></div>
+                                    <div
+                                        class="sun absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+                                        id="sun"
+                                    ></div>
+                                </div>
+                                <div
+                                    class="absolute right-3 bottom-3 z-90 flex flex-col gap-1.5"
+                                >
+                                    <button
+                                        class="zoom-btn icon-btn"
+                                        id="zoom-in"
+                                        aria-label="Zoom in"
+                                    >
+                                        <i class="bx bx-plus"></i>
+                                    </button>
+                                    <button
+                                        class="zoom-btn icon-btn"
+                                        id="zoom-out"
+                                        aria-label="Zoom out"
+                                    >
+                                        <i class="bx bx-minus"></i>
+                                    </button>
+                                    <button
+                                        class="zoom-btn icon-btn"
+                                        id="zoom-reset"
+                                        aria-label="Reset position"
+                                    >
+                                        <i class="bx bx-refresh"></i>
+                                    </button>
                                 </div>
                             </div>
+                            <p
+                                class="text-muted animate-target mt-4 font-mono text-xs leading-relaxed"
+                            >
+                                Orbits use each body's real eccentricity and
+                                inclination, with the Sun at one focus of each
+                                ellipse. Distances and sizes are compressed to
+                                fit on screen. The asteroid belt, Kuiper belt,
+                                and dashed Oort Cloud boundary are interactive.
+                                Gas and ice giant temperatures refer to their
+                                average cloud tops (near the 1-bar pressure
+                                level).
+                            </p>
                         </div>
 
-                        <!-- ======= TABLE VIEW ======= -->
-                        <div
-                            id="table-view"
-                            class="view-panel view-hidden"
-                            aria-labelledby="table-heading"
+                        <aside
+                            class="panel surface-panel relative overflow-x-hidden overflow-y-auto"
+                            id="panel"
+                            aria-hidden="true"
                             inert
                         >
-                            <h2 id="table-heading" class="sr-only">
-                                Planet comparison table
-                            </h2>
-
-                            <div class="surface-panel overflow-x-auto">
-                                <table
-                                    class="w-full min-w-190 border-collapse text-sm"
+                            <div class="p-6">
+                                <button
+                                    class="icon-btn absolute top-4 right-4 z-10"
+                                    id="panel-close"
+                                    aria-label="Close profile"
                                 >
-                                    <thead>
-                                        <tr
-                                            class="bg-surface-2 text-muted text-left font-mono text-xs tracking-widest uppercase"
-                                        >
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Planet
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Discovered
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Classification
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Moons
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Mythology
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Atmosphere
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Structure
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Surface
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Exploration
-                                            </th>
-                                            <th
-                                                class="border-border border-b px-5 py-4 font-semibold"
-                                            >
-                                                Highlight
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody
-                                        id="table-body"
-                                        class="divide-border divide-y"
-                                    ></tbody>
-                                </table>
+                                    <i class="bx bx-x"></i>
+                                </button>
+                                <div id="panel-inner"></div>
                             </div>
-                        </div>
+                        </aside>
                     </div>
                 </section>
             </main>
