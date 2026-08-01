@@ -37,23 +37,8 @@
     </head>
 
     <body class="bg-background text-foreground font-sans">
-        <button
-            id="sidebar-btn"
-            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
-            aria-label="Open menu"
-        >
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
         </button>
 
         <header>
@@ -61,74 +46,37 @@
             <nav id="navbar"></nav>
         </header>
 
-        <div class="md:ml-48">
+        <div class="page-shell">
             <main class="flex-1">
                 <!-- ======= PAGE HEADER ======= -->
-                <section
-                    id="intro"
-                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
-                >
-                    <p
-                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
-                    >
+                <section id="intro" class="page-header animate-target">
+                    <p class="eyebrow animate-target">
                         Humanity's journey beyond Earth
                     </p>
-                    <h1
-                        class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
-                    >
-                        Space Missions
-                    </h1>
-                    <p
-                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
-                    >
+                    <h1 class="page-title animate-target">Space Missions</h1>
+                    <p class="page-lede animate-target">
                         From the first satellite to the return to the Moon,
                         these are the milestones that expanded what humans and
                         their machines could reach. Click a milestone below to
                         read more.
                     </p>
 
-                    <dl
-                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
-                    >
+                    <dl class="stats-grid animate-target">
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Milestones
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                10
-                            </dd>
+                            <dt class="stat-label">Milestones</dt>
+                            <dd class="stat-value">10</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Time span
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                1957–2022
-                            </dd>
+                            <dt class="stat-label">Time span</dt>
+                            <dd class="stat-value">1957–2022</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                First milestone
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                Sputnik 1
-                            </dd>
+                            <dt class="stat-label">First milestone</dt>
+                            <dd class="stat-value">Sputnik 1</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Latest milestone
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                Artemis I
-                            </dd>
+                            <dt class="stat-label">Latest milestone</dt>
+                            <dd class="stat-value">Artemis I</dd>
                         </div>
                     </dl>
                 </section>
@@ -137,7 +85,7 @@
                 <section
                     id="timeline"
                     aria-labelledby="timeline-heading"
-                    class="animate-target mx-auto max-w-6xl px-6 py-16 pb-24 md:mb-32 md:pb-32 xl:mb-40 xl:max-w-7xl"
+                    class="timeline-section animate-target"
                 >
                     <h2 id="timeline-heading" class="sr-only">
                         Mission Timeline

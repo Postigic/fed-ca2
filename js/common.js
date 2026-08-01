@@ -71,8 +71,14 @@ async function loadFooter() {
     document.getElementById("footer").innerHTML = data;
 }
 
+async function loadSidebarButton() {
+    const response = await fetch("partials/sidebar-button.html");
+    const data = await response.text();
+    document.getElementById("sidebar-btn").innerHTML = data;
+}
+
 async function init() {
-    await Promise.all([loadNavbar(), loadFooter()]);
+    await Promise.all([loadNavbar(), loadFooter(), loadSidebarButton()]);
 
     const sidebar = document.getElementById("sidebar");
     const button = document.getElementById("sidebar-btn");

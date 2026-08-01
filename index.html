@@ -43,23 +43,8 @@
     </head>
 
     <body class="bg-background text-foreground font-sans">
-        <button
-            id="sidebar-btn"
-            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
-            aria-label="Open menu"
-        >
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
         </button>
 
         <header>
@@ -67,12 +52,12 @@
             <nav id="navbar"></nav>
         </header>
 
-        <div class="md:ml-48">
+        <div class="page-shell">
             <main class="flex-1">
                 <!-- ======= HERO SECTION ======= -->
 
                 <section
-                    class="relative mb-24 flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center md:mb-32 md:p-12 xl:mb-40"
+                    class="section-gap relative flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center md:p-12"
                 >
                     <img
                         src="./assets/images/ui/hero.jpg"
@@ -152,7 +137,7 @@
                 <section
                     id="intro"
                     aria-labelledby="intro-heading"
-                    class="animate-target mb-24 py-24 md:mb-32 md:py-28 xl:mb-40 xl:py-32"
+                    class="animate-target section-gap py-24 md:py-28 xl:py-32"
                 >
                     <div
                         class="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 min-[1920px]:max-w-7xl min-[2200px]:max-w-368 min-[2200px]:gap-24 md:grid-cols-[1fr_1.4fr] md:items-start md:gap-16 xl:max-w-6xl"
@@ -182,81 +167,39 @@
 
                 <section
                     id="stats"
-                    class="bg-surface border-border animate-target relative mb-24 overflow-hidden border-y py-20 md:mb-32 md:py-24 xl:mb-40 xl:py-28"
+                    class="bg-surface border-border animate-target section-gap relative overflow-hidden border-y py-20 md:py-24 xl:py-28"
                 >
                     <div
                         class="divide-border relative mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-6 min-[1920px]:max-w-[100rem] md:grid-cols-4 md:gap-y-0 md:divide-x xl:max-w-7xl"
                     >
                         <dl class="animate-target space-y-1 md:px-8">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Planets
-                            </dt>
-                            <dd
-                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
-                            >
-                                8
-                            </dd>
-                            <dd
-                                class="text-muted font-mono text-xs tracking-widest"
-                            >
+                            <dt class="stat-label">Planets</dt>
+                            <dd class="big-stat-value">8</dd>
+                            <dd class="big-stat-caption">
                                 in the Solar System
                             </dd>
                         </dl>
 
                         <dl class="animate-target space-y-1 md:px-8">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Moons
-                            </dt>
-                            <dd
-                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
-                            >
-                                200+
-                            </dd>
-                            <dd
-                                class="text-muted font-mono text-xs tracking-widest"
-                            >
+                            <dt class="stat-label">Moons</dt>
+                            <dd class="big-stat-value">200+</dd>
+                            <dd class="big-stat-caption">
                                 known natural satellites
                             </dd>
                         </dl>
 
                         <dl class="animate-target space-y-1 md:px-8">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Space Age
-                            </dt>
-                            <dd
-                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
-                            >
-                                60+
-                            </dd>
-                            <dd
-                                class="text-muted font-mono text-xs tracking-widest"
-                            >
+                            <dt class="stat-label">Space Age</dt>
+                            <dd class="big-stat-value">60+</dd>
+                            <dd class="big-stat-caption">
                                 years of human exploration
                             </dd>
                         </dl>
 
                         <dl class="animate-target space-y-1 md:px-8">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Universe Age
-                            </dt>
-                            <dd
-                                class="text-primary font-mono text-3xl font-semibold md:text-5xl"
-                            >
-                                13.8B
-                            </dd>
-                            <dd
-                                class="text-muted font-mono text-xs tracking-widest"
-                            >
-                                years old
-                            </dd>
+                            <dt class="stat-label">Universe Age</dt>
+                            <dd class="big-stat-value">13.8B</dd>
+                            <dd class="big-stat-caption">years old</dd>
                         </dl>
                     </div>
                 </section>
@@ -266,14 +209,12 @@
                 <section
                     id="explore"
                     aria-labelledby="explore-heading"
-                    class="animate-target mb-24 px-6 py-16 pb-24 md:mb-32 md:py-24 md:pb-32 xl:mb-40"
+                    class="animate-target section-gap px-6 py-16 pb-24 md:py-24 md:pb-32"
                 >
-                    <div
-                        class="mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl"
-                    >
+                    <div class="wide-container">
                         <h2
                             id="explore-heading"
-                            class="font-display animate-target mb-10 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                            class="section-title animate-target"
                         >
                             Start Exploring
                         </h2>
@@ -284,35 +225,26 @@
                             <article class="animate-target">
                                 <a
                                     href="solar-system.html"
-                                    class="group border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] relative block aspect-video overflow-hidden rounded-sm border duration-300 hover:-translate-y-1 active:translate-y-0"
+                                    class="feature-card group"
                                 >
                                     <img
                                         src="./assets/images/celestial/saturn.jpg"
                                         alt=""
-                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                        class="feature-card-img"
                                     />
-                                    <div
-                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
-                                    ></div>
-                                    <div
-                                        class="relative flex h-full flex-col justify-end p-6"
-                                    >
-                                        <h3
-                                            class="font-display text-xl font-semibold"
-                                        >
+                                    <div class="feature-card-overlay"></div>
+                                    <div class="feature-card-body">
+                                        <h3 class="feature-card-title">
                                             Solar System
                                         </h3>
-                                        <p class="text-muted mt-1 text-sm">
+                                        <p class="fact-card-body">
                                             Discover the structure of our Solar
                                             System and the worlds that orbit our
                                             Sun.
                                         </p>
-                                        <span
-                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                        <span class="feature-card-link"
                                             >Explore
-                                            <span
-                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
-                                            >
+                                            <span class="feature-card-arrow">
                                                 →
                                             </span></span
                                         >
@@ -323,35 +255,26 @@
                             <article class="animate-target">
                                 <a
                                     href="missions.html"
-                                    class="group border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] relative block aspect-video overflow-hidden rounded-sm border duration-300 hover:-translate-y-1 active:translate-y-0"
+                                    class="feature-card group"
                                 >
                                     <img
                                         src="./assets/images/missions/apollo-11.jpg"
                                         alt=""
-                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                        class="feature-card-img"
                                     />
-                                    <div
-                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
-                                    ></div>
-                                    <div
-                                        class="relative flex h-full flex-col justify-end p-6"
-                                    >
-                                        <h3
-                                            class="font-display text-xl font-semibold"
-                                        >
+                                    <div class="feature-card-overlay"></div>
+                                    <div class="feature-card-body">
+                                        <h3 class="feature-card-title">
                                             Space Missions
                                         </h3>
-                                        <p class="text-muted mt-1 text-sm">
+                                        <p class="fact-card-body">
                                             Explore historic missions that took
                                             humans to the Moon and spacecraft to
                                             the edges of our Solar System.
                                         </p>
-                                        <span
-                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                        <span class="feature-card-link"
                                             >Explore
-                                            <span
-                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
-                                            >
+                                            <span class="feature-card-arrow">
                                                 →
                                             </span></span
                                         >
@@ -362,35 +285,26 @@
                             <article class="animate-target">
                                 <a
                                     href="technology.html"
-                                    class="group border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] relative block aspect-video overflow-hidden rounded-sm border duration-300 hover:-translate-y-1 active:translate-y-0"
+                                    class="feature-card group"
                                 >
                                     <img
                                         src="./assets/images/missions/hubble-space-telescope.jpg"
                                         alt=""
-                                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02]"
+                                        class="feature-card-img"
                                     />
-                                    <div
-                                        class="from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent"
-                                    ></div>
-                                    <div
-                                        class="relative flex h-full flex-col justify-end p-6"
-                                    >
-                                        <h3
-                                            class="font-display text-xl font-semibold"
-                                        >
+                                    <div class="feature-card-overlay"></div>
+                                    <div class="feature-card-body">
+                                        <h3 class="feature-card-title">
                                             Space Technology
                                         </h3>
-                                        <p class="text-muted mt-1 text-sm">
+                                        <p class="fact-card-body">
                                             Discover the spacecraft, telescopes,
                                             and technology that make exploration
                                             possible.
                                         </p>
-                                        <span
-                                            class="text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200"
+                                        <span class="feature-card-link"
                                             >Explore
-                                            <span
-                                                class="inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0"
-                                            >
+                                            <span class="feature-card-arrow">
                                                 →
                                             </span></span
                                         >
@@ -405,15 +319,13 @@
 
                 <section
                     id="more-explore"
-                    class="animate-target mb-24 px-6 md:mb-32 xl:mb-40"
+                    class="animate-target section-gap px-6"
                     aria-labelledby="more-explore-heading"
                 >
-                    <div
-                        class="mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl"
-                    >
+                    <div class="wide-container">
                         <h2
                             id="more-explore-heading"
-                            class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl"
+                            class="section-title animate-target"
                         >
                             More to Explore
                         </h2>
@@ -423,10 +335,7 @@
                                 class="animate-target grid grid-cols-2 gap-4 sm:grid-cols-4"
                             >
                                 <li class="animate-target">
-                                    <a
-                                        href="planets.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="planets.html" class="nav-card">
                                         <i
                                             class="bx bx-planet text-primary text-xl"
                                             aria-hidden="true"
@@ -438,10 +347,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="moon.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="moon.html" class="nav-card">
                                         <i
                                             class="bx bx-moon text-primary text-xl"
                                             aria-hidden="true"
@@ -453,10 +359,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="sun.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="sun.html" class="nav-card">
                                         <i
                                             class="bx bx-sun text-primary text-xl"
                                             aria-hidden="true"
@@ -468,10 +371,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="galaxies.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="galaxies.html" class="nav-card">
                                         <i
                                             class="bx bx-globe text-primary text-xl"
                                             aria-hidden="true"
@@ -483,10 +383,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="astronauts.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="astronauts.html" class="nav-card">
                                         <i
                                             class="bx bx-user text-primary text-xl"
                                             aria-hidden="true"
@@ -500,7 +397,7 @@
                                 <li class="animate-target">
                                     <a
                                         href="constellations.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
+                                        class="nav-card"
                                     >
                                         <i
                                             class="bx bx-star text-primary text-xl"
@@ -513,10 +410,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="quiz.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="quiz.html" class="nav-card">
                                         <i
                                             class="bx bx-help-circle text-primary text-xl"
                                             aria-hidden="true"
@@ -528,10 +422,7 @@
                                 </li>
 
                                 <li class="animate-target">
-                                    <a
-                                        href="about.html"
-                                        class="border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] shadow-elevated flex items-center gap-3 rounded-sm border p-4 duration-200 hover:-translate-y-1 active:translate-y-0"
-                                    >
+                                    <a href="about.html" class="nav-card">
                                         <i
                                             class="bx bx-info-circle text-primary text-xl"
                                             aria-hidden="true"
@@ -551,7 +442,7 @@
                 <section
                     id="quiz-cta"
                     aria-labelledby="quiz-cta-heading"
-                    class="animate-target border-border bg-surface mb-24 border-y px-6 py-16 text-center md:mb-32 md:py-20 xl:mb-40 xl:py-24"
+                    class="animate-target border-border bg-surface section-gap border-y px-6 py-16 text-center md:py-20 xl:py-24"
                 >
                     <p
                         class="text-muted animate-target font-mono text-xs tracking-widest uppercase"
@@ -565,9 +456,7 @@
                         Test Your Space Knowledge
                     </h2>
                     <div class="animate-target">
-                        <a
-                            href="quiz.html"
-                            class="border-primary text-primary hover:bg-primary hover:text-background transition-[color, transform, box-shadow] shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative mt-6 inline-block rounded-sm border px-6 py-3 font-mono text-sm duration-200 hover:-translate-y-1 active:translate-y-0"
+                        <a href="quiz.html" class="btn-outline relative mt-6"
                             >Take the Quiz →</a
                         >
                     </div>
