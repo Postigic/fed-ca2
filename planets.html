@@ -15,6 +15,102 @@
         <link href="./dist/output.css" rel="stylesheet" />
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
         <script type="module" src="./js/planets.js"></script>
+        <style>
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .panel-collapse {
+                display: grid;
+                grid-template-rows: 0fr;
+                opacity: 0;
+                transition:
+                    grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.25s ease;
+            }
+
+            .panel-collapse.is-open {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+
+            .panel-collapse > div {
+                overflow: hidden;
+            }
+
+            .panel-collapse.is-settled > div {
+                overflow: visible;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > * {
+                animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(2) {
+                animation-delay: 0.06s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(3) {
+                animation-delay: 0.12s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(4) {
+                animation-delay: 0.18s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(5) {
+                animation-delay: 0.24s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(6) {
+                animation-delay: 0.3s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(7) {
+                animation-delay: 0.36s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(8) {
+                animation-delay: 0.42s;
+            }
+
+            .panel-collapse.is-open .panel-inner-content > *:nth-child(9) {
+                animation-delay: 0.48s;
+            }
+
+            .chevron-toggle {
+                transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .planet-card[aria-expanded="true"] .chevron-toggle {
+                transform: rotate(180deg);
+            }
+
+            .view-panel {
+                transition:
+                    opacity 0.28s ease,
+                    transform 0.28s ease;
+            }
+
+            .view-panel.view-hidden {
+                opacity: 0;
+                transform: translateY(10px);
+                pointer-events: none;
+                position: absolute;
+                inset: 0;
+            }
+
+            #view-stage {
+                transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+        </style>
     </head>
 
     <body class="bg-background text-foreground font-sans">
@@ -43,7 +139,215 @@
         </header>
 
         <div class="md:ml-48">
-            <main class="flex-1"></main>
+            <main class="flex-1">
+                <section
+                    id="intro"
+                    aria-labelledby="planets-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
+                >
+                    <p
+                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
+                    >
+                        Eight Worlds, One Sun
+                    </p>
+
+                    <div class="flex flex-wrap items-end justify-between gap-6">
+                        <h1
+                            id="planets-heading"
+                            class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
+                        >
+                            The Planets
+                        </h1>
+
+                        <div class="animate-target">
+                            <button
+                                id="view-toggle"
+                                type="button"
+                                class="border-primary text-primary hover:bg-primary hover:text-background transition-[color, transform, box-shadow] shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative inline-flex items-center gap-2 rounded-sm border px-6 py-3 font-mono text-sm duration-200 hover:-translate-y-1 active:translate-y-0"
+                            >
+                                <i
+                                    id="view-toggle-icon"
+                                    class="bx bx-table text-base"
+                                    aria-hidden="true"
+                                ></i>
+                                <span id="view-toggle-label">Table View</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <p
+                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
+                    >
+                        From scorched Mercury to windswept Neptune, the eight
+                        planets of our solar system span rocky worlds and gas
+                        giants alike. Tap any card below to see how they
+                        compare, or switch to a table for the full picture.
+                    </p>
+
+                    <dl
+                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
+                    >
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Largest
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Jupiter
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Smallest
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Mercury
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Hottest
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Venus
+                            </dd>
+                        </div>
+                        <div class="animate-target">
+                            <dt
+                                class="text-muted font-mono text-xs tracking-widest uppercase"
+                            >
+                                Windiest
+                            </dt>
+                            <dd class="text-foreground font-mono text-lg">
+                                Neptune
+                            </dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <!-- ======= PLANETS SECTION ======= -->
+                <section
+                    id="planets"
+                    aria-label="Planet gallery and comparison table"
+                    class="animate-target mb-24 px-6 py-10 pb-24 md:mb-32 md:pb-32 xl:mb-40"
+                >
+                    <div
+                        id="view-stage"
+                        class="relative mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl"
+                    >
+                        <!-- ======= GALLERY VIEW ======= -->
+                        <div
+                            id="gallery-view"
+                            class="view-panel"
+                            aria-labelledby="gallery-heading"
+                        >
+                            <h2 id="gallery-heading" class="sr-only">
+                                Planet gallery
+                            </h2>
+
+                            <div
+                                id="gallery"
+                                class="animate-target grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"
+                            ></div>
+
+                            <div
+                                id="panel-collapse"
+                                class="panel-collapse mt-6"
+                            >
+                                <div>
+                                    <div id="panel"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ======= TABLE VIEW ======= -->
+                        <div
+                            id="table-view"
+                            class="view-panel view-hidden"
+                            aria-labelledby="table-heading"
+                            inert
+                        >
+                            <h2 id="table-heading" class="sr-only">
+                                Planet comparison table
+                            </h2>
+
+                            <div
+                                class="border-border bg-surface shadow-elevated overflow-x-auto rounded-sm border"
+                            >
+                                <table
+                                    class="w-full min-w-190 border-collapse text-sm"
+                                >
+                                    <thead>
+                                        <tr
+                                            class="bg-surface-2 text-muted text-left font-mono text-xs tracking-widest uppercase"
+                                        >
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Planet
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Discovered
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Classification
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Moons
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Mythology
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Atmosphere
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Structure
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Surface
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Exploration
+                                            </th>
+                                            <th
+                                                class="border-border border-b px-5 py-4 font-semibold"
+                                            >
+                                                Highlight
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        id="table-body"
+                                        class="divide-border divide-y"
+                                    ></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
 
             <footer id="footer"></footer>
         </div>
