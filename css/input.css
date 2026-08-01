@@ -220,7 +220,7 @@
 
     /* ===== Nav cards: small bordered link tiles ("More to Explore") ===== */
     .nav-card {
-        @apply border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated shadow-elevated flex items-center gap-3 rounded-sm border p-4 transition-[color,_border-color,_translate,_box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
+        @apply border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated shadow-elevated flex items-center gap-3 rounded-sm border p-4 transition-[color,border-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
     }
 
     /* ===== Gallery tiles: square image cards with caption overlay ===== */
@@ -250,7 +250,7 @@
        it's just a marker for group-hover/group-active variants — so
        add it as a literal class alongside `explore-card` in the HTML. */
     .explore-card {
-        @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,_box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0;
+        @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0;
     }
 
     .explore-card-img {
