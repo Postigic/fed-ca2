@@ -283,7 +283,7 @@
 
     /* ===== Buttons: outlined CTA button/link ===== */
     .btn-outline {
-        @apply border-primary text-primary hover:bg-primary hover:text-background shadow-elevated hover:shadow-elevated-hover active:shadow-elevated inline-block rounded-sm border px-6 py-3 font-mono text-sm transition-[color,_background-color,_translate,_box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
+        @apply border-primary text-primary hover:bg-primary hover:text-background shadow-elevated hover:shadow-elevated-hover active:shadow-elevated inline-block rounded-sm border px-6 py-3 font-mono text-sm transition-[color,background-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
     }
 
     /* ===== Team cards (about.html team grid) ===== */
