@@ -45,23 +45,8 @@
     </head>
 
     <body class="bg-background text-foreground font-sans">
-        <button
-            id="sidebar-btn"
-            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
-            aria-label="Open menu"
-        >
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
         </button>
 
         <header>
@@ -69,23 +54,14 @@
             <nav id="navbar"></nav>
         </header>
 
-        <div class="md:ml-48">
+        <div class="page-shell">
             <main class="flex-1">
                 <!-- ======= PAGE HEADING ======= -->
 
-                <section
-                    id="intro"
-                    class="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
-                >
-                    <div class="mx-auto max-w-5xl">
-                        <p
-                            class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.35em] uppercase"
-                        >
-                            About
-                        </p>
-                        <h1
-                            class="font-display animate-target text-3xl font-semibold tracking-tight md:text-5xl xl:text-6xl"
-                        >
+                <section id="intro" class="page-header animate-target">
+                    <div class="narrow-container">
+                        <p class="eyebrow animate-target">About</p>
+                        <h1 class="page-title animate-target">
                             The Team Behind Universe Explorer
                         </h1>
                     </div>
@@ -96,12 +72,12 @@
                 <section
                     id="team"
                     aria-labelledby="team-heading"
-                    class="animate-target mb-24 px-6 md:mb-32 xl:mb-40"
+                    class="animate-target section-gap px-6 py-10"
                 >
-                    <div class="mx-auto max-w-5xl">
+                    <div class="narrow-container">
                         <h2
                             id="team-heading"
-                            class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl xl:text-5xl"
+                            class="section-title animate-target"
                         >
                             Meet the Team
                         </h2>
@@ -110,11 +86,9 @@
                             class="animate-target flex w-full list-none flex-row flex-wrap items-stretch gap-4"
                         >
                             <li class="flex flex-1">
-                                <figure
-                                    class="border-border bg-surface shadow-elevated animate-target flex w-full flex-col items-center justify-center gap-3 rounded-sm border p-10 font-bold"
-                                >
+                                <figure class="team-card animate-target">
                                     <img
-                                        class="w-28 rounded-full"
+                                        class="team-card-avatar"
                                         src="https://placehold.co/400"
                                         alt="Dev Number 1"
                                     />
@@ -124,11 +98,9 @@
                                 </figure>
                             </li>
                             <li class="flex flex-1">
-                                <figure
-                                    class="border-border bg-surface shadow-elevated animate-target flex w-full flex-col items-center justify-center gap-3 rounded-sm border p-10 font-bold"
-                                >
+                                <figure class="team-card animate-target">
                                     <img
-                                        class="w-28 rounded-full"
+                                        class="team-card-avatar"
                                         src="https://placehold.co/400"
                                         alt="Dev Number 2"
                                     />
@@ -138,11 +110,9 @@
                                 </figure>
                             </li>
                             <li class="flex flex-1">
-                                <figure
-                                    class="border-border bg-surface shadow-elevated animate-target flex w-full flex-col items-center justify-center gap-3 rounded-sm border p-10 font-bold"
-                                >
+                                <figure class="team-card animate-target">
                                     <img
-                                        class="w-28 rounded-full"
+                                        class="team-card-avatar"
                                         src="https://placehold.co/400"
                                         alt="Dev Number 3"
                                     />
@@ -152,11 +122,9 @@
                                 </figure>
                             </li>
                             <li class="flex flex-1">
-                                <figure
-                                    class="border-border bg-surface shadow-elevated animate-target flex w-full flex-col items-center justify-center gap-3 rounded-sm border p-10 font-bold"
-                                >
+                                <figure class="team-card animate-target">
                                     <img
-                                        class="w-28 rounded-full"
+                                        class="team-card-avatar"
                                         src="https://placehold.co/400"
                                         alt="Dev Number 4"
                                     />
@@ -174,12 +142,12 @@
                 <section
                     id="faq"
                     aria-labelledby="faq-heading"
-                    class="animate-target mb-24 px-6 md:mb-32 xl:mb-40"
+                    class="animate-target section-gap px-6"
                 >
-                    <div class="mx-auto max-w-5xl">
+                    <div class="narrow-container">
                         <h2
                             id="faq-heading"
-                            class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl xl:text-5xl"
+                            class="section-title animate-target"
                         >
                             Frequently Asked Questions
                         </h2>
@@ -193,19 +161,19 @@
                 <section
                     id="contact"
                     aria-labelledby="contact-heading"
-                    class="animate-target mb-24 px-6 pb-24 md:mb-32 md:pb-32 xl:mb-40"
+                    class="animate-target section-gap px-6 pb-24 md:pb-32"
                 >
-                    <div class="mx-auto max-w-5xl">
+                    <div class="narrow-container">
                         <h2
                             id="contact-heading"
-                            class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl xl:text-5xl"
+                            class="section-title animate-target"
                         >
                             Send Feedback / Contact Us
                         </h2>
 
                         <form id="contact-form" novalidate>
                             <div
-                                class="border-border bg-surface shadow-elevated animate-target flex w-full flex-col rounded-sm border"
+                                class="surface-panel animate-target flex w-full flex-col"
                             >
                                 <div
                                     class="animate-target flex w-full flex-col items-stretch justify-between gap-4 p-8"
@@ -253,7 +221,7 @@
                                     <button
                                         type="submit"
                                         id="submit-btn"
-                                        class="border-primary text-primary hover:bg-primary hover:text-background shadow-elevated hover:shadow-elevated-hover active:shadow-elevated transition-[color, transform, box-shadow] w-full rounded-sm border px-6 py-3 font-mono text-sm duration-200 hover:-translate-y-1 active:translate-y-0"
+                                        class="btn-outline w-full"
                                     >
                                         Submit Form
                                     </button>
