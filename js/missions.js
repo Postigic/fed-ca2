@@ -276,9 +276,6 @@ MISSIONS.forEach((mission) => {
     timelineWrap.appendChild(renderMission(mission));
 });
 
-/* =========================================================
-    ACCORDION BEHAVIOR
-========================================================= */
 const cards = document.querySelectorAll(".timeline-card");
 
 cards.forEach((card) => {
