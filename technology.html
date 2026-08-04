@@ -15,6 +15,25 @@
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
         <script type="module" src="./js/technology.js"></script>
         <title>Space Technology | Universe Explorer</title>
+        <style>
+            .extra-info-wrap {
+                display: grid;
+                grid-template-rows: 0fr;
+                opacity: 0;
+                transition:
+                    grid-template-rows 300ms ease,
+                    opacity 250ms ease;
+            }
+
+            .extra-info-wrap.is-open {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+
+            .extra-info {
+                overflow: hidden;
+            }
+        </style>
     </head>
 
     <body class="bg-background text-foreground font-sans">
@@ -29,12 +48,6 @@
 
         <div class="page-shell">
             <main class="flex-1">
-                <!-- TODO: add more stuff, right now i'm only focused on patching inconsistencies -->
-                <!-- ALSO TODO: add image source to attributions and find the source of lag -->
-
-                <!-- IDEA: Organise technologies by purpose, e.g. Observation, Transportation, 
-                Exporation, Habitation, Life Support, Communication, etc, etc. -->
-
                 <!-- ======= PAGE HEADER ======= -->
                 <section id="intro" class="page-header animate-target">
                     <p class="eyebrow animate-target">
@@ -56,155 +69,10 @@
                     aria-label="Space technologies"
                     class="content-container animate-target pb-24 md:pb-32 xl:pb-40"
                 >
-                    <ul
-                        class="animate-target grid grid-cols-1 items-start gap-6 sm:grid-cols-2"
-                    >
-                        <!-- telescopes -->
-                        <li class="animate-target">
-                            <article
-                                class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1"
-                            >
-                                <h2
-                                    class="font-display text-foreground mb-4 text-xl font-semibold"
-                                >
-                                    Space Telescopes
-                                </h2>
-
-                                <figure>
-                                    <img
-                                        src="assets/images/technology/telescope.jpg"
-                                        alt="Space Telescope"
-                                        class="h-48 w-full rounded-sm object-cover"
-                                    />
-                                    <figcaption
-                                        class="text-muted text-center text-sm leading-relaxed"
-                                    >
-                                        NASA's Hubble Space Telescope
-                                    </figcaption>
-                                </figure>
-
-                                <div class="extra-info hidden">
-                                    <p class="text-muted mt-4 leading-relaxed">
-                                        The Hubble Space Telescope was launched
-                                        in 1990 and orbits Earth above most of
-                                        the atmosphere. It has helped
-                                        astronomers study distant galaxies,
-                                        stars, planets and other objects
-                                        throughout the universe.
-                                    </p>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- rovers -->
-                        <li class="animate-target">
-                            <article
-                                class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1"
-                            >
-                                <h2
-                                    class="font-display text-foreground mb-4 text-xl font-semibold"
-                                >
-                                    Robotic Rovers
-                                </h2>
-
-                                <figure>
-                                    <img
-                                        src="assets/images/technology/rover.jpg"
-                                        alt="Mars Rover"
-                                        class="h-48 w-full rounded-sm object-cover"
-                                    />
-                                    <figcaption
-                                        class="text-muted text-center text-sm leading-relaxed"
-                                    >
-                                        Mars Exploration Rover "Opportunity"
-                                    </figcaption>
-                                </figure>
-
-                                <div class="extra-info hidden">
-                                    <p class="text-muted mt-4 leading-relaxed">
-                                        Robotic rovers are unmanned vehicles
-                                        designed to explore the surfaces of
-                                        other worlds. NASA's Opportunity rover
-                                        explored Mars and studied its rocks,
-                                        soil and environment.
-                                    </p>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- space stations -->
-                        <li class="animate-target">
-                            <article
-                                class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1"
-                            >
-                                <h2
-                                    class="font-display text-foreground mb-4 text-xl font-semibold"
-                                >
-                                    Space Stations
-                                </h2>
-
-                                <figure>
-                                    <img
-                                        src="assets/images/technology/space_station.jpg"
-                                        alt="Space Station"
-                                        class="h-48 w-full rounded-sm object-cover"
-                                    />
-                                    <figcaption
-                                        class="text-muted text-center text-sm leading-relaxed"
-                                    >
-                                        NASA's International Space Station
-                                    </figcaption>
-                                </figure>
-
-                                <div class="extra-info hidden">
-                                    <p class="text-muted mt-4 leading-relaxed">
-                                        The International Space Station is a
-                                        large laboratory orbiting Earth.
-                                        Astronauts from different countries use
-                                        it to conduct experiments and study how
-                                        humans and technology operate in space.
-                                    </p>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- suits -->
-                        <li class="animate-target">
-                            <article
-                                class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1"
-                            >
-                                <h2
-                                    class="font-display text-foreground mb-4 text-xl font-semibold"
-                                >
-                                    Space Suits
-                                </h2>
-
-                                <figure>
-                                    <img
-                                        src="assets/images/technology/suit.jpg"
-                                        alt="Space Suit"
-                                        class="h-48 w-full rounded-sm object-cover"
-                                    />
-                                    <figcaption
-                                        class="text-muted text-center text-sm leading-relaxed"
-                                    >
-                                        Space Suit (Extravehicular Mobility
-                                        Unit)
-                                    </figcaption>
-                                </figure>
-
-                                <div class="extra-info hidden">
-                                    <p class="text-muted mt-4 leading-relaxed">
-                                        Space suits protect astronauts from the
-                                        harsh environment of space. They provide
-                                        oxygen, temperature control and
-                                        protection while astronauts work outside
-                                        their spacecraft.
-                                    </p>
-                                </div>
-                            </article>
-                        </li>
-                    </ul>
+                    <div
+                        id="technologies-list"
+                        class="animate-target space-y-12"
+                    ></div>
                 </section>
             </main>
 
