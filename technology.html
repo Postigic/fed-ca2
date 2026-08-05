@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,155 +12,71 @@
             href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
         />
         <link href="./dist/output.css" rel="stylesheet" />
-        <script src="js/technology.js" defer></script>
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/technology.js"></script>
         <title>Space Technology | Universe Explorer</title>
+        <style>
+            .extra-info-wrap {
+                display: grid;
+                grid-template-rows: 0fr;
+                opacity: 0;
+                transition:
+                    grid-template-rows 300ms ease,
+                    opacity 250ms ease;
+            }
+
+            .extra-info-wrap.is-open {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+
+            .extra-info {
+                overflow: hidden;
+            }
+        </style>
     </head>
 
-    <body class="bg-background text-foreground min-h-screen font-sans">
-        <main class="mx-auto max-w-6xl px-6 py-12">
-            <!-- header -->
-            <section class="mb-10">
-                <p
-                    class="text-primary mb-3 font-mono text-xs tracking-[0.3em] uppercase"
-                >
-                    Technology beyond Earth
-                </p>
+    <body class="bg-background text-foreground font-sans">
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
+        </button>
 
-                <h1
-                    class="font-display text-4xl font-semibold tracking-tight md:text-5xl"
-                >
-                    Space Technology
-                </h1>
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
 
-                <p class="text-muted mt-4 max-w-2xl text-base">
-                    From observing distant galaxies to exploring the surfaces of
-                    other worlds, these technologies have helped deepen our
-                    understanding and exploration of space.
-                </p>
-            </section>
-
-            <!-- cards -->
-            <section class="grid grid-cols-2 items-start gap-4">
-                <!-- telescopes -->
-                <div
-                    class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
-                >
-                    <h2
-                        class="font-display text-foreground mb-4 text-xl font-semibold"
-                    >
-                        Space Telescopes
-                    </h2>
-
-                    <img
-                        src="assets/images/technology/telescope.jpg"
-                        alt="Space Telescope"
-                        class="h-48 w-full rounded-xl object-cover"
-                    />
-
-                    <p class="text-muted text-md text-center leading-relaxed">
-                        NASA's Hubble Space Telescope
+        <div class="page-shell">
+            <main class="flex-1">
+                <!-- ======= PAGE HEADER ======= -->
+                <section id="intro" class="page-header animate-target">
+                    <p class="eyebrow animate-target">
+                        Technology beyond Earth
                     </p>
 
-                    <div class="extra-info hidden">
-                        <p class="text-muted mt-4 leading-relaxed">
-                            The Hubble Space Telescope was launched in 1990 and
-                            orbits Earth above most of the atmosphere. It has
-                            helped astronomers study distant galaxies, stars,
-                            planets and other objects throughout the universe.
-                        </p>
-                    </div>
-                </div>
+                    <h1 class="page-title animate-target">Space Technology</h1>
 
-                <!-- rovers -->
-                <div
-                    class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
-                >
-                    <h2
-                        class="font-display text-foreground mb-4 text-xl font-semibold"
-                    >
-                        Robotic Rovers
-                    </h2>
-
-                    <img
-                        src="assets/images/technology/rover.jpg"
-                        alt="Mars Rover"
-                        class="h-48 w-full rounded-xl object-cover"
-                    />
-
-                    <p class="text-muted text-md text-center leading-relaxed">
-                        Mars Exploration Rover "Opportunity"
+                    <p class="page-lede animate-target">
+                        From observing distant galaxies to exploring the
+                        surfaces of other worlds, these technologies have helped
+                        deepen our understanding and exploration of space.
                     </p>
+                </section>
 
-                    <div class="extra-info hidden">
-                        <p class="text-muted mt-4 leading-relaxed">
-                            Robotic rovers are unmanned vehicles designed to
-                            explore the surfaces of other worlds. NASA's
-                            Opportunity rover explored Mars and studied its
-                            rocks, soil and environment.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- space stations -->
-                <div
-                    class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
+                <!-- ======= TECHNOLOGY CARDS ======= -->
+                <section
+                    id="technologies"
+                    aria-label="Space technologies"
+                    class="content-container animate-target pb-24 md:pb-32 xl:pb-40"
                 >
-                    <h2
-                        class="font-display text-foreground mb-4 text-xl font-semibold"
-                    >
-                        Space Stations
-                    </h2>
+                    <div
+                        id="technologies-list"
+                        class="animate-target space-y-12"
+                    ></div>
+                </section>
+            </main>
 
-                    <img
-                        src="assets/images/technology/space_station.jpg"
-                        alt="Space Station"
-                        class="h-48 w-full rounded-xl object-cover"
-                    />
-
-                    <p class="text-muted text-md text-center leading-relaxed">
-                        NASA's International Space Station
-                    </p>
-
-                    <div class="extra-info hidden">
-                        <p class="text-muted mt-4 leading-relaxed">
-                            The International Space Station is a large
-                            laboratory orbiting Earth. Astronauts from different
-                            countries use it to conduct experiments and study
-                            how humans and technology operate in space.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- suits -->
-                <div
-                    class="tech-card bg-surface-2 border-border hover:border-primary hover:shadow-elevated-hover cursor-pointer rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
-                >
-                    <h2
-                        class="font-display text-foreground mb-4 text-xl font-semibold"
-                    >
-                        Space Suits
-                    </h2>
-
-                    <img
-                        src="assets/images/technology/suit.jpg"
-                        alt="Space Suit"
-                        class="h-48 w-full rounded-xl object-cover"
-                    />
-
-                    <p class="text-muted text-md text-center leading-relaxed">
-                        Space Suit (Extravehicular Mobility Unit)
-                    </p>
-
-                    <div class="extra-info hidden">
-                        <p class="text-muted mt-4 leading-relaxed">
-                            Space suits protect astronauts from the harsh
-                            environment of space. They provide oxygen,
-                            temperature control and protection while astronauts
-                            work outside their spacecraft.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
+            <footer id="footer"></footer>
+        </div>
     </body>
 </html>
