@@ -203,7 +203,7 @@ PLANETS.forEach((p, i) => {
 
     card.innerHTML = `
         <div
-            class="bg-surface-2 mb-4 flex aspect-[2.2/1] w-full items-center justify-center overflow-hidden rounded-full border border-border"
+            class="bg-surface-2 mx-auto flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border md:mx-0"
         >
             <img
                 src="${p.image}"
