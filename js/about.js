@@ -5,7 +5,7 @@ observeElements({ elements: document.querySelector("#team") });
 observeElements({ elements: document.querySelector("#faq") });
 observeElements({ elements: document.querySelector("#contact") });
 
-const faqs = [
+const FAQS = [
     {
         question: "What is this website about?",
         answer: "An educational platform where you can discover space, astronomy, and the wonders of the universe.",
@@ -43,9 +43,8 @@ const faqs = [
 function renderFaqs() {
     const list = document.getElementById("faq-list");
 
-    list.innerHTML = faqs
-        .map(
-            (faq, i) => `
+    list.innerHTML = FAQS.map(
+        (faq, i) => `
                 <div class="border-border bg-surface shadow-elevated overflow-hidden rounded-sm border animate-target">
                     <h3>
                         <button
@@ -72,8 +71,7 @@ function renderFaqs() {
                         <p class="text-muted px-4 pb-3 text-base">${faq.answer}</p>
                     </div>
                 </div>`,
-        )
-        .join("");
+    ).join("");
 }
 
 function toggleAccordion(index) {
