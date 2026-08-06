@@ -3,7 +3,7 @@ import { observeElements } from "./common.js";
 observeElements({ elements: document.querySelector("#intro") });
 observeElements({
     elements: document.querySelector("#technologies"),
-    desktopThreshold: 0.2,
+    desktopThreshold: 0.1,
     mobileThreshold: 0.1,
 });
 
@@ -12,7 +12,7 @@ const TECHNOLOGIES = [
         id: "launch-vehicles",
         title: "Launch Vehicles",
         category: "Transportation",
-        image: "assets/images/technology/rocket.jpg",
+        image: "assets/images/technology/launch_vehicle.jpg",
         caption: "NASA's Space Launch System (SLS)",
         body: "Launch vehicles are powerful rockets that carry spacecraft and satellites from Earth into space. Modern launch systems can deliver cargo, astronauts and scientific missions into orbit and beyond.",
     },
@@ -20,17 +20,17 @@ const TECHNOLOGIES = [
         id: "crew-spacecraft",
         title: "Crew Spacecraft",
         category: "Transportation",
-        image: "assets/images/technology/crew_capsule.jpg",
+        image: "assets/images/technology/crew_spacecraft.jpg",
         caption: "NASA's Orion spacecraft",
         body: "Crew spacecraft transport astronauts safely through space. They include life-support systems, navigation equipment and heat shields that protect crews during launch, spaceflight and re-entry.",
     },
     {
         id: "satellites",
-        title: "Artificial Satellites",
+        title: "Communications Satellites",
         category: "Communication",
         image: "assets/images/technology/satellite.jpg",
         caption: "Communications satellite in Earth orbit",
-        body: "Artificial satellites orbit Earth to provide communications, weather forecasting, navigation and scientific observations. Thousands of satellites support modern life every day.",
+        body: "Communications satellites relay television, telephone, internet and other data between locations on Earth. They form a vital part of the world's global communications infrastructure.",
     },
     {
         id: "deep-space-network",
@@ -38,7 +38,7 @@ const TECHNOLOGIES = [
         category: "Communication",
         image: "assets/images/technology/deep_space_network.jpg",
         caption: "NASA's Deep Space Network antenna",
-        body: "The Deep Space Network is a worldwide system of giant radio antennas that communicates with spacecraft exploring the Solar System. It sends commands and receives scientific data from distant missions.",
+        body: "The Deep Space Network is a worldwide network of giant radio antennas that sends commands to spacecraft and receives scientific data from missions throughout the Solar System.",
     },
     {
         id: "landers",
@@ -67,7 +67,7 @@ const TECHNOLOGIES = [
     {
         id: "solar-panels",
         title: "Solar Arrays",
-        category: "Life Support",
+        category: "Power",
         image: "assets/images/technology/solar_panels.jpg",
         caption: "Solar arrays powering the ISS",
         body: "Solar arrays convert sunlight into electricity, providing power for spacecraft, satellites and space stations. They are one of the most common energy sources used in space missions.",
@@ -75,17 +75,17 @@ const TECHNOLOGIES = [
     {
         id: "robotic-arms",
         title: "Robotic Arms",
-        category: "Exploration",
+        category: "Manufacturing",
         image: "assets/images/technology/robotic_arm.jpg",
         caption: "Canadarm2 aboard the ISS",
-        body: "Robotic arms assist astronauts by moving cargo, capturing spacecraft and supporting maintenance work. They can perform tasks that would otherwise require risky spacewalks.",
+        body: "Robotic arms assist astronauts and spacecraft by moving cargo, capturing visiting vehicles, assembling structures and supporting maintenance work. They can perform tasks that would otherwise require risky spacewalks.",
     },
     {
         id: "navigation",
-        title: "Guidance & Navigation",
-        category: "Communication",
+        title: "Guidance & Navigation Systems",
+        category: "Navigation",
         image: "assets/images/technology/navigation.jpg",
-        caption: "Spacecraft guidance systems",
+        caption: "Guidance, navigation and control (GNC) system",
         body: "Guidance, navigation and control systems help spacecraft determine their position, maintain orientation and follow precise flight paths during missions throughout the Solar System.",
     },
     {
@@ -125,7 +125,7 @@ const TECHNOLOGIES = [
         title: "Nuclear Thermal Propulsion",
         category: "Propulsion",
         image: "assets/images/technology/nuclear_thermal.jpg",
-        caption: "Concept of a nuclear thermal rocket",
+        caption: "Concept of NASA's DRACO nuclear thermal rocket",
         body: "Nuclear thermal propulsion uses a nuclear reactor to heat hydrogen propellant, producing greater efficiency than conventional chemical rockets. The technology remains under development for future missions to Mars and beyond.",
     },
     {
@@ -141,7 +141,7 @@ const TECHNOLOGIES = [
         title: "In-Space Manufacturing",
         category: "Manufacturing",
         image: "assets/images/technology/in_space_manufacturing.jpg",
-        caption: "Concept of manufacturing in orbit",
+        caption: "Concept of orbital manufacturing",
         body: "In-space manufacturing involves building or repairing equipment directly in orbit instead of launching everything from Earth. This approach can reduce mission costs and enable larger structures to be constructed in space.",
     },
     {
@@ -160,6 +160,46 @@ const TECHNOLOGIES = [
         caption: "Concept of autonomous robotic assembly",
         body: "Autonomous assembly robots are designed to construct and maintain spacecraft, satellites and space habitats with minimal human intervention. They could enable the creation of structures too large to launch in a single piece.",
     },
+    {
+        id: "ground-telescopes",
+        title: "Ground-Based Telescopes",
+        category: "Observation",
+        image: "assets/images/technology/ground_telescope.jpg",
+        caption: "Very Large Telescope (VLT)",
+        body: "Ground-based observatories use large optical and infrared telescopes to study celestial objects. Modern facilities often employ adaptive optics to reduce the effects of Earth's atmosphere and achieve exceptionally high-resolution observations.",
+    },
+    {
+        id: "space-telescopes",
+        title: "Space Telescopes",
+        category: "Observation",
+        image: "assets/images/technology/space_telescope.jpg",
+        caption: "James Webb Space Telescope (JWST)",
+        body: "Space telescopes observe the universe from above Earth's atmosphere, producing sharper images and detecting wavelengths such as infrared and ultraviolet that are partially or completely blocked from the ground. They have transformed our understanding of galaxies, stars and exoplanets.",
+    },
+    {
+        id: "radio-telescopes",
+        title: "Radio Telescopes",
+        category: "Observation",
+        image: "assets/images/technology/radio_telescope.jpg",
+        caption: "FAST radio telescope",
+        body: "Radio telescopes detect radio waves emitted by celestial objects. They allow astronomers to study pulsars, galaxies, molecular clouds and black holes, revealing phenomena invisible to optical telescopes.",
+    },
+    {
+        id: "earth-observation",
+        title: "Earth Observation Satellites",
+        category: "Observation",
+        image: "assets/images/technology/earth_observation.jpg",
+        caption: "Landsat Earth observation satellite",
+        body: "Earth observation satellites monitor weather, climate, oceans, forests and natural disasters using cameras and scientific sensors. Their data support environmental research, agriculture and disaster response.",
+    },
+    {
+        id: "scientific-instruments",
+        title: "Scientific Instruments",
+        category: "Observation",
+        image: "assets/images/technology/scientific_instruments.jpg",
+        caption: "Mars rover scientific instruments",
+        body: "Scientific instruments include cameras, spectrometers, radar systems and magnetometers that collect detailed information about planets, moons and asteroids. They help scientists determine surface composition, atmospheric conditions and geological history.",
+    },
 ];
 
 const CATEGORY_ORDER = [
@@ -168,7 +208,9 @@ const CATEGORY_ORDER = [
     "Exploration",
     "Habitation",
     "Life Support",
+    "Power",
     "Communication",
+    "Navigation",
     "Propulsion",
     "Manufacturing",
 ];
@@ -197,7 +239,7 @@ function renderTechnology(tech) {
     li.className = "animate-target";
     li.innerHTML = `
         <article
-            class="tech-card bg-surface-2 border-border hover:border-primary shadow-elevated hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1"
+            class="tech-card bg-surface-2 border-border hover:border-primary/40 shadow-elevated hover:shadow-elevated-hover cursor-pointer rounded-sm border p-6 transition-[color,border-color,translate,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0 active:shadow-elevated"
         >
             <button
                 type="button"
@@ -215,14 +257,14 @@ function renderTechnology(tech) {
                 <img
                     src="${tech.image}"
                     alt=""
-                    class="h-48 w-full rounded-sm object-cover"
+                    class="h-64 w-full rounded-sm object-cover"
                 />
-                <figcaption class="text-muted text-center text-sm leading-relaxed">
+                <figcaption class="text-muted text-center text-sm leading-relaxed mt-4">
                     ${tech.caption}
                 </figcaption>
             </figure>
  
-            <div class="extra-info-wrap" id="${detailsId}">
+            <div class="extra-info-wrap" id="${detailsId}" aria-hidden="true">
                 <div class="extra-info">
                     <p class="text-muted mt-4 leading-relaxed">${tech.body}</p>
                 </div>
@@ -250,7 +292,9 @@ function renderCategory(category, items) {
     `;
 
     const ul = section.querySelector("ul");
-    items.forEach((tech) => ul.appendChild(renderTechnology(tech)));
+    items
+        .toSorted((a, b) => a.title.localeCompare(b.title))
+        .forEach((tech) => ul.appendChild(renderTechnology(tech)));
 
     return section;
 }
@@ -272,5 +316,6 @@ cards.forEach((card) => {
 
         icon.textContent = isOpen ? "−" : "+";
         button.setAttribute("aria-expanded", String(isOpen));
+        wrap.setAttribute("aria-hidden", String(!isOpen));
     });
 });
