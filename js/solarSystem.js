@@ -680,6 +680,8 @@ function resetView() {
 stageViewport.addEventListener(
     "wheel",
     (e) => {
+        if (!(e.ctrlKey || e.metaKey)) return; // prevent hijacking scroll (it's annoying)
+
         e.preventDefault();
 
         const rect = stageViewport.getBoundingClientRect();
@@ -991,7 +993,7 @@ function openBody(id) {
         .join("");
 
     panelInner.innerHTML =
-        '<div class="panel-portrait bg-surface-2 relative mb-4 h-42.5 w-full overflow-hidden rounded-xl">' +
+        '<div class="panel-portrait bg-surface-2 relative mb-4 h-42.5 w-full overflow-hidden rounded-sm">' +
         '<img class="block h-full w-full object-cover" src="' +
         p.image +
         '" alt="' +

@@ -186,6 +186,7 @@ const tableView = document.getElementById("table-view");
 
 let expandedIndex = null;
 let currentView = "gallery";
+let lastFocusedElement = null;
 
 const cardBaseClass =
     "planet-card group border-border bg-surface shadow-elevated hover:shadow-elevated-hover active:shadow-elevated hover:border-primary/40 transition-[color, transform, box-shadow] flex flex-col items-center rounded-sm border p-5 text-center duration-200 hover:-translate-y-1 active:translate-y-0 cursor-pointer";
@@ -234,6 +235,11 @@ PLANETS.forEach((p, i) => {
 function toggleExpand(i) {
     const wasOpen = expandedIndex !== null;
     const previousIndex = expandedIndex;
+
+    if (expandedIndex === null) {
+        lastFocusedElement = document.activeElement;
+    }
+
     expandedIndex = expandedIndex === i ? null : i;
 
     [...gallery.children].forEach((wrapper, idx) => {
@@ -245,11 +251,17 @@ function toggleExpand(i) {
     if (expandedIndex === null) {
         panelCollapse.classList.remove("is-open");
         panelCollapse.classList.remove("is-settled");
+        panelCollapse.setAttribute("aria-hidden", "true");
+        panelCollapse.setAttribute("inert", "");
+        lastFocusedElement?.focus();
+        lastFocusedElement = null;
         return;
     }
 
     renderPanel(PLANETS[expandedIndex]);
     panelCollapse.classList.add("is-open");
+    panelCollapse.removeAttribute("aria-hidden");
+    panelCollapse.removeAttribute("inert");
 
     if (wasOpen && previousIndex !== expandedIndex) {
         // Switching directly between two already-open panels: the grid
@@ -262,6 +274,7 @@ function toggleExpand(i) {
 
     window.setTimeout(() => {
         panelCollapse.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        document.getElementById("panel-close")?.focus();
     }, 200);
 }
 

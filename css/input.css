@@ -250,7 +250,7 @@
        it's just a marker for group-hover/group-active variants — so
        add it as a literal class alongside `explore-card` in the HTML. */
     .explore-card {
-        @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0;
+        @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
     }
 
     .explore-card-img {

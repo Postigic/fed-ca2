@@ -215,7 +215,7 @@ function renderMission(mission) {
             </p>
 
             <div
-                class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
+                class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated hover:shadow-elevated-hover ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition-[color,border-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-elevated"
             >
                 <div class="relative aspect-3/1">
                     <img
@@ -243,9 +243,9 @@ function renderMission(mission) {
                     </div>
                 </div>
 
-                <div class="extra-info-wrap" id="${detailsId}">
+                <div class="extra-info-wrap" id="${detailsId}" aria-hidden="true">
                     <div class="extra-info">
-                        <div class="border-border text-muted border-t p-6 pt-4">
+                        <div class="text-muted p-6 pt-4">
                             <dl class="space-y-1">
                                 ${mission.facts.map(factRow).join("")}
                             </dl>
@@ -276,6 +276,7 @@ cards.forEach((card) => {
 
         icon.textContent = isOpen ? "−" : "+";
         button.setAttribute("aria-expanded", String(isOpen));
+        wrap.setAttribute("aria-hidden", String(!isOpen));
     });
 });
 

@@ -66,6 +66,7 @@ function renderFaqs() {
                         id="ac-${i + 1}"
                         role="region"
                         aria-labelledby="faq-trigger-${i + 1}"
+                        aria-hidden="true"
                         class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
                     >
                         <p class="text-muted px-4 pb-3 text-base">${faq.answer}</p>
@@ -80,10 +81,12 @@ function toggleAccordion(index) {
 
     if (content.style.maxHeight && content.style.maxHeight !== "0px") {
         content.style.maxHeight = "0";
+        content.setAttribute("aria-hidden", "true");
         icon.classList.remove("bx-minus");
         icon.classList.add("bx-plus");
     } else {
         content.style.maxHeight = content.scrollHeight + "px";
+        content.removeAttribute("aria-hidden");
         icon.classList.remove("bx-plus");
         icon.classList.add("bx-minus");
     }
@@ -122,6 +125,15 @@ function showAlert(status, message) {
     }
 }
 
+function markInvalid(field) {
+    field.setAttribute("aria-invalid", "true");
+    field.focus();
+}
+
+function clearInvalid(field) {
+    field.removeAttribute("aria-invalid");
+}
+
 function submitForm() {
     const emailField = document.getElementById("email");
     const messageField = document.getElementById("message");
@@ -129,8 +141,12 @@ function submitForm() {
     const email = emailField.value.trim().toLowerCase();
     const message = messageField.value.trim();
 
+    clearInvalid(emailField);
+    clearInvalid(messageField);
+
     if (!email) {
         showAlert("error", "Error: Email field empty, unable to send message.");
+        markInvalid(emailField);
         return;
     }
 
@@ -139,6 +155,7 @@ function submitForm() {
             "error",
             "Error: Message field empty, unable to send message.",
         );
+        markInvalid(messageField);
         return;
     }
 
@@ -152,6 +169,7 @@ function submitForm() {
         email.includes("..")
     ) {
         showAlert("error", "Error: You entered an invalid email.");
+        markInvalid(emailField);
         return;
     }
 
