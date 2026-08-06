@@ -1,10 +1,95 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>Quiz</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/about.js"></script>
     </head>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+        </button>
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
 
-    <body></body>
+
+
+        <!-- MAIN CONTENT FOR QUIZ.HTML -->
+        <div class="w-full p-12 sm:pl-10 md:pl-50">
+            <h1 class="text-5xl font-extrabold">Space Quiz</h1>
+            <p class="text-s">Test your space knowledge here!</p>
+            <br>
+            <div class="p-12 bg-[#1a1c25] rounded-xl border-[#8b93a6]">
+                <br>
+                <div id="quiz"></div>
+                <div id="navButtons"></div>
+                <br>
+            </div>
+            <br>
+            <br>
+            <footer id="footer"></footer>
+        </div>
+
+
+        <script>
+            function injectHTML() {
+                let currentQn = 1
+                const quizDiv = document.getElementById("quiz")
+                const navButtonsDiv = document.getElementById("navButtons")
+                const quizPage1 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <p class="p-8">Question #1:</p>
+                    <button class="p-4 rounded-xl bg-[#2c587d]">Button 1</button>
+                    <button class="p-4 rounded-xl bg-[#2c587d]">Button 2</button>
+                </div>
+                `
+
+                const navPage1 = `
+                <div class="content-center p-6 w-full">
+                    <div class="flex flex-row gap-8 text-l items-center content-center">
+                        <button class="p-4 rounded-xl bg-[#2c587d]">Prev</button>
+                        <button class="p-4 rounded-xl bg-[#2c587d]">Next</button>
+                    </div>
+                </div>
+                `
+
+                quizDiv.innerHTML = eval("quizPage" + currentQn)
+                navButtonsDiv.innerHTML = eval("navPage" + currentQn)
+            }
+
+            window.addEventListener("DOMContentLoaded", () => {
+                setTimeout(() => {
+                    injectHTML()
+                }, 0.1);
+            });
+        </script>
+    </body>
 </html>
