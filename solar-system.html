@@ -54,7 +54,7 @@
                 }
             }
 
-            /* ---------- ORBITS ---------- */
+            /* ===== ORBITS ===== */
             .orbit {
                 position: absolute;
                 border: 1px solid var(--color-border);
@@ -115,7 +115,7 @@
                 ties between different planets are broken without exceeding this range */
             }
 
-            /* ---------- PLANETS ---------- */
+            /* ===== PLANETS ===== */
             .planet {
                 -webkit-tap-highlight-color: transparent;
             }
@@ -206,7 +206,7 @@
                 color: var(--color-foreground);
             }
 
-            /* ---------- BELTS / REGIONS ---------- */
+            /* ===== BELTS / REGIONS ===== */
             .belt-dot {
                 position: absolute;
                 border-radius: 50%;
@@ -252,7 +252,7 @@
                 border-color: var(--color-primary);
             }
 
-            /* ---------- DETAIL PANEL ---------- */
+            /* ===== DETAIL PANEL ===== */
             .panel {
                 opacity: 0;
                 pointer-events: none;
@@ -266,6 +266,11 @@
                 opacity: 1;
                 pointer-events: auto;
                 transform: translateX(0);
+            }
+
+            .orrery-grid:not(.is-open) .panel {
+                max-height: 0;
+                overflow: hidden;
             }
 
             @media (max-width: 860px) {
@@ -286,6 +291,7 @@
                     z-index: 80;
                     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
                 }
+
                 .orrery-grid.is-open .panel {
                     transform: translateY(0);
                 }
@@ -294,23 +300,8 @@
     </head>
 
     <body class="bg-background text-foreground font-sans">
-        <button
-            id="sidebar-btn"
-            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
-            aria-label="Open menu"
-        >
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
         </button>
 
         <header>
@@ -318,72 +309,37 @@
             <nav id="navbar"></nav>
         </header>
 
-        <div class="md:ml-48">
+        <div class="page-shell">
             <main class="flex-1">
                 <!-- ======= PAGE HEADER ======= -->
-                <section
-                    id="intro"
-                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
-                >
-                    <p
-                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
-                    >
+                <section id="intro" class="page-header animate-target">
+                    <p class="eyebrow animate-target">
                         Our home planetary system
                     </p>
-                    <h1
-                        class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
-                    >
-                        The Solar System
-                    </h1>
-                    <p
-                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
-                    >
+                    <h1 class="page-title animate-target">The Solar System</h1>
+                    <p class="page-lede animate-target">
                         Orbiting a single star, the Solar System is our home in
                         the cosmos. From the rocky inner planets to the icy
                         reaches beyond Neptune, explore the worlds, moons, and
                         small bodies that make up our celestial neighborhood.
                     </p>
 
-                    <dl
-                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
-                    >
+                    <dl class="stats-grid animate-target">
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Age
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                4.57B years
-                            </dd>
+                            <dt class="stat-label">Age</dt>
+                            <dd class="stat-value">4.57B years</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Planets
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">8</dd>
+                            <dt class="stat-label">Planets</dt>
+                            <dd class="stat-value">8</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Largest planet
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                Jupiter
-                            </dd>
+                            <dt class="stat-label">Largest planet</dt>
+                            <dd class="stat-value">Jupiter</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Dwarf planets
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                5 recognised
-                            </dd>
+                            <dt class="stat-label">Dwarf planets</dt>
+                            <dd class="stat-value">5 recognised</dd>
                         </div>
                     </dl>
                 </section>
@@ -391,19 +347,19 @@
                 <!-- ======= INTERACTIVE ORRERY ======= -->
                 <section
                     id="orrery"
-                    class="orrery-section animate-target mx-auto max-w-275 px-6 pb-20 xl:max-w-7xl"
+                    class="orrery-section animate-target wide-container section-gap-end px-6"
                 >
                     <p
                         class="text-muted mb-4 text-center font-mono text-xs tracking-widest uppercase"
                     >
-                        Click a world for details · scroll/pinch to zoom · drag
-                        to pan
+                        Click a world for details · ctrl/cmd + scroll or pinch
+                        to zoom · drag to pan
                     </p>
 
                     <div class="orrery-grid" id="orrery-grid">
                         <div class="min-w-0">
                             <div
-                                class="stage-viewport border-border bg-surface animate-target relative w-full cursor-grab touch-none overflow-hidden rounded-sm border"
+                                class="stage-viewport surface-panel animate-target relative w-full cursor-grab touch-none overflow-hidden"
                                 id="stage-viewport"
                             >
                                 <div
@@ -423,21 +379,21 @@
                                     class="absolute right-3 bottom-3 z-90 flex flex-col gap-1.5"
                                 >
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn icon-btn"
                                         id="zoom-in"
                                         aria-label="Zoom in"
                                     >
                                         <i class="bx bx-plus"></i>
                                     </button>
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn icon-btn"
                                         id="zoom-out"
                                         aria-label="Zoom out"
                                     >
                                         <i class="bx bx-minus"></i>
                                     </button>
                                     <button
-                                        class="zoom-btn border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary animate-target flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        class="zoom-btn icon-btn"
                                         id="zoom-reset"
                                         aria-label="Reset position"
                                     >
@@ -446,29 +402,28 @@
                                 </div>
                             </div>
                             <p
-                                class="text-muted animate-target mt-3 font-mono text-xs leading-relaxed"
+                                class="text-muted animate-target mt-4 font-mono text-xs leading-relaxed"
                             >
                                 Orbits use each body's real eccentricity and
-                                inclination. The Sun lies at each ellipse's
-                                focus, not its center. The asteroid belt, Kuiper
-                                belt, and dashed Oort Cloud boundary are
-                                interactive. Distances and sizes are compressed
-                                to fit on screen. For the gas and ice giants,
-                                the mean temperature refers to the average
-                                cloud-top temperature (near the 1-bar pressure
-                                level), as these planets have no solid surface.
+                                inclination, with the Sun at one focus of each
+                                ellipse. Distances and sizes are compressed to
+                                fit on screen. The asteroid belt, Kuiper belt,
+                                and dashed Oort Cloud boundary are interactive.
+                                Gas and ice giant temperatures refer to their
+                                average cloud tops (near the 1-bar pressure
+                                level).
                             </p>
                         </div>
 
                         <aside
-                            class="panel border-border bg-surface relative overflow-x-hidden overflow-y-auto rounded-sm border"
+                            class="panel surface-panel relative overflow-x-hidden overflow-y-auto"
                             id="panel"
                             aria-hidden="true"
                             inert
                         >
                             <div class="p-6">
                                 <button
-                                    class="border-border bg-surface-2 text-muted hover:text-foreground hover:border-primary absolute top-4 right-4 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-lg"
+                                    class="icon-btn absolute top-4 right-4 z-10"
                                     id="panel-close"
                                     aria-label="Close profile"
                                 >

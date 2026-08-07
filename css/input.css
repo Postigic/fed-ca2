@@ -18,6 +18,30 @@
         transparent
     );
 
+    --color-error: #c17b74;
+    --color-error-surface: color-mix(
+        in srgb,
+        var(--color-error) 12%,
+        var(--color-background)
+    );
+    --color-error-border: color-mix(
+        in srgb,
+        var(--color-error) 40%,
+        transparent
+    );
+
+    --color-success: #7fa88a;
+    --color-success-surface: color-mix(
+        in srgb,
+        var(--color-success) 12%,
+        var(--color-background)
+    );
+    --color-success-border: color-mix(
+        in srgb,
+        var(--color-success) 40%,
+        transparent
+    );
+
     --shadow-elevated: 0 8px 30px -8px
         color-mix(in srgb, var(--color-primary) 20%, black);
     --shadow-elevated-hover: 0 14px 40px -10px
@@ -29,12 +53,56 @@
 }
 
 @layer base {
-    button {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-secondary) var(--color-surface);
+    }
+
+    ::-webkit-scrollbar {
+        @apply h-3 w-3;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--color-surface);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-secondary);
+        border: 3px solid var(--color-surface);
+        border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: color-mix(in srgb, var(--color-primary) 80%, white);
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: var(--color-surface);
+    }
+
+    button:not(:disabled) {
         @apply cursor-pointer;
     }
 }
 
 @layer components {
+    /* ===== Chrome: sidebar toggle, nav/footer links, page shell ===== */
+    .sidebar-toggle {
+        @apply bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden;
+    }
+
+    .sidebar-toggle-bar {
+        @apply bg-foreground block h-0.5 w-5 rounded-full;
+    }
+
+    .page-shell {
+        @apply md:ml-48;
+    }
+
     .nav-link,
     .footer-link {
         @apply hover:text-primary transition-colors duration-200;
@@ -47,19 +115,213 @@
     .footer-link {
         @apply underline;
     }
+
+    /* ===== Section rhythm =====
+       .section-gap is just the shared bottom-margin cadence — pair it
+       with whatever padding/width a given section actually needs. */
+    .section-gap {
+        @apply mb-24 md:mb-32 xl:mb-40;
+    }
+
+    .content-container {
+        @apply mx-auto max-w-6xl px-6 xl:max-w-7xl;
+    }
+
+    /* Narrower centered wrapper (about.html sections) */
+    .narrow-container {
+        @apply mx-auto max-w-5xl;
+    }
+
+    /* Wider centered wrapper that keeps growing past xl, for very large
+       screens (homepage "Start Exploring" / "More to Explore", planets
+       gallery/table stage) */
+    .wide-container {
+        @apply mx-auto max-w-6xl min-[1920px]:max-w-[100rem] min-[2200px]:max-w-[120rem] xl:max-w-7xl;
+    }
+
+    /* content-container + the standard vertical rhythm for a mid-page
+       section (heading directly followed by a content grid, no lede) */
+    .content-section {
+        @apply mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl;
+    }
+
+    /* Extra bottom spacing for a section that sits directly above the
+       footer, used on top of a section's own vertical padding */
+    .section-gap-end {
+        @apply pb-24 md:mb-32 md:pb-32 xl:mb-40;
+    }
+
+    /* content-container + section-gap-end, for the last section on a
+       page (missions timeline, moon timeline) */
+    .timeline-section {
+        @apply mx-auto max-w-6xl px-6 py-16 pb-24 md:mb-32 md:pb-32 xl:mb-40 xl:max-w-7xl;
+    }
+
+    /* ===== Page header: eyebrow + h1 + lede ===== */
+    .page-header {
+        @apply mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl;
+    }
+
+    .eyebrow {
+        @apply text-primary mb-3 font-mono text-xs tracking-[0.3em] uppercase;
+    }
+
+    .page-title {
+        @apply font-display text-4xl font-semibold tracking-tight md:text-6xl;
+    }
+
+    .page-lede {
+        @apply text-muted mt-4 max-w-2xl text-base md:text-lg;
+    }
+
+    /* ===== Section title (h2 introducing a section body) ===== */
+    .section-title {
+        @apply font-display mb-8 text-2xl font-semibold tracking-tight min-[2200px]:text-6xl md:text-4xl xl:text-5xl;
+    }
+
+    /* ===== Stats: small key/value fact strips under a page header ===== */
+    .stats-grid {
+        @apply border-border mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4;
+    }
+
+    .stat-label {
+        @apply text-muted font-mono text-xs tracking-widest uppercase;
+    }
+
+    .stat-value {
+        @apply text-foreground font-mono text-lg;
+    }
+
+    /* Big headline stats (homepage "Planets / Moons / Space Age" strip) */
+    .big-stat-value {
+        @apply text-primary font-mono text-3xl font-semibold md:text-5xl;
+    }
+
+    .big-stat-caption {
+        @apply text-muted font-mono text-xs tracking-widest;
+    }
+
+    /* ===== Fact cards: icon + title + body ("Fun Facts") ===== */
+    .fact-card {
+        @apply border-border bg-surface shadow-elevated rounded-sm border p-6;
+    }
+
+    .fact-card-icon {
+        @apply text-primary text-2xl;
+    }
+
+    .fact-card-title {
+        @apply font-display mt-3 font-semibold;
+    }
+
+    .fact-card-body {
+        @apply text-muted mt-1 text-sm;
+    }
+
+    /* ===== Nav cards: small bordered link tiles ("More to Explore") ===== */
+    .nav-card {
+        @apply border-border bg-surface hover:border-primary/40 hover:text-primary hover:shadow-elevated-hover active:shadow-elevated shadow-elevated flex items-center gap-3 rounded-sm border p-4 transition-[color,border-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
+    }
+
+    /* ===== Gallery tiles: square image cards with caption overlay ===== */
+    .gallery-tile {
+        @apply border-border shadow-elevated relative aspect-square overflow-hidden rounded-sm border;
+    }
+
+    .gallery-tile-img {
+        @apply absolute inset-0 h-full w-full object-cover;
+    }
+
+    .gallery-tile-overlay {
+        @apply from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent;
+    }
+
+    .gallery-tile-caption {
+        @apply relative flex h-full flex-col justify-end p-4;
+    }
+
+    .gallery-tile-title {
+        @apply font-display text-sm font-semibold;
+    }
+
+    /* ===== Explore cards: large aspect-video image link cards
+       ("Start Exploring" on the homepage) =====
+       `group` itself can't be @apply'd — it emits no CSS of its own,
+       it's just a marker for group-hover/group-active variants — so
+       add it as a literal class alongside `explore-card` in the HTML. */
+    .explore-card {
+        @apply border-border shadow-elevated hover:shadow-elevated-hover active:shadow-elevated relative block aspect-video overflow-hidden rounded-sm border transition-[translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
+    }
+
+    .explore-card-img {
+        @apply absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.02];
+    }
+
+    .explore-card-overlay {
+        @apply from-background via-background/60 absolute inset-0 bg-linear-to-t to-transparent;
+    }
+
+    .explore-card-body {
+        @apply relative flex h-full flex-col justify-end p-6;
+    }
+
+    .explore-card-title {
+        @apply font-display text-xl font-semibold;
+    }
+
+    .explore-card-desc {
+        @apply text-muted mt-1 text-sm;
+    }
+
+    .explore-card-link {
+        @apply text-accent group-hover:text-primary mt-3 inline-block font-mono text-sm transition-colors duration-200;
+    }
+
+    .explore-card-arrow {
+        @apply inline-block transition-all duration-200 group-hover:translate-x-1 group-active:translate-x-0;
+    }
+
+    /* ===== Buttons: outlined CTA button/link ===== */
+    .btn-outline {
+        @apply border-primary text-primary hover:bg-primary hover:text-background shadow-elevated hover:shadow-elevated-hover active:shadow-elevated inline-block rounded-sm border px-6 py-3 font-mono text-sm transition-[color,background-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0;
+    }
+
+    /* ===== Team cards (about.html team grid) ===== */
+    .team-card {
+        @apply border-border bg-surface shadow-elevated flex w-full flex-col items-center justify-center gap-3 rounded-sm border p-10 font-bold;
+    }
+
+    .team-card-avatar {
+        @apply w-28 rounded-full;
+    }
+
+    /* ===== Surface panel =====
+       Bordered surface block used as a base for bigger bespoke panels
+       (phase explorer, orrery stage/panel, comparison tables, contact
+       form). Each usage adds its own padding/overflow/position on top. */
+    .surface-panel {
+        @apply border-border bg-surface shadow-elevated rounded-sm border;
+    }
+
+    /* ===== Icon buttons: small square icon-only controls ===== */
+    .icon-btn {
+        @apply border-border bg-surface/85 text-muted hover:text-foreground hover:border-primary focus-visible:outline-primary flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border text-base backdrop-blur-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2;
+    }
 }
 
-.animate-target {
-    opacity: 0;
-    transform: translateY(50px);
-    pointer-events: none;
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-}
+@layer utilities {
+    .animate-target {
+        opacity: 0;
+        transform: translateY(50px);
+        pointer-events: none;
+        transition:
+            opacity 0.4s ease,
+            transform 0.4s ease;
+    }
 
-.animate-target.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+    .animate-target.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 }

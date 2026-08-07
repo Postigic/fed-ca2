@@ -102,23 +102,8 @@
     </head>
 
     <body class="bg-background text-foreground font-sans">
-        <button
-            id="sidebar-btn"
-            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
-            aria-label="Open menu"
-        >
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
-            <span
-                class="bar bg-foreground block h-0.5 w-5 rounded-full"
-                aria-hidden="true"
-            ></span>
+        <button id="sidebar-btn" class="sidebar-toggle" aria-label="Open menu">
+            <!-- injected via JS -->
         </button>
 
         <header>
@@ -126,74 +111,37 @@
             <nav id="navbar"></nav>
         </header>
 
-        <div class="md:ml-48">
+        <div class="page-shell">
             <main class="flex-1">
                 <!-- ======= PAGE HEADER ======= -->
-                <section
-                    id="intro"
-                    class="animate-target mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-24 md:pb-14 xl:max-w-7xl"
-                >
-                    <p
-                        class="text-primary animate-target mb-3 font-mono text-xs tracking-[0.3em] uppercase"
-                    >
+                <section id="intro" class="page-header animate-target">
+                    <p class="eyebrow animate-target">
                         Earth's only natural satellite
                     </p>
-                    <h1
-                        class="font-display animate-target text-4xl font-semibold tracking-tight md:text-6xl"
-                    >
-                        The Moon
-                    </h1>
-                    <p
-                        class="text-muted animate-target mt-4 max-w-2xl text-base md:text-lg"
-                    >
+                    <h1 class="page-title animate-target">The Moon</h1>
+                    <p class="page-lede animate-target">
                         Every 29.5 days the Moon cycles through 8 recognizable
                         phases as it orbits Earth. Drag the slider below to
                         preview each one, then explore facts, imagery, and the
                         history of lunar exploration.
                     </p>
 
-                    <dl
-                        class="border-border animate-target mt-8 grid grid-cols-2 gap-y-6 border-t pt-6 sm:grid-cols-4"
-                    >
+                    <dl class="stats-grid animate-target">
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Diameter
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                3,474 km
-                            </dd>
+                            <dt class="stat-label">Diameter</dt>
+                            <dd class="stat-value">3,474 km</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Avg. distance
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                384,400 km
-                            </dd>
+                            <dt class="stat-label">Avg. distance</dt>
+                            <dd class="stat-value">384,400 km</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Orbital period
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                27.3 days
-                            </dd>
+                            <dt class="stat-label">Orbital period</dt>
+                            <dd class="stat-value">27.3 days</dd>
                         </div>
                         <div class="animate-target">
-                            <dt
-                                class="text-muted font-mono text-xs tracking-widest uppercase"
-                            >
-                                Full cycle
-                            </dt>
-                            <dd class="text-foreground font-mono text-lg">
-                                29.5 days
-                            </dd>
+                            <dt class="stat-label">Full cycle</dt>
+                            <dd class="stat-value">29.5 days</dd>
                         </div>
                     </dl>
                 </section>
@@ -201,11 +149,9 @@
                 <!-- ======= PHASE EXPLORER ======= -->
                 <section
                     id="phase-explorer"
-                    class="animate-target mx-auto max-w-6xl px-6 py-10 xl:max-w-7xl"
+                    class="content-container animate-target py-10"
                 >
-                    <div
-                        class="bg-surface border-border shadow-elevated rounded-sm border p-6 md:p-10"
-                    >
+                    <div class="surface-panel p-6 md:p-10">
                         <div
                             class="animate-target grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:items-center"
                         >
@@ -383,11 +329,11 @@
                 <section
                     id="fun-facts"
                     aria-labelledby="fun-facts-heading"
-                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    class="content-section animate-target"
                 >
                     <h2
                         id="fun-facts-heading"
-                        class="font-display mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
+                        class="section-title animate-target"
                     >
                         Fun Facts
                     </h2>
@@ -395,86 +341,70 @@
                     <div
                         class="animate-target grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
                     >
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i
                                 class="bx bx-time-five text-primary text-2xl"
                             ></i>
-                            <h3 class="font-display mt-3 font-semibold">
+                            <h3 class="fact-card-title">
                                 Always the same face
                             </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <p class="fact-card-body">
                                 The Moon is tidally locked to Earth, so the same
                                 side always faces us; the "far side" was never
                                 seen until spacecraft photographed it.
                             </p>
                         </div>
 
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i class="bx bx-move text-primary text-2xl"></i>
-                            <h3 class="font-display mt-3 font-semibold">
+                            <h3 class="fact-card-title">
                                 Slowly drifting away
                             </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <p class="fact-card-body">
                                 The Moon moves about 3.8 cm farther from Earth
                                 every year, roughly the speed your fingernails
                                 grow.
                             </p>
                         </div>
 
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i class="bx bx-sun text-primary text-2xl"></i>
-                            <h3 class="font-display mt-3 font-semibold">
+                            <h3 class="fact-card-title">
                                 Extreme temperatures
                             </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <p class="fact-card-body">
                                 With no atmosphere to trap heat, the surface
                                 swings from about 127°C in direct sunlight to
                                 -173°C in shadow.
                             </p>
                         </div>
 
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i class="bx bx-map-pin text-primary text-2xl"></i>
-                            <h3 class="font-display mt-3 font-semibold">
+                            <h3 class="fact-card-title">
                                 Footprints that last
                             </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <p class="fact-card-body">
                                 Without wind or water to erode them, astronaut
                                 footprints left in the lunar dust could remain
                                 visible for millions of years.
                             </p>
                         </div>
 
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i class="bx bx-pulse text-primary text-2xl"></i>
-                            <h3 class="font-display mt-3 font-semibold">
-                                Moonquakes
-                            </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <h3 class="fact-card-title">Moonquakes</h3>
+                            <p class="fact-card-body">
                                 Apollo seismometers recorded "moonquakes" caused
                                 by tidal stress; some tremors rang on for over
                                 10 minutes.
                             </p>
                         </div>
 
-                        <div
-                            class="animate-target border-border bg-surface shadow-elevated rounded-sm border p-6"
-                        >
+                        <div class="fact-card animate-target">
                             <i class="bx bx-expand text-primary text-2xl"></i>
-                            <h3 class="font-display mt-3 font-semibold">
-                                Supermoons
-                            </h3>
-                            <p class="text-muted mt-1 text-sm">
+                            <h3 class="fact-card-title">Supermoons</h3>
+                            <p class="fact-card-body">
                                 When a full moon lines up with its closest
                                 approach to Earth (perigee), it can look up to
                                 14% bigger and 30% brighter.
@@ -487,11 +417,11 @@
                 <section
                     id="gallery"
                     aria-labelledby="gallery-heading"
-                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    class="content-section animate-target"
                 >
                     <h2
                         id="gallery-heading"
-                        class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
+                        class="section-title animate-target"
                     >
                         Gallery
                     </h2>
@@ -499,83 +429,55 @@
                     <div
                         class="animate-target grid grid-cols-2 gap-4 md:grid-cols-4"
                     >
-                        <figure
-                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
-                        >
+                        <figure class="gallery-tile animate-target">
                             <img
                                 src="./assets/images/celestial/phases-in-sequence.jpg"
                                 alt="Sequence of lunar eclipse phases arranged against a black sky"
                                 class="absolute inset-0 h-full w-full object-cover"
                             />
-                            <div
-                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
-                            ></div>
-                            <figcaption
-                                class="relative flex h-full flex-col justify-end p-4"
-                            >
-                                <h3 class="font-display text-sm font-semibold">
+                            <div class="gallery-tile-overlay"></div>
+                            <figcaption class="gallery-tile-caption">
+                                <h3 class="gallery-tile-title">
                                     Phases in Sequence
                                 </h3>
                             </figcaption>
                         </figure>
 
-                        <figure
-                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
-                        >
+                        <figure class="gallery-tile animate-target">
                             <img
                                 src="./assets/images/celestial/cratered-surface.jpg"
                                 alt="Close-up of the Moon's cratered surface"
                                 class="absolute inset-0 h-full w-full object-cover"
                             />
-                            <div
-                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
-                            ></div>
-                            <figcaption
-                                class="relative flex h-full flex-col justify-end p-4"
-                            >
-                                <h3 class="font-display text-sm font-semibold">
+                            <div class="gallery-tile-overlay"></div>
+                            <figcaption class="gallery-tile-caption">
+                                <h3 class="gallery-tile-title">
                                     Cratered Surface
                                 </h3>
                             </figcaption>
                         </figure>
 
-                        <figure
-                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
-                        >
+                        <figure class="gallery-tile animate-target">
                             <img
                                 src="./assets/images/celestial/earthrise.jpg"
                                 alt="Earth rising over the Moon's horizon, seen from lunar orbit"
                                 class="absolute inset-0 h-full w-full object-cover"
                             />
-                            <div
-                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
-                            ></div>
-                            <figcaption
-                                class="relative flex h-full flex-col justify-end p-4"
-                            >
-                                <h3 class="font-display text-sm font-semibold">
-                                    Earthrise
-                                </h3>
+                            <div class="gallery-tile-overlay"></div>
+                            <figcaption class="gallery-tile-caption">
+                                <h3 class="gallery-tile-title">Earthrise</h3>
                             </figcaption>
                         </figure>
 
-                        <figure
-                            class="border-border shadow-elevated animate-target relative aspect-square overflow-hidden rounded-sm border"
-                        >
+                        <figure class="gallery-tile animate-target">
                             <img
                                 src="./assets/images/celestial/moonrise.jpg"
                                 alt="Bright orange full moon rising over silhouetted trees"
                                 class="absolute inset-0 h-full w-full object-cover"
                             />
-                            <div
-                                class="from-background via-background/50 absolute inset-0 bg-linear-to-t to-transparent"
-                            ></div>
-                            <figcaption
-                                class="relative flex h-full flex-col justify-end p-4"
-                            >
-                                <h3 class="font-display text-sm font-semibold">
-                                    Moonrise
-                                </h3>
+                            <div class="gallery-tile-overlay"></div>
+                            <figcaption class="gallery-tile-caption">
+                                <h3 class="gallery-tile-title">Moonrise</h3>
                             </figcaption>
                         </figure>
                     </div>
@@ -585,7 +487,7 @@
                 <section
                     id="timeline"
                     aria-labelledby="timeline-heading"
-                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                    class="timeline-section animate-target"
                 >
                     <h2
                         id="timeline-heading"
@@ -613,7 +515,7 @@
 
                     <div
                         id="timeline-card"
-                        class="bg-surface border-border shadow-elevated animate-target mt-8 rounded-sm border p-6 md:p-8"
+                        class="surface-panel animate-target mt-8 p-6 md:p-8"
                     >
                         <p
                             id="tl-year"

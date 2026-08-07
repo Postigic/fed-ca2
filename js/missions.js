@@ -3,8 +3,7 @@ import { observeElements } from "./common.js";
 const MISSIONS = [
     {
         id: "sputnik-1",
-        year: "1957",
-        datetime: "1957",
+        datetime: "1957-10",
         title: "Sputnik 1",
         blurb: "First artificial satellite.",
         image: "./assets/images/missions/sputnik-1.jpg",
@@ -23,8 +22,7 @@ const MISSIONS = [
     },
     {
         id: "vostok-1",
-        year: "1961",
-        datetime: "1961",
+        datetime: "1961-04",
         title: "Vostok 1",
         blurb: "First human spaceflight.",
         image: "./assets/images/missions/vostok-1.jpg",
@@ -43,8 +41,7 @@ const MISSIONS = [
     },
     {
         id: "apollo-11",
-        year: "1969",
-        datetime: "1969",
+        datetime: "1969-07",
         title: "Apollo 11",
         blurb: "First crewed Moon landing.",
         image: "./assets/images/missions/apollo-11(1).jpg",
@@ -66,8 +63,7 @@ const MISSIONS = [
     },
     {
         id: "voyager-1",
-        year: "1977",
-        datetime: "1977",
+        datetime: "1977-09",
         title: "Voyager 1",
         blurb: "Grand Tour probe, now in interstellar space.",
         image: "./assets/images/missions/voyager-1.jpg",
@@ -86,8 +82,7 @@ const MISSIONS = [
     },
     {
         id: "hubble-space-telescope",
-        year: "1990",
-        datetime: "1990",
+        datetime: "1990-04",
         title: "Hubble Space Telescope",
         blurb: "Orbiting observatory that reshaped modern astronomy.",
         image: "./assets/images/missions/hubble-space-telescope(1).jpg",
@@ -103,8 +98,7 @@ const MISSIONS = [
     },
     {
         id: "international-space-station",
-        year: "1998",
-        datetime: "1998",
+        datetime: "1998-11",
         title: "International Space Station",
         blurb: "Largest space laboratory, continuously crewed since 2000.",
         image: "./assets/images/missions/international-space-station.jpg",
@@ -122,8 +116,7 @@ const MISSIONS = [
     },
     {
         id: "falcon-9-first-landing",
-        year: "2015",
-        datetime: "2015",
+        datetime: "2015-12",
         title: "Falcon 9 First Landing",
         blurb: "First landing of an orbital-class rocket booster.",
         image: "./assets/images/missions/falcon-9-first-landing.jpg",
@@ -142,8 +135,7 @@ const MISSIONS = [
     },
     {
         id: "crew-dragon-demo-2",
-        year: "2020",
-        datetime: "2020",
+        datetime: "2020-05",
         title: "Crew Dragon Demo-2",
         blurb: "First crewed flight on a commercially built spacecraft.",
         image: "./assets/images/missions/crew-dragon-demo-2.jpg",
@@ -162,7 +154,6 @@ const MISSIONS = [
     },
     {
         id: "james-webb-space-telescope",
-        year: "2022",
         datetime: "2022-07",
         title: "James Webb Space Telescope",
         blurb: "Hubble's successor, built to see the universe's first galaxies.",
@@ -179,7 +170,6 @@ const MISSIONS = [
     },
     {
         id: "artemis-i",
-        year: "2022",
         datetime: "2022-11",
         title: "Artemis I",
         blurb: "Uncrewed test flight paving the way back to the Moon.",
@@ -201,8 +191,6 @@ const MISSIONS = [
 
 const timelineWrap = document.getElementById("missions-timeline");
 
-const DOT_CLASS = "border-border bg-background h-3 w-3 rounded-full border-2";
-
 function factRow({ label, value }) {
     return `
         <div class="flex gap-1">
@@ -219,15 +207,15 @@ function renderMission(mission) {
     li.innerHTML = `
         <article class="animate-target relative mb-10 flex items-center">
             <div class="relative flex w-8 justify-center" aria-hidden="true">
-                <div class="${DOT_CLASS}"></div>
+                <div class="border-border bg-background h-3 w-3 rounded-full border-2"></div>
             </div>
 
             <p class="text-muted ml-4 w-20 font-mono font-semibold">
-                <time datetime="${mission.datetime}">${mission.year}</time>
+                <time datetime="${mission.datetime}">${mission.datetime.substring(0, 4)}</time>
             </p>
 
             <div
-                class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition"
+                class="timeline-card border-border bg-surface hover:border-primary/40 shadow-elevated hover:shadow-elevated-hover ml-6 min-w-0 flex-1 cursor-pointer overflow-hidden rounded-sm border transition-[color,border-color,translate,box-shadow] duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-elevated"
             >
                 <div class="relative aspect-3/1">
                     <img
@@ -255,9 +243,9 @@ function renderMission(mission) {
                     </div>
                 </div>
 
-                <div class="extra-info-wrap" id="${detailsId}">
+                <div class="extra-info-wrap" id="${detailsId}" aria-hidden="true">
                     <div class="extra-info">
-                        <div class="border-border text-muted border-t p-6 pt-4">
+                        <div class="text-muted p-6 pt-4">
                             <dl class="space-y-1">
                                 ${mission.facts.map(factRow).join("")}
                             </dl>
@@ -276,9 +264,6 @@ MISSIONS.forEach((mission) => {
     timelineWrap.appendChild(renderMission(mission));
 });
 
-/* =========================================================
-    ACCORDION BEHAVIOR
-========================================================= */
 const cards = document.querySelectorAll(".timeline-card");
 
 cards.forEach((card) => {
@@ -291,6 +276,7 @@ cards.forEach((card) => {
 
         icon.textContent = isOpen ? "−" : "+";
         button.setAttribute("aria-expanded", String(isOpen));
+        wrap.setAttribute("aria-hidden", String(!isOpen));
     });
 });
 

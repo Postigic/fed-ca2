@@ -397,9 +397,7 @@ function createStarfield(container, count = 140) {
         star.style.left = Math.random() * 100 + "%";
         star.style.top = Math.random() * 100 + "%";
 
-        // Twinkle range/timing randomized per-star via CSS custom properties
-        // (consumed by the .star / @keyframes star-twinkle rules in the
-        // <style> block) so stars don't all pulse in lockstep.
+        // Per-star twinkle range/timing, consumed by .star's CSS keyframes
         const minOpacity = 0.15 + Math.random() * 0.2;
         const maxOpacity = 0.55 + Math.random() * 0.4;
 
@@ -471,22 +469,15 @@ const els = [...PLANETS, ...DWARFS].map((p) => {
 });
 
 // Stable "how far out is this body" ranking (0 = innermost), used as a
-// tie-breaker in positionAll()'s z-index calc below. See the comment there
-// for why this exists. Short version: without it, two planets can end up
-// with near-identical z-index and their front/back order can flip randomly
-// frame to frame (this is what caused Uranus to occasionally render in front
-// of Saturn observed during testing).
+// z-index tie-breaker in positionAll() so stacking order doesn't flicker.
 [...els]
     .sort((a, b) => a.data.orbitFrac - b.data.orbitFrac)
     .forEach((e, i) => {
         e.depthRank = i;
     });
 
-// Stamps out `count` small dots scattered in an annulus between fracMin and
-// fracMax (as a fraction of stage radius). Used for the asteroid + Kuiper
-// belts. These are purely decorative scatter, not simulated bodies, so
-// each dot gets randomized size/opacity/phase once and just orbits at a
-// fixed radius (no eccentricity/inclination like real planets get).
+// Decorative scatter dots for the asteroid/Kuiper belts (not simulated
+// bodies): randomized size/opacity/phase, fixed circular orbit radius.
 function makeBelt(className, fracMin, fracMax, count, sizeRange, periodRange) {
     const items = [];
     for (let i = 0; i < count; i++) {
@@ -523,9 +514,7 @@ function makeBelt(className, fracMin, fracMax, count, sizeRange, periodRange) {
 const asteroidBelt = makeBelt("asteroid", 0.34, 0.42, 55, [1, 2.5], [3.3, 6]);
 const kuiperBelt = makeBelt("kuiper", 0.58, 0.82, 40, [1, 2], [200, 320]);
 
-// Single ring marking the (notional) edge of the Oort Cloud, just a dashed
-// circle via CSS (.oort), sized/positioned in layoutStage(). Not a belt of
-// dots since the real Oort Cloud is a diffuse shell, not a visible ring.
+// Notional edge of the Oort Cloud: a dashed ring (.oort in CSS), not dots.
 const oort = document.createElement("div");
 oort.className = "oort";
 oort.setAttribute("aria-hidden", "true");
@@ -538,12 +527,8 @@ function setBeltHot(items, on) {
     });
 }
 
-// Each region-hit button covers the *entire* stage, then clip-path: path()
-// cuts it down to a ring: an outer ellipse arc plus an inner ellipse arc,
-// combined with fill-rule evenodd (outer minus inner = just the band).
-// This is simpler than trying to hit-test "is this click within a ring" by
-// hand. The browser's clip-path does it for free, and it composes cleanly
-// with the same tilted-ellipse math used everywhere else on the stage.
+// SVG path for one ellipse arc; combined outer+inner via evenodd fill-rule
+// (in annulusClip below) clips a full-stage button down to a ring shape.
 function ellipseArc(px, py, rx, ry) {
     return (
         "M " +
@@ -570,9 +555,8 @@ function ellipseArc(px, py, rx, ry) {
     );
 }
 
-// Builds the two-arc `path(evenodd, ...)` clip-path string described above.
-// rOuter/rInner get the same TILT foreshortening as everything else so the
-// clickable band matches the visually tilted belt.
+// Builds the ring clip-path; rOuter/rInner get the same TILT foreshortening
+// as the rest of the stage so the clickable band matches the visual belt.
 function annulusClip(px, py, rOuter, rInner) {
     const outer = ellipseArc(px, py, rOuter, rOuter * TILT);
     const inner = ellipseArc(px, py, rInner, rInner * TILT);
@@ -638,10 +622,7 @@ const oortHit = makeRegionHit("oort-cloud", oortLabel, (on) =>
     oort.classList.toggle("is-hot", on || activeId === "oort-cloud"),
 );
 
-// All pan/zoom state funnels into a single CSS transform applied to #stage
-// (applyTransform, below): translate for pan, scale for zoom. Nothing else
-// on the stage needs to know pan/zoom is happening; it's all just one
-// transform on the parent layer.
+// Pan/zoom state funnels into one CSS transform on #stage (applyTransform).
 let zoom = 1,
     panX = 0,
     panY = 0;
@@ -699,6 +680,8 @@ function resetView() {
 stageViewport.addEventListener(
     "wheel",
     (e) => {
+        if (!(e.ctrlKey || e.metaKey)) return; // prevent hijacking scroll (it's annoying)
+
         e.preventDefault();
 
         const rect = stageViewport.getBoundingClientRect();
@@ -714,12 +697,9 @@ stageViewport.addEventListener(
 
 const DRAG_THRESHOLD = 6; // px of movement before a press counts as a pan instead of a tap
 
-// Note on why pointer capture is deferred (see panStart.captured below):
-// if we captured the pointer immediately on pointerdown, a plain click on a
-// planet button would never reach that button because the viewport would "steal"
-// it as the start of a pan. So panStart just records the starting position
-// here; capture only happens once movement crosses DRAG_THRESHOLD in
-// pointermove, by which point we're confident it's a drag, not a tap.
+// Pointer capture is deferred until DRAG_THRESHOLD is crossed in
+// pointermove (see panStart.captured), so a plain click on a planet
+// button isn't stolen as the start of a pan.
 stageViewport.addEventListener("pointerdown", (e) => {
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 1) {
@@ -732,8 +712,7 @@ stageViewport.addEventListener("pointerdown", (e) => {
             captured: false,
         };
     } else if (pointers.size === 2) {
-        // A second finger landed mid-drag: cancel the single-pointer pan and
-        // switch to pinch-zoom, anchored at the midpoint between the two touches.
+        // Second finger landed mid-drag: cancel the pan, start pinch-zoom.
         panStart = null;
         stageViewport.setPointerCapture(e.pointerId);
 
@@ -839,16 +818,10 @@ function layoutStage() {
     sun.style.left = cx + "px";
     sun.style.top = cy + "px";
 
-    // For each planet: derive its ellipse from orbitFrac + eccentricity, with
-    // the SUN at one focus (not the ellipse's center). This is real orbital
-    // geometry, not just a cosmetic oval. orbitFrac is treated as the target
-    // *aphelion* (farthest point from the sun), so:
-    //   a  = semi-major axis      (aphelion = a * (1+ecc), so a = aphelion / (1+ecc))
-    //   b0 = semi-minor axis      (standard ellipse relation: b = a*sqrt(1-ecc^2))
-    //   c  = focus offset from center (c = a*ecc)
-    // a/b0/c are stashed on `e` because positionAll() needs `a` every frame
-    // to solve the polar ellipse equation, and recomputing it there would be
-    // wasteful.
+    // Derive each planet's ellipse (sun at one focus, not the center) from
+    // orbitFrac treated as the target aphelion: a = aphelion/(1+ecc),
+    // b0 = a*sqrt(1-ecc^2), c = a*ecc (focus offset). Stashed on `e` since
+    // positionAll() needs `a` every frame.
     els.forEach((e) => {
         const ecc = e.data.ecc;
         const aphelionTarget = e.data.orbitFrac * R;
@@ -924,42 +897,25 @@ function positionAll() {
         const theta = e.angle;
         // Polar equation of an ellipse with the origin AT ONE FOCUS (the sun):
         //   r(theta) = a(1 - e^2) / (1 + e*cos(theta))
-        // This is the actual textbook Kepler orbit shape, it's why
-        // eccentric orbits (Mercury, Pluto) visibly speed up near perihelion
-        // (small r) and slow down near aphelion (large r), not just a
-        // decorative squashed circle.
+        // This is the actual textbook Kepler orbit shape (not just a
+        // decorative squashed circle). Note that this equation alone only
+        // gives the *shape* of the orbit. The perihelion/aphelion speed-up itself
+        // comes from how fast theta advances each frame, which is handled
+        // in tick() via Kepler's second law, not here.
         const r = (e.a * (1 - ecc * ecc)) / (1 + ecc * Math.cos(theta));
-        // Local (unrotated) position, with TILT foreshortening the y-axis to
-        // fake a slightly-from-above viewing angle. This foreshortened y is
-        // also what encodes "near side / far side of the orbit" for the
-        // depth (z-index) hack just below.
+        // Local (unrotated) position, TILT-foreshortened to fake a
+        // slightly-from-above view; then rotated by inclination (phi).
         const xl = r * Math.cos(theta);
         const yl = r * Math.sin(theta) * TILT;
-        // Rotate by the orbit's inclination (phi) to get the final on-screen offset.
         const xr = xl * Math.cos(e.phi) - yl * Math.sin(e.phi);
         const yr = xl * Math.sin(e.phi) + yl * Math.cos(e.phi);
         e.btnEl.style.left = cx + xr + "px";
         e.btnEl.style.top = cy + yr + "px";
 
-        // ---- depth (z-index) hack ----
-        // The sun is fixed at z-index 300. sin(theta) (the pre-rotation,
-        // local "near/far along this planet's own orbit" signal) maps to a
-        // ±90 offset around that, so each planet individually passes in
-        // front of the sun on the near half of its orbit and behind it on
-        // the far half of its orbit. See the note above #sun in the CSS for the
-        // original reasoning.
-        //
-        // The gotcha: that ±90 range is identical for every planet, with no
-        // regard for which orbit is actually farther out. So two planets on
-        // different orbits can land on nearly the same z-index and their
-        // stacking can flip essentially at random frame to frame. This is what caused
-        // Uranus to sometimes render in front of Saturn.
-        //
-        // Fix: subtract depthRank (0 = innermost, computed once above) as a
-        // small baseline offset. It nudges ties toward "farther-out planet
-        // loses," without meaningfully disturbing the sun-crossing behavior
-        // in any way. Max total range across all planets is still comfortably inside
-        // the documented ~390 ceiling (worst case 300 - 0 + 78 = 378).
+        // Depth hack: sun sits at z-index 300, sin(theta) offsets ±90 so a
+        // planet passes in front of/behind the sun on the near/far half of
+        // its orbit. depthRank is subtracted as a tie-break so planets on
+        // different orbits don't randomly flip stacking order.
         e.btnEl.style.zIndex = String(
             300 - e.depthRank + Math.round(Math.sin(theta) * 78),
         );
@@ -969,27 +925,33 @@ function positionAll() {
         const y = cy + b.ry * Math.sin(b.angle) + b.jitter * b.ry;
         b.el.style.left = x + "px";
         b.el.style.top = y + "px";
-        // Belts get their own separate, lower z-index band (110-190) that
-        // never overlaps the planets' band (210-390ish), so belts are
-        // always behind every planet regardless of depth rank. No tie-break
-        // needed here.
+        // Belts get their own lower z-index band, always behind planets.
         b.el.style.zIndex = String(150 + Math.round(Math.sin(b.angle) * 40));
     });
 }
 
-// Main animation loop: advance every angle by speed * elapsed-seconds, then
-// re-derive positions. Frame-rate independent (uses real dt, not a fixed
-// step), so orbit speed stays consistent regardless of display refresh rate.
+// Main animation loop. Uses real dt (not a fixed step) so orbit speed
+// stays consistent regardless of display refresh rate.
 let lastT = null;
+
 function tick(t) {
     if (lastT === null) lastT = t;
     const dt = (t - lastT) / 1000;
     lastT = t;
     els.forEach((e) => {
-        e.angle += e.speed * dt;
+        // e.speed is the mean angular speed n (2*pi/period). Kepler's
+        // second law means true angular rate isn't constant, it speeds
+        // up near perihelion, slows near aphelion:
+        //   dtheta/dt = n * (1 + e*cos(theta))^2 / (1 - e^2)^1.5
+        // Averages to n over a full orbit, so periods are unaffected.
+        const ecc = e.data.ecc;
+        const rateFactor =
+            Math.pow(1 + ecc * Math.cos(e.angle), 2) /
+            Math.pow(1 - ecc * ecc, 1.5);
+        e.angle += e.speed * rateFactor * dt;
     });
     [...asteroidBelt, ...kuiperBelt].forEach((b) => {
-        b.angle += b.speed * dt;
+        b.angle += b.speed * dt; // circular scatter, no eccentricity
     });
     positionAll();
     requestAnimationFrame(tick);
@@ -997,11 +959,6 @@ function tick(t) {
 
 let lastFocusedElement = null; // for accessibility focus resolution
 
-// Handles clicking any planet, dwarf, or region: updates all the "is-active"/
-// "is-hot" highlight states (only one of these toggles is ever true per
-// call, since `id` matches at most one thing), then builds and injects the
-// detail panel's HTML from that body's data, and opens the panel via
-// .is-open on the grid.
 function openBody(id) {
     if (!activeId) {
         lastFocusedElement = document.activeElement;
@@ -1036,7 +993,7 @@ function openBody(id) {
         .join("");
 
     panelInner.innerHTML =
-        '<div class="panel-portrait bg-surface-2 relative mb-4 h-42.5 w-full overflow-hidden rounded-xl">' +
+        '<div class="panel-portrait bg-surface-2 relative mb-4 h-42.5 w-full overflow-hidden rounded-sm">' +
         '<img class="block h-full w-full object-cover" src="' +
         p.image +
         '" alt="' +
@@ -1069,7 +1026,6 @@ function openBody(id) {
     setTimeout(() => panelClose.focus(), 0);
 }
 
-// Mirror image of openBody: clears every highlight toggle and closes the panel.
 function closePanel() {
     lastFocusedElement?.focus();
     lastFocusedElement = null;
@@ -1102,9 +1058,18 @@ document.addEventListener("keydown", (e) => {
 // Debounced (100ms) so a window being actively resized doesn't trigger a
 // full layoutStage() recompute on every intermediate pixel.
 let resizeT;
+
 window.addEventListener("resize", () => {
     clearTimeout(resizeT);
     resizeT = setTimeout(layoutStage, 100);
+});
+
+grid.addEventListener("transitionend", (e) => {
+    if (e.target !== grid) return;
+    if (e.propertyName !== "grid-template-columns") return;
+    if (grid.classList.contains("is-open")) return;
+
+    layoutStage();
 });
 
 layoutStage();
