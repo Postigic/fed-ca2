@@ -40,29 +40,28 @@
             <nav id="navbar"></nav>
         </header>
 
-
-
         <!-- MAIN CONTENT FOR QUIZ.HTML -->
         <div class="w-full p-12 sm:pl-10 md:pl-50">
-            <p class="text-s font-mono text-muted">Test your space knowledge here!</p>
+            <p class="text-s text-muted font-mono">
+                Test your space knowledge here!
+            </p>
             <h1 class="text-5xl font-extrabold">Space Quiz</h1>
-            <br>
-            <div class="p-12 bg-[#1a1c25] rounded-xl border-[#8b93a6]">
+            <br />
+            <div class="rounded-xl border-[#8b93a6] bg-[#1a1c25] p-12">
                 <div id="quiz"></div>
-                <br>
+                <br />
                 <div id="navButtons"></div>
             </div>
-            <br>
-            <br>
+            <br />
+            <br />
             <footer id="footer"></footer>
         </div>
 
-
         <script>
-            let points = 0
-            let currentQn = 1
-            let answers = [undefined, undefined, undefined, undefined]
-            const correctAnswers = [3, 2, 4, 4]
+            let points = 0;
+            let currentQn = 1;
+            let answers = [undefined, undefined, undefined, undefined];
+            const correctAnswers = [3, 2, 4, 4];
 
             function updateQuizPage() {
                 const quizPage1 = `
@@ -76,7 +75,7 @@
                     <button onclick="answerButton(3, 1)" id="r3-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Jupiter</button>
                     <button onclick="answerButton(4, 1)" id="r4-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Neptune</button>
                 </div>
-                `
+                `;
                 const quizPage2 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
@@ -88,7 +87,7 @@
                     <button onclick="answerButton(3, 2)" id="r3-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Vanguard 1</button>
                     <button onclick="answerButton(4, 2)" id="r4-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Luna 1</button>
                 </div>
-                `
+                `;
                 const quizPage3 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
@@ -100,7 +99,7 @@
                     <button onclick="answerButton(3, 3)" id="r3-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Kepler Space Telescope</button>
                     <button onclick="answerButton(4, 3)" id="r4-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">James Webb Space Telescope</button>
                 </div>
-                `
+                `;
                 const quizPage4 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
@@ -112,7 +111,7 @@
                     <button onclick="answerButton(3, 4)" id="r3-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Triton</button>
                     <button onclick="answerButton(4, 4)" id="r4-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Titan</button>
                 </div>
-                `
+                `;
                 const quizPage5 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
@@ -120,9 +119,7 @@
                         <p id="score" class="py-4 text-sm font-mono"></p>
                     </div>
                 </div>
-                `
-
-
+                `;
 
                 const navPage1 = `
                 <div class="content-center p-6 w-full">
@@ -131,7 +128,7 @@
                         <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
                     </div>
                 </div>
-                `
+                `;
                 const navPage2 = `
                 <div class="content-center p-6 w-full">
                     <div class="flex flex-row gap-8 text-l items-center content-center">
@@ -139,7 +136,7 @@
                         <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
                     </div>
                 </div>
-                `
+                `;
                 const navPage3 = `
                 <div class="content-center p-6 w-full">
                     <div class="flex flex-row gap-8 text-l items-center content-center">
@@ -147,7 +144,7 @@
                         <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
                     </div>
                 </div>
-                `
+                `;
                 const navPage4 = `
                 <div class="content-center p-6 w-full">
                     <div class="flex flex-row gap-8 text-l items-center content-center">
@@ -156,7 +153,7 @@
                         <button onclick="checkAnswers()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse">Submit Quiz</button>
                     </div>
                 </div>
-                `
+                `;
                 const navPage5 = `
                 <div class="content-center p-6 w-full">
                     <br>
@@ -165,72 +162,72 @@
                     </div>
                     <br>
                 </div>
-                `
+                `;
 
-
-                
-
-                const quizDiv = document.getElementById("quiz")
-                const navButtonsDiv = document.getElementById("navButtons")
-                quizDiv.innerHTML = eval("quizPage" + currentQn)
-                navButtonsDiv.innerHTML = eval("navPage" + currentQn)
+                const quizDiv = document.getElementById("quiz");
+                const navButtonsDiv = document.getElementById("navButtons");
+                quizDiv.innerHTML = eval("quizPage" + currentQn);
+                navButtonsDiv.innerHTML = eval("navPage" + currentQn);
 
                 if (answers[currentQn - 1] !== undefined) {
-                    let selectedResponse = answers[currentQn - 1]
-                    let selectedResponseId = document.getElementById(`r${selectedResponse}-q${currentQn}`)
-                    selectedResponseId.classList.remove("bg-[#0a0b10]")
-                    selectedResponseId.classList.add("bg-[#8b93a6]")
+                    let selectedResponse = answers[currentQn - 1];
+                    let selectedResponseId = document.getElementById(
+                        `r${selectedResponse}-q${currentQn}`,
+                    );
+                    selectedResponseId.classList.remove("bg-[#0a0b10]");
+                    selectedResponseId.classList.add("bg-[#8b93a6]");
                 }
             }
 
             function nextButton() {
                 if (currentQn < 4) {
-                    currentQn ++
-                    updateQuizPage()
+                    currentQn++;
+                    updateQuizPage();
                 }
             }
 
             function prevButton() {
                 if (currentQn > 1) {
-                    currentQn --
-                    updateQuizPage()
+                    currentQn--;
+                    updateQuizPage();
                 }
             }
 
             function submitQuiz() {
-                currentQn = 5
-                updateQuizPage()
+                currentQn = 5;
+                updateQuizPage();
             }
 
             function retakeQuiz() {
-                currentQn = 1
-                points = 0
-                answers = [undefined, undefined, undefined, undefined]
-                updateQuizPage()
+                currentQn = 1;
+                points = 0;
+                answers = [undefined, undefined, undefined, undefined];
+                updateQuizPage();
             }
 
             function answerButton(response, question) {
-                answers[question - 1] = response
-                console.log(answers)
-                updateQuizPage()
+                answers[question - 1] = response;
+                console.log(answers);
+                updateQuizPage();
             }
 
             function checkAnswers() {
-                submitQuiz()
-                points = 0
-                
+                submitQuiz();
+                points = 0;
+
                 for (let i = 0; i <= 3; i++) {
                     if (answers[i] === correctAnswers[i]) {
-                        points ++
+                        points++;
                     }
-                } 
-                document.getElementById("score").innerHTML = `Score: ${points}/4`
-                console.log(points)
+                }
+                document.getElementById("score").innerHTML =
+                    `Score: ${points}/4`;
+                console.log(points);
             }
 
             window.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
-                    updateQuizPage()
+                    updateQuizPage();
                 }, 0.1);
             });
         </script>
