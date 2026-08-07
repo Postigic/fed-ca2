@@ -51,7 +51,6 @@
                 <div id="quiz"></div>
                 <br>
                 <div id="navButtons"></div>
-                <p id="score" class="font-mono font-extrabold visible">Submit your answers to see your score.</p>
             </div>
             <br>
             <br>
@@ -114,6 +113,14 @@
                     <button onclick="answerButton(4, 4)" id="r4-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Titan</button>
                 </div>
                 `
+                const quizPage5 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-5xl">Quiz Results:</p>
+                        <p id="score" class="py-4 text-sm font-mono"></p>
+                    </div>
+                </div>
+                `
 
 
 
@@ -150,6 +157,15 @@
                     </div>
                 </div>
                 `
+                const navPage5 = `
+                <div class="content-center p-6 w-full">
+                    <br>
+                    <div class="flex flex-row gap-8 text-l items-center content-center w-full">
+                        <button onclick="retakeQuiz()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse w-full">Retake Quiz</button>
+                    </div>
+                    <br>
+                </div>
+                `
 
 
                 
@@ -181,6 +197,18 @@
                 }
             }
 
+            function submitQuiz() {
+                currentQn = 5
+                updateQuizPage()
+            }
+
+            function retakeQuiz() {
+                currentQn = 1
+                points = 0
+                answers = [undefined, undefined, undefined, undefined]
+                updateQuizPage()
+            }
+
             function answerButton(response, question) {
                 answers[question - 1] = response
                 console.log(answers)
@@ -188,6 +216,7 @@
             }
 
             function checkAnswers() {
+                submitQuiz()
                 points = 0
                 
                 for (let i = 0; i <= 3; i++) {
