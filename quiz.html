@@ -46,12 +46,12 @@
         <div class="w-full p-12 sm:pl-10 md:pl-50">
             <p class="text-s font-mono text-muted">Test your space knowledge here!</p>
             <h1 class="text-5xl font-extrabold">Space Quiz</h1>
-            
             <br>
             <div class="p-12 bg-[#1a1c25] rounded-xl border-[#8b93a6]">
                 <div id="quiz"></div>
                 <br>
                 <div id="navButtons"></div>
+                <p id="score" class="font-mono font-extrabold visible">Submit your answers to see your score.</p>
             </div>
             <br>
             <br>
@@ -60,57 +60,58 @@
 
 
         <script>
+            let points = 0
             let currentQn = 1
             let answers = [undefined, undefined, undefined, undefined]
+            const correctAnswers = [3, 2, 4, 4]
 
             function updateQuizPage() {
                 const quizPage1 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
                         <p class="px-4 text-4xl">Question 1:</p>
-                        <p class="py-4 text-sm font-mono">blah blah blah blah blah</p>
+                        <p class="py-4 text-sm font-mono">Which planet in our Solar System has the shortest day (fastest rotation)?</p>
                     </div>
-                    <button onclick="answerButton(1, 1)" id="r1-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Response 1</button>
-                    <button onclick="answerButton(2, 1)" id="r1-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Response 2</button>
-                    <button onclick="answerButton(3, 1)" id="r1-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Response 3</button>
-                    <button onclick="answerButton(4, 1)" id="r1-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Response 4</button>
+                    <button onclick="answerButton(1, 1)" id="r1-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Saturn</button>
+                    <button onclick="answerButton(2, 1)" id="r2-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Earth</button>
+                    <button onclick="answerButton(3, 1)" id="r3-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Jupiter</button>
+                    <button onclick="answerButton(4, 1)" id="r4-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Neptune</button>
                 </div>
                 `
-
                 const quizPage2 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
                         <p class="px-4 text-4xl">Question 2:</p>
-                        <p class="py-4 text-sm font-mono">SUIWHADHWODHWIFJEIOFJEWHOIFHWOFIHEOFHEOIFHE</p>
+                        <p class="py-4 text-sm font-mono">What is the name of the first artificial satellite launched into orbit around Earth?</p>
                     </div>
-                    <button onclick="answerButton(1, 2)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">DWDIUUFGWU</button>
-                    <button onclick="answerButton(2, 2)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">DUWHWD</button>
-                    <button onclick="answerButton(3, 2)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">IJDEIOFOJIEOFWO</button>
-                    <button onclick="answerButton(4, 2)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">:)</button>
+                    <button onclick="answerButton(1, 2)" id="r1-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Explorer 1</button>
+                    <button onclick="answerButton(2, 2)" id="r2-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Sputnik 1</button>
+                    <button onclick="answerButton(3, 2)" id="r3-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Vanguard 1</button>
+                    <button onclick="answerButton(4, 2)" id="r4-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Luna 1</button>
                 </div>
                 `
                 const quizPage3 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
                         <p class="px-4 text-4xl">Question 3:</p>
-                        <p class="py-4 text-sm font-mono">DJIOEIFNIEFNFNKAIZERREICHFIEJFI</p>
+                        <p class="py-4 text-sm font-mono">Which telescope was launched in 2021 to succeed the Hubble Space Telescope?</p>
                     </div>
-                    <button onclick="answerButton(1, 3)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Fur</button>
-                    <button onclick="answerButton(2, 3)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Kaizer</button>
-                    <button onclick="answerButton(3, 3)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Gott</button>
-                    <button onclick="answerButton(4, 3)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">und Vaterland</button>
+                    <button onclick="answerButton(1, 3)" id="r1-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Chandra X-ray Observatory</button>
+                    <button onclick="answerButton(2, 3)" id="r2-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Spitzer Space Telescope</button>
+                    <button onclick="answerButton(3, 3)" id="r3-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Kepler Space Telescope</button>
+                    <button onclick="answerButton(4, 3)" id="r4-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">James Webb Space Telescope</button>
                 </div>
                 `
                 const quizPage4 = `
                 <div class="flex flex-col gap-6 text-xl text-center">
                     <div class="flex flex-col gap-0 text-center">
                         <p class="px-4 text-4xl">Question 4:</p>
-                        <p class="py-4 text-sm font-mono">67676767676767676767676767</p>
+                        <p class="py-4 text-sm font-mono">What is the largest moon of Saturn?</p>
                     </div>
-                    <button onclick="answerButton(1, 4)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">idk</button>
-                    <button onclick="answerButton(2, 4)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">kys</button>
-                    <button onclick="answerButton(3, 4)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">KEEP YOUSELF SAFE</button>
-                    <button onclick="answerButton(4, 4)" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">jk go die</button>
+                    <button onclick="answerButton(1, 4)" id="r1-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Europa</button>
+                    <button onclick="answerButton(2, 4)" id="r2-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Ganymade</button>
+                    <button onclick="answerButton(3, 4)" id="r3-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Triton</button>
+                    <button onclick="answerButton(4, 4)" id="r4-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Titan</button>
                 </div>
                 `
 
@@ -145,16 +146,25 @@
                     <div class="flex flex-row gap-8 text-l items-center content-center">
                         <button onclick="prevButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Previous Question</button>
                         <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#960000] hover:border-[#ff0000] hover:animate-pulse cursor-not-allowed">Next Question</button>
-                        <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse">Submit Quiz</button>
+                        <button onclick="checkAnswers()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse">Submit Quiz</button>
                     </div>
                 </div>
                 `
 
 
+                
+
                 const quizDiv = document.getElementById("quiz")
                 const navButtonsDiv = document.getElementById("navButtons")
                 quizDiv.innerHTML = eval("quizPage" + currentQn)
                 navButtonsDiv.innerHTML = eval("navPage" + currentQn)
+
+                if (answers[currentQn - 1] !== undefined) {
+                    let selectedResponse = answers[currentQn - 1]
+                    let selectedResponseId = document.getElementById(`r${selectedResponse}-q${currentQn}`)
+                    selectedResponseId.classList.remove("bg-[#0a0b10]")
+                    selectedResponseId.classList.add("bg-[#8b93a6]")
+                }
             }
 
             function nextButton() {
@@ -171,11 +181,24 @@
                 }
             }
 
-
             function answerButton(response, question) {
                 answers[question - 1] = response
                 console.log(answers)
+                updateQuizPage()
             }
+
+            function checkAnswers() {
+                points = 0
+                
+                for (let i = 0; i <= 3; i++) {
+                    if (answers[i] === correctAnswers[i]) {
+                        points ++
+                    }
+                } 
+                document.getElementById("score").innerHTML = `Score: ${points}/4`
+                console.log(points)
+            }
+
             window.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     updateQuizPage()
