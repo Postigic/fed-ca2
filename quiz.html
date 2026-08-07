@@ -1,10 +1,235 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>Quiz</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/about.js"></script>
     </head>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span
+            ><span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+        </button>
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
 
-    <body></body>
+        <!-- MAIN CONTENT FOR QUIZ.HTML -->
+        <div class="w-full p-12 sm:pl-10 md:pl-50">
+            <p class="text-s text-muted font-mono">
+                Test your space knowledge here!
+            </p>
+            <h1 class="text-5xl font-extrabold">Space Quiz</h1>
+            <br />
+            <div class="rounded-xl border-[#8b93a6] bg-[#1a1c25] p-12">
+                <div id="quiz"></div>
+                <br />
+                <div id="navButtons"></div>
+            </div>
+            <br />
+            <br />
+            <footer id="footer"></footer>
+        </div>
+
+        <script>
+            let points = 0;
+            let currentQn = 1;
+            let answers = [undefined, undefined, undefined, undefined];
+            const correctAnswers = [3, 2, 4, 4];
+
+            function updateQuizPage() {
+                const quizPage1 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-4xl">Question 1:</p>
+                        <p class="py-4 text-sm font-mono">Which planet in our Solar System has the shortest day (fastest rotation)?</p>
+                    </div>
+                    <button onclick="answerButton(1, 1)" id="r1-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Saturn</button>
+                    <button onclick="answerButton(2, 1)" id="r2-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Earth</button>
+                    <button onclick="answerButton(3, 1)" id="r3-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Jupiter</button>
+                    <button onclick="answerButton(4, 1)" id="r4-q1" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Neptune</button>
+                </div>
+                `;
+                const quizPage2 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-4xl">Question 2:</p>
+                        <p class="py-4 text-sm font-mono">What is the name of the first artificial satellite launched into orbit around Earth?</p>
+                    </div>
+                    <button onclick="answerButton(1, 2)" id="r1-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Explorer 1</button>
+                    <button onclick="answerButton(2, 2)" id="r2-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Sputnik 1</button>
+                    <button onclick="answerButton(3, 2)" id="r3-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Vanguard 1</button>
+                    <button onclick="answerButton(4, 2)" id="r4-q2" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Luna 1</button>
+                </div>
+                `;
+                const quizPage3 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-4xl">Question 3:</p>
+                        <p class="py-4 text-sm font-mono">Which telescope was launched in 2021 to succeed the Hubble Space Telescope?</p>
+                    </div>
+                    <button onclick="answerButton(1, 3)" id="r1-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Chandra X-ray Observatory</button>
+                    <button onclick="answerButton(2, 3)" id="r2-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Spitzer Space Telescope</button>
+                    <button onclick="answerButton(3, 3)" id="r3-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Kepler Space Telescope</button>
+                    <button onclick="answerButton(4, 3)" id="r4-q3" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">James Webb Space Telescope</button>
+                </div>
+                `;
+                const quizPage4 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-4xl">Question 4:</p>
+                        <p class="py-4 text-sm font-mono">What is the largest moon of Saturn?</p>
+                    </div>
+                    <button onclick="answerButton(1, 4)" id="r1-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Europa</button>
+                    <button onclick="answerButton(2, 4)" id="r2-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Ganymade</button>
+                    <button onclick="answerButton(3, 4)" id="r3-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Triton</button>
+                    <button onclick="answerButton(4, 4)" id="r4-q4" class="p-4 rounded-xl bg-[#0a0b10]  border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Titan</button>
+                </div>
+                `;
+                const quizPage5 = `
+                <div class="flex flex-col gap-6 text-xl text-center">
+                    <div class="flex flex-col gap-0 text-center">
+                        <p class="px-4 text-5xl">Quiz Results:</p>
+                        <p id="score" class="py-4 text-sm font-mono"></p>
+                    </div>
+                </div>
+                `;
+
+                const navPage1 = `
+                <div class="content-center p-6 w-full">
+                    <div class="flex flex-row gap-8 text-l items-center content-center">
+                        <button onclick="prevButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#960000] hover:border-[#ff0000] hover:animate-pulse cursor-not-allowed">Previous Question</button>
+                        <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
+                    </div>
+                </div>
+                `;
+                const navPage2 = `
+                <div class="content-center p-6 w-full">
+                    <div class="flex flex-row gap-8 text-l items-center content-center">
+                        <button onclick="prevButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Previous Question</button>
+                        <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
+                    </div>
+                </div>
+                `;
+                const navPage3 = `
+                <div class="content-center p-6 w-full">
+                    <div class="flex flex-row gap-8 text-l items-center content-center">
+                        <button onclick="prevButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Previous Question</button>
+                        <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Next Question</button>
+                    </div>
+                </div>
+                `;
+                const navPage4 = `
+                <div class="content-center p-6 w-full">
+                    <div class="flex flex-row gap-8 text-l items-center content-center">
+                        <button onclick="prevButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#323c4d] hover:border-[#ffffff] hover:animate-pulse">Previous Question</button>
+                        <button onclick="nextButton()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#960000] hover:border-[#ff0000] hover:animate-pulse cursor-not-allowed">Next Question</button>
+                        <button onclick="checkAnswers()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse">Submit Quiz</button>
+                    </div>
+                </div>
+                `;
+                const navPage5 = `
+                <div class="content-center p-6 w-full">
+                    <br>
+                    <div class="flex flex-row gap-8 text-l items-center content-center w-full">
+                        <button onclick="retakeQuiz()" class="p-4 rounded-xl bg-[#0a0b10] border-1 border-[#007822] hover:border-[#00e340] hover:animate-pulse w-full">Retake Quiz</button>
+                    </div>
+                    <br>
+                </div>
+                `;
+
+                const quizDiv = document.getElementById("quiz");
+                const navButtonsDiv = document.getElementById("navButtons");
+                quizDiv.innerHTML = eval("quizPage" + currentQn);
+                navButtonsDiv.innerHTML = eval("navPage" + currentQn);
+
+                if (answers[currentQn - 1] !== undefined) {
+                    let selectedResponse = answers[currentQn - 1];
+                    let selectedResponseId = document.getElementById(
+                        `r${selectedResponse}-q${currentQn}`,
+                    );
+                    selectedResponseId.classList.remove("bg-[#0a0b10]");
+                    selectedResponseId.classList.add("bg-[#8b93a6]");
+                }
+            }
+
+            function nextButton() {
+                if (currentQn < 4) {
+                    currentQn++;
+                    updateQuizPage();
+                }
+            }
+
+            function prevButton() {
+                if (currentQn > 1) {
+                    currentQn--;
+                    updateQuizPage();
+                }
+            }
+
+            function submitQuiz() {
+                currentQn = 5;
+                updateQuizPage();
+            }
+
+            function retakeQuiz() {
+                currentQn = 1;
+                points = 0;
+                answers = [undefined, undefined, undefined, undefined];
+                updateQuizPage();
+            }
+
+            function answerButton(response, question) {
+                answers[question - 1] = response;
+                console.log(answers);
+                updateQuizPage();
+            }
+
+            function checkAnswers() {
+                submitQuiz();
+                points = 0;
+
+                for (let i = 0; i <= 3; i++) {
+                    if (answers[i] === correctAnswers[i]) {
+                        points++;
+                    }
+                }
+                document.getElementById("score").innerHTML =
+                    `Score: ${points}/4`;
+                console.log(points);
+            }
+
+            window.addEventListener("DOMContentLoaded", () => {
+                setTimeout(() => {
+                    updateQuizPage();
+                }, 0.1);
+            });
+        </script>
+    </body>
 </html>
