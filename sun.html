@@ -34,8 +34,7 @@
             }
             .sun-layer[data-active="true"] {
                 opacity: 1;
-                filter: 
-                    drop-shadow(0 0 5px rgba(255, 193, 7, 0.8))
+                filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.8))
                     drop-shadow(0 0 12px rgba(255, 140, 0, 0.5));
                 transform: scale(1.04);
             }
@@ -44,16 +43,16 @@
                the diagram — clicking a ring or a legend button both select
                the same layer. */
             .layer-btn {
-                transition: 
+                transition:
                     background-color 0.25s ease,
                     border-color 0.25s ease,
                     color 0.25s ease,
                     transform 0.25s ease;
             }
             .layer-btn[aria-pressed="true"] {
-                border-color: #FFB703;
+                border-color: #ffb703;
                 background-color: rgba(255, 183, 3, 0.15);
-                color: #FFB703;
+                color: #ffb703;
                 font-weight: 600;
             }
 
@@ -217,11 +216,22 @@
                                     </title>
 
                                     <defs>
-                                        <filter id="sun-glow" x="-50%" y="-50%" width="200%" height="200%">
-                                            <feGaussianBlur stdDeviation="5" result="blur" />
+                                        <filter
+                                            id="sun-glow"
+                                            x="-50%"
+                                            y="-50%"
+                                            width="200%"
+                                            height="200%"
+                                        >
+                                            <feGaussianBlur
+                                                stdDeviation="5"
+                                                result="blur"
+                                            />
                                             <feMerge>
                                                 <feMergeNode in="blur" />
-                                                <feMergeNode in="SourceGraphic" />
+                                                <feMergeNode
+                                                    in="SourceGraphic"
+                                                />
                                             </feMerge>
                                         </filter>
                                     </defs>
@@ -237,7 +247,7 @@
                                             r="100"
                                             fill="#FFD166"
                                             opacity="0.85"
-                                            filter= "url(#sun-glow)"
+                                            filter="url(#sun-glow)"
                                         />
                                     </g>
                                     <g
@@ -251,7 +261,7 @@
                                             r="78"
                                             fill="#FFB703"
                                             opacity="0.8"
-                                            filter= "url(#sun-glow)"
+                                            filter="url(#sun-glow)"
                                         />
                                     </g>
                                     <g
@@ -265,7 +275,7 @@
                                             r="54"
                                             fill="#FB8500"
                                             opacity="0.85"
-                                            filter= "url(#sun-glow)"
+                                            filter="url(#sun-glow)"
                                         />
                                     </g>
                                     <g
@@ -279,7 +289,7 @@
                                             r="28"
                                             fill="#E85D04"
                                             opacity="0.95"
-                                            filter= "url(#sun-glow)"
+                                            filter="url(#sun-glow)"
                                         />
                                     </g>
                                 </svg>
