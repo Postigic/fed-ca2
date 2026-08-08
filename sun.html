@@ -1,10 +1,537 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400..600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+        />
+        <link href="./dist/output.css" rel="stylesheet" />
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+        <script type="module" src="./js/sun.js"></script>
+        <title>Sun | Universe Explorer</title>
+        <style>
+            /* Concentric layer diagram: each ring gets a subtle glow + scale
+               when active, and the whole group has a pointer cursor. */
+            .sun-layer {
+                cursor: pointer;
+                opacity: 0.3;
+                filter: saturate(0.5);
+                transition:
+                    opacity 200ms ease,
+                    filter 200ms ease,
+                    transform 200ms ease;
+                transform-box: fill-box;
+                transform-origin: center;
+            }
+            .sun-layer:hover {
+                opacity: 0.9;
+            }
+            .sun-layer[data-active="true"] {
+                opacity: 1;
+                filter: 
+                    drop-shadow(0 0 5px rgba(255, 193, 7, 0.8))
+                    drop-shadow(0 0 12px rgba(255, 140, 0, 0.5));
+                transform: scale(1.04);
+            }
+
+            /* Legend buttons double as the accessible/keyboard control for
+               the diagram — clicking a ring or a legend button both select
+               the same layer. */
+            .layer-btn {
+                transition: 
+                    background-color 0.25s ease,
+                    border-color 0.25s ease,
+                    color 0.25s ease,
+                    transform 0.25s ease;
+            }
+            .layer-btn[aria-pressed="true"] {
+                border-color: #FFB703;
+                background-color: rgba(255, 183, 3, 0.15);
+                color: #FFB703;
+                font-weight: 600;
+            }
+
+            /* Fade-swap for the info panel when the selected layer changes */
+            #layer-panel.swapping {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            #layer-panel {
+                transition:
+                    opacity 200ms ease,
+                    transform 200ms ease;
+            }
+        </style>
     </head>
 
-    <body></body>
+    <body class="bg-background text-foreground font-sans">
+        <button
+            id="sidebar-btn"
+            class="bg-surface-2 border-border hover:bg-surface fixed top-4 left-4 z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-sm border transition-all duration-200 md:hidden"
+            aria-label="Open menu"
+        >
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+            <span
+                class="bar bg-foreground block h-0.5 w-5 rounded-full"
+                aria-hidden="true"
+            ></span>
+        </button>
+
+        <header>
+            <!-- injected via JS -->
+            <nav id="navbar"></nav>
+        </header>
+
+        <div class="md:ml-48">
+            <main class="flex-1">
+                <!-- ======= PAGE HEADER ======= -->
+                <section id="intro" class="relative">
+                    <div class="mx-auto max-w-6xl px-6 py-16">
+                        <!-- Intro text -->
+                        <div class="max-w-3xl">
+                            <p
+                                class="animate-target text-muted font-mono text-sm tracking-widest uppercase"
+                            >
+                                Our star
+                            </p>
+
+                            <h1
+                                class="animate-target mt-4 text-4xl font-bold tracking-tight sm:text-6xl"
+                            >
+                                The Sun
+                            </h1>
+
+                            <p
+                                class="animate-target text-muted mt-6 text-lg leading-8"
+                            >
+                                The Sun is the star at the centre of our solar
+                                system. It provides the light and energy that
+                                make life on Earth possible.
+                            </p>
+                        </div>
+
+                        <!-- Sun information -->
+                        <dl
+                            id="sun-stats"
+                            class="border-border mt-12 grid grid-cols-2 gap-y-8 border-t pt-8 sm:grid-cols-4"
+                        >
+                            <div class="animate-target">
+                                <dt
+                                    class="text-muted font-mono text-xs tracking-widest uppercase"
+                                >
+                                    Core temp.
+                                </dt>
+                                <dd
+                                    class="text-foreground mt-2 font-mono text-lg"
+                                >
+                                    ~15,000,000°C
+                                </dd>
+                            </div>
+
+                            <div class="animate-target">
+                                <dt
+                                    class="text-muted font-mono text-xs tracking-widest uppercase"
+                                >
+                                    Surface temp.
+                                </dt>
+                                <dd
+                                    class="text-foreground mt-2 font-mono text-lg"
+                                >
+                                    ~5,500°C
+                                </dd>
+                            </div>
+
+                            <div class="animate-target">
+                                <dt
+                                    class="text-muted font-mono text-xs tracking-widest uppercase"
+                                >
+                                    Diameter
+                                </dt>
+                                <dd
+                                    class="text-foreground mt-2 font-mono text-lg"
+                                >
+                                    1.39M km
+                                </dd>
+                            </div>
+
+                            <div class="animate-target">
+                                <dt
+                                    class="text-muted font-mono text-xs tracking-widest uppercase"
+                                >
+                                    Age
+                                </dt>
+                                <dd
+                                    class="text-foreground mt-2 font-mono text-lg"
+                                >
+                                    ~4.6B years
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </section>
+
+                <!-- ======= SECTION 1: SUN ANATOMY (interactive layer diagram) ======= -->
+                <section
+                    id="anatomy"
+                    aria-labelledby="anatomy-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-10 xl:max-w-7xl"
+                >
+                    <h2
+                        id="anatomy-heading"
+                        class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
+                    >
+                        Anatomy of the Sun
+                    </h2>
+
+                    <div
+                        class="bg-surface border-border shadow-elevated animate-target rounded-sm border p-6 md:p-10"
+                    >
+                        <div
+                            class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,300px)_1fr] md:items-center"
+                        >
+                            <!-- Concentric layer diagram. Each <g> is one layer; clicking it
+                                 or its matching legend button below updates the info panel. -->
+                            <div class="mx-auto w-full max-w-[260px]">
+                                <svg
+                                    id="sun-svg"
+                                    viewBox="0 0 220 220"
+                                    class="h-full w-full"
+                                    role="img"
+                                    aria-labelledby="sun-svg-title"
+                                >
+                                    <title id="sun-svg-title">
+                                        Cross-section of the Sun's layers
+                                    </title>
+
+                                    <defs>
+                                        <filter id="sun-glow" x="-50%" y="-50%" width="200%" height="200%">
+                                            <feGaussianBlur stdDeviation="5" result="blur" />
+                                            <feMerge>
+                                                <feMergeNode in="blur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+
+                                    <g
+                                        class="sun-layer"
+                                        data-layer="photosphere"
+                                        tabindex="-1"
+                                    >
+                                        <circle
+                                            cx="110"
+                                            cy="110"
+                                            r="100"
+                                            fill="#FFD166"
+                                            opacity="0.85"
+                                            filter= "url(#sun-glow)"
+                                        />
+                                    </g>
+                                    <g
+                                        class="sun-layer"
+                                        data-layer="convective"
+                                        tabindex="-1"
+                                    >
+                                        <circle
+                                            cx="110"
+                                            cy="110"
+                                            r="78"
+                                            fill="#FFB703"
+                                            opacity="0.8"
+                                            filter= "url(#sun-glow)"
+                                        />
+                                    </g>
+                                    <g
+                                        class="sun-layer"
+                                        data-layer="radiative"
+                                        tabindex="-1"
+                                    >
+                                        <circle
+                                            cx="110"
+                                            cy="110"
+                                            r="54"
+                                            fill="#FB8500"
+                                            opacity="0.85"
+                                            filter= "url(#sun-glow)"
+                                        />
+                                    </g>
+                                    <g
+                                        class="sun-layer"
+                                        data-layer="core"
+                                        tabindex="-1"
+                                    >
+                                        <circle
+                                            cx="110"
+                                            cy="110"
+                                            r="28"
+                                            fill="#E85D04"
+                                            opacity="0.95"
+                                            filter= "url(#sun-glow)"
+                                        />
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- Info panel: swaps content based on the selected layer -->
+                            <div>
+                                <div id="layer-panel">
+                                    <h3
+                                        id="layer-name"
+                                        class="font-display text-2xl font-semibold md:text-3xl"
+                                    ></h3>
+                                    <p
+                                        id="layer-temp"
+                                        class="text-primary mt-1 font-mono text-sm"
+                                    ></p>
+                                    <p
+                                        id="layer-desc"
+                                        class="text-muted mt-3 text-sm md:text-base"
+                                    ></p>
+                                </div>
+
+                                <!-- Legend / accessible layer selector, same pattern as a tab list -->
+                                <div
+                                    id="layer-buttons"
+                                    class="mt-6 grid w-full grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-4"
+                                    role="tablist"
+                                    aria-label="Sun layers"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= SECTION 2: SOLAR PHENOMENA ======= -->
+                <section
+                    id="phenomena"
+                    aria-labelledby="phenomena-heading"
+                    class="animate-target mx-auto max-w-6xl px-6 py-16 xl:max-w-7xl"
+                >
+                    <h2
+                        id="phenomena-heading"
+                        class="font-display animate-target mb-8 text-2xl font-semibold tracking-tight md:text-4xl"
+                    >
+                        Solar Phenomena
+                    </h2>
+
+                    <div
+                        class="animate-target grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-flash text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Solar Flares
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                Sudden bursts of radiation released when
+                                magnetic energy near sunspots snaps and
+                                reconnects, flooding space with X-rays and UV
+                                light in minutes.
+                            </p>
+                        </div>
+
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-circle text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Sunspots
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                Darker, cooler patches on the photosphere where
+                                strong magnetic fields suppress the flow of heat
+                                from below — some grow larger than Earth.
+                            </p>
+                        </div>
+
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-radio text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Coronal Mass Ejections
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                Huge eruptions of plasma and magnetic field
+                                hurled from the corona — when aimed at Earth,
+                                they can trigger geomagnetic storms and auroras.
+                            </p>
+                        </div>
+
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-wind text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Solar Wind
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                A constant stream of charged particles flowing
+                                outward from the corona, shaping every planet's
+                                magnetosphere as it sweeps through the Solar
+                                System.
+                            </p>
+                        </div>
+
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-loader-circle text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Prominences
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                Huge loops of glowing plasma arcing above the
+                                surface, held aloft by magnetic fields for days
+                                or weeks before collapsing back down.
+                            </p>
+                        </div>
+
+                        <div
+                            class="border-border bg-surface hover:border-primary/40 hover:shadow-elevated-hover active:shadow-elevated shadow-elevated animate-target rounded-sm border p-6 transition-[color,transform,box-shadow] duration-300 hover:-translate-y-1 active:translate-y-0"
+                        >
+                            <i
+                                class="bx bx-star text-primary text-2xl"
+                                aria-hidden="true"
+                            ></i>
+                            <h3 class="font-display mt-3 font-semibold">
+                                Auroras
+                            </h3>
+                            <p class="text-muted mt-1 text-sm">
+                                When solar wind and CMEs strike Earth's magnetic
+                                field, charged particles collide with the
+                                atmosphere and glow — the northern and southern
+                                lights.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======= SECTION 3: HOW THE SUN MAKES HEAT & LIGHT (short) ======= -->
+                <section
+                    id="how-it-works"
+                    aria-labelledby="how-it-works-heading"
+                    class="animate-target border-border bg-surface mx-auto mb-24 border-y px-6 py-16 md:mb-32 md:py-20 xl:mb-40 xl:py-24"
+                >
+                    <div class="animate-target mx-auto max-w-6xl xl:max-w-7xl">
+                        <h2
+                            id="how-it-works-heading"
+                            class="font-display animate-target mb-2 text-2xl font-semibold tracking-tight md:text-4xl"
+                        >
+                            How the Sun Makes Heat &amp; Light
+                        </h2>
+                        <p
+                            class="text-muted animate-target mb-10 max-w-2xl text-sm md:text-base"
+                        >
+                            In short: nuclear fusion in the core, then a very
+                            long trip outward.
+                        </p>
+
+                        <!-- Compact 4-step process — deliberately lightweight, not a full timeline -->
+                        <ol
+                            class="animate-target grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+                        >
+                            <li
+                                class="border-border bg-background animate-target rounded-sm border p-5"
+                            >
+                                <span
+                                    class="text-primary font-mono text-xs tracking-widest uppercase"
+                                    >Step 1</span
+                                >
+                                <h3 class="font-display mt-1 font-semibold">
+                                    Fusion in the core
+                                </h3>
+                                <p class="text-muted mt-1 text-sm">
+                                    Immense pressure and ~15M°C heat fuse
+                                    hydrogen nuclei into helium, releasing
+                                    energy as gamma rays.
+                                </p>
+                            </li>
+                            <li
+                                class="border-border bg-background animate-target rounded-sm border p-5"
+                            >
+                                <span
+                                    class="text-primary font-mono text-xs tracking-widest uppercase"
+                                    >Step 2</span
+                                >
+                                <h3 class="font-display mt-1 font-semibold">
+                                    Radiative zone crawl
+                                </h3>
+                                <p class="text-muted mt-1 text-sm">
+                                    Photons bounce between particles so often it
+                                    can take tens of thousands of years to drift
+                                    outward.
+                                </p>
+                            </li>
+                            <li
+                                class="border-border bg-background animate-target rounded-sm border p-5"
+                            >
+                                <span
+                                    class="text-primary font-mono text-xs tracking-widest uppercase"
+                                    >Step 3</span
+                                >
+                                <h3 class="font-display mt-1 font-semibold">
+                                    Convective churn
+                                </h3>
+                                <p class="text-muted mt-1 text-sm">
+                                    Closer to the surface, rising and sinking
+                                    plasma currents carry the remaining energy
+                                    upward much faster.
+                                </p>
+                            </li>
+                            <li
+                                class="border-border bg-background animate-target rounded-sm border p-5"
+                            >
+                                <span
+                                    class="text-primary font-mono text-xs tracking-widest uppercase"
+                                    >Step 4</span
+                                >
+                                <h3 class="font-display mt-1 font-semibold">
+                                    Light escapes
+                                </h3>
+                                <p class="text-muted mt-1 text-sm">
+                                    At the photosphere, energy finally radiates
+                                    freely into space as the sunlight and heat
+                                    we receive on Earth.
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+            </main>
+
+            <!-- injected via JS -->
+            <footer id="footer"></footer>
+        </div>
+    </body>
 </html>
